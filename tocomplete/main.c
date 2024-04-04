@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   files.h                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 15:46:08 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/02 14:02:01 by mbecker          ###   ########.fr       */
+/*   Created: 2024/03/29 16:47:13 by mbecker           #+#    #+#             */
+/*   Updated: 2024/03/29 17:41:34 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILES_H
-# define FILES_H
+#include "pipex.h"
 
-# include "../libft.h"
-
-typedef struct s_gnl_fd_data
+int	main(int ac, const char **av, char **e)
 {
-	int				fd;
-	char			stash[BUFFER_SIZE + 1];
-}					t_gnl_fd_data;
-
-char	*get_next_line(int fd);
-//get_next_line.c
-
-
-
-int		pipex(int argc, char const **argv, char **envp);
-//pipex.c
-
-#endif
+	if (ac != 5)
+	{
+		return (1);
+	}
+	return (pipex(ac, av, e));
+}

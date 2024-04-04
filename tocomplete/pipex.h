@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   files.h                                            :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 15:46:08 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/02 14:02:01 by mbecker          ###   ########.fr       */
+/*   Created: 2024/02/15 15:11:32 by mbecker           #+#    #+#             */
+/*   Updated: 2024/04/02 15:04:05 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILES_H
-# define FILES_H
+#ifndef PIPEX_H
+# define PIPEX_H
 
-# include "../libft.h"
+# include "libft/libft.h"
+# include <errno.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <sys/wait.h>
+# include <unistd.h>
 
-typedef struct s_gnl_fd_data
+typedef struct s_pipex
 {
-	int				fd;
-	char			stash[BUFFER_SIZE + 1];
-}					t_gnl_fd_data;
+	int		infile;
+	int		outfile;
+	int		pipefd[2];
+	char	**envp;
+}	t_pipex;
 
-char	*get_next_line(int fd);
-//get_next_line.c
+int		exec_cmd(const char *cmd, char **envp);
+void	here_doc(const char *limiter);
 
 
-
-int		pipex(int argc, char const **argv, char **envp);
-//pipex.c
+int	pipex(int argc, char const **argv, char **envp);
 
 #endif

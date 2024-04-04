@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   files.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 15:46:08 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/02 14:02:01 by mbecker          ###   ########.fr       */
+/*   Created: 2024/02/15 15:11:32 by mbecker           #+#    #+#             */
+/*   Updated: 2024/03/21 13:40:46 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILES_H
-# define FILES_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
-# include "../libft.h"
+# include "../libft/libft.h"
+# include "../pipex.h"
+# include <errno.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <sys/wait.h>
+# include <unistd.h>
 
-typedef struct s_gnl_fd_data
-{
-	int				fd;
-	char			stash[BUFFER_SIZE + 1];
-}					t_gnl_fd_data;
+# define INVALID_LIMITER "Error: LIMITER must be printable\n"
 
-char	*get_next_line(int fd);
-//get_next_line.c
+int		exec_cmd(const char *cmd, char **envp);
+// commands.c
 
-
-
-int		pipex(int argc, char const **argv, char **envp);
-//pipex.c
+void	here_doc(const char *limiter);
+// bonus.c
 
 #endif

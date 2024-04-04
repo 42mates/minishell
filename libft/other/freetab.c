@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   files.h                                            :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 15:46:08 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/02 14:02:01 by mbecker          ###   ########.fr       */
+/*   Created: 2024/01/16 16:02:33 by mbecker           #+#    #+#             */
+/*   Updated: 2024/03/29 17:26:47 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILES_H
-# define FILES_H
+#include "other.h"
 
-# include "../libft.h"
-
-typedef struct s_gnl_fd_data
+/**
+ * @brief Frees a char **tab and its content.
+ * @param tab The tab to free.
+ * @param heap If 1, frees the tab itself.
+ */
+void	freetab(char **tab, int heap)
 {
-	int				fd;
-	char			stash[BUFFER_SIZE + 1];
-}					t_gnl_fd_data;
+	int	i;
 
-char	*get_next_line(int fd);
-//get_next_line.c
-
-
-
-int		pipex(int argc, char const **argv, char **envp);
-//pipex.c
-
-#endif
+	i = 0;
+	if (tab == NULL)
+		return ;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	if (heap)
+		free(tab);
+}

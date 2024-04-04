@@ -2,6 +2,7 @@
 
 - Set and use git branches
 - Set a common libft without conflicting functions
+- Read the documentation and prepare for edge cases
 
 
 
@@ -19,10 +20,10 @@
 
 
 
+# Menu
 
-
-- Parsing
-- Edge cases
+1. Parsing
+2. Edge cases
 
 ## Parsing
 handling of `''` and `""`
