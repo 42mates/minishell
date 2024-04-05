@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:46:08 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/02 14:02:01 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/05 17:47:31 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ typedef struct s_gnl_fd_data
 
 char	*get_next_line(int fd);
 //get_next_line.c
-
-
 
 int		pipex(int argc, char const **argv, char **envp);
 //pipex.c

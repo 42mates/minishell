@@ -6,11 +6,11 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:20:40 by mbecker           #+#    #+#             */
-/*   Updated: 2024/03/29 17:41:17 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/05 17:20:40 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "tmp.h"
 
 void	cmd_error(const char *cmd)
 {
@@ -53,7 +53,7 @@ char	**get_cmd_paths(char **envp, char *cmd)
 	return (path);
 }
 
-int	exec_cmd(const char *cmd, char **envp)
+int	execute(const char *cmd, char **envp)
 {
 	char	**path;
 	char	**args;
@@ -64,6 +64,8 @@ int	exec_cmd(const char *cmd, char **envp)
 	args = ft_split_charset(cmd, SPACES);
 	if (ft_strchr(cmd, '/'))
 	{
+		if (args[0][0] == '~')
+			args[0] = set_home_path(args[0], TRUE);
 		execve(args[0], args, envp);
 		return (report_and_clean(args[0], args, NULL));
 	}
