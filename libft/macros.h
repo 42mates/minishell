@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:22:17 by mbecker           #+#    #+#             */
-/*   Updated: 2024/03/19 14:54:13 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/05 14:16:32 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define BUFFER_SIZE 4096
 # define FD_MAX 512
 
-# define SPACES " \t\n"
+# define SPACES " \t\n\r"
 # define MALLOC_ERR "Error: malloc failed\n"
 # define PATH_ERR "Error: invalid or missing path\n"
 
