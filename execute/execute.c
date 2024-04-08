@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands.c                                         :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:20:40 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/05 17:20:40 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/08 14:18:14 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tmp.h"
+#include "../minishell.h"
 
 void	cmd_error(const char *cmd)
 {
@@ -19,14 +19,13 @@ void	cmd_error(const char *cmd)
 	write(2, "\n", 1);
 }
 
-int	report_and_clean(char *errorstr, char **tab1, char **tab2)
+void	report_and_clean(char *errorstr, char **tab1, char **tab2)
 {
 	cmd_error(errorstr);
 	if (tab1)
 		freetab(tab1, TRUE);
 	if (tab2)
 		freetab(tab2, TRUE);
-	return (1);
 }
 
 char	**get_cmd_paths(char **envp, char *cmd)
@@ -53,6 +52,13 @@ char	**get_cmd_paths(char **envp, char *cmd)
 	return (path);
 }
 
+/**
+ * Executes a command with the given arguments and environment variables.
+ *
+ * @param cmd The command to execute.
+ * @param envp The array of environment variables.
+ * @return execve exits the process if the command is found, otherwise 1.
+ */
 int	execute(const char *cmd, char **envp)
 {
 	char	**path;
@@ -67,7 +73,7 @@ int	execute(const char *cmd, char **envp)
 		if (args[0][0] == '~')
 			args[0] = set_home_path(args[0], TRUE);
 		execve(args[0], args, envp);
-		return (report_and_clean(args[0], args, NULL));
+		return (report_and_clean(args[0], args, NULL), 1);
 	}
 	path = get_cmd_paths(envp, args[0]);
 	if (!path)
@@ -78,5 +84,5 @@ int	execute(const char *cmd, char **envp)
 	i = 0;
 	while (path[i])
 		execve(path[i++], args, envp);
-	return (report_and_clean(args[0], args, path));
+	return (report_and_clean(args[0], args, path), 1);
 }

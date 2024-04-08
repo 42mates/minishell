@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   here_doc_bonus.c                                   :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:38:21 by mbecker           #+#    #+#             */
-/*   Updated: 2024/03/20 14:50:53 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/08 14:17:57 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "minishell.h"
 
-void	redirect_input(const char *limiter, int fd)
+/**
+ * Redirects input from the user until a specified delimiter is encountered.
+ * The input is written to a file descriptor.
+ *
+ * @param limiter The delimiter to stop reading input.
+ * @param fd The file descriptor to write the input to.
+ */
+static void redirect_input(const char *limiter, int fd)
 {
-	char	*line;
+	char *line;
 
+	write(STDOUT_FILENO,"> ", 2);
 	line = get_next_line(STDIN_FILENO);
 	while (line)
 	{
@@ -25,19 +33,30 @@ void	redirect_input(const char *limiter, int fd)
 			close(fd);
 			exit(EXIT_SUCCESS);
 		}
-		ft_putstr_fd(line, fd);
+		write(fd, line, ft_strlen(line));
 		free(line);
+		write(STDOUT_FILENO,"> ", 2);
 		line = get_next_line(STDIN_FILENO);
 	}
 }
 
-void	here_doc(const char *limiter)
+/**
+ * Implements the here document functionality by redirecting input from the user
+ * until a specified delimiter is encountered.  
+ * The input is then passed to the parent process through a pipe.
+ *
+ * @param limiter The delimiter to stop reading input.
+ */
+void here_doc(const char *limiter)
 {
-	pid_t	reader;
-	int		pipe_fd[2];
+	pid_t reader;
+	int pipe_fd[2];
 
 	if (pipe(pipe_fd) == -1)
-		exit_error("pipe");
+	{
+		perror("pipe");
+		exit(EXIT_FAILURE);
+	}
 	reader = fork();
 	if (reader == 0)
 	{

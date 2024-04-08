@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:22:17 by mbecker           #+#    #+#             */
-/*   Updated: 2024/03/19 14:54:13 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/08 12:06:00 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@
 # define SPACES " \t\n"
 # define MALLOC_ERR "Error: malloc failed\n"
 # define PATH_ERR "Error: invalid or missing path\n"
+
+# define LENNY "( ͡° ͜ʖ ͡°)> "
 
 #endif

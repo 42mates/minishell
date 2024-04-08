@@ -3,7 +3,9 @@ NAME = tmp
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRC = commands.c set_home_path.c
+SRC = 	pipex.c \
+		execute/execute.c \
+		execute/set_home_path.c
 
 all: $(NAME)
 

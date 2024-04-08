@@ -1,25 +1,5 @@
 # TO DO LIST
 
-- Set and use git branches
-- Set a common libft without conflicting functions
-- Read the documentation and prepare for edge cases
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Menu
 
 1. Parsing
