@@ -5,6 +5,7 @@
 
 typedef struct s_pipex
 {
+	int		io[2];
 	int		infile;
 	int		outfile;
 	int		pipefd[2];
