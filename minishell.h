@@ -5,10 +5,12 @@
 
 typedef struct s_pipex
 {
-	int		io[2];
 	int		infile;
 	int		outfile;
-	int		pipefd[2];
+	int		nb_cmds;
+	int		status;
+	//int		pipefd[2];
+	//int		prevfd[2];
 	char	**envp;
 }	t_pipex;
 
@@ -17,6 +19,6 @@ char	*set_home_path(char *str, int free_str);
 // in execute/
 
 void	here_doc(const char *limiter);
-int		pipex(char const **cmds, char **envp, int outfile);
+int		pipex(char const **cmds, char **envp, int infile, int outfile);
 
 #endif

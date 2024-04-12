@@ -1,4 +1,4 @@
-NAME = tmp
+NAME = pipex
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
@@ -36,3 +36,14 @@ YELLOW =\033[1;33m
 LYELLOW =\033[0;33m
 GREY =\033[1;37m
 NC =\033[0m
+
+tester: all
+	@if [ ! -d "pipex.tester" ]; then \
+		echo "$(GREEN)Cloning tester...$(LGREEN)"; \
+		git clone https://github.com/vfurmane/pipex-tester pipex.tester; \
+	fi
+	@chmod +x pipex.tester/run.sh
+	@echo "$(YELLOW)Tester ready.$(NC)"
+	@echo "$(RED)Running tester...$(NC)"
+	@printf "..\nn" | pipex.tester/run.sh
+	
