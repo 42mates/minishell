@@ -6,11 +6,11 @@
 #    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/04/15 13:25:50 by mbecker          ###   ########.fr        #
+#    Updated: 2024/04/15 17:09:01 by mbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pipex
+NAME = minishell
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
@@ -24,8 +24,8 @@ SRC = 	main.c \
 all: $(NAME)
 
 $(NAME): libft
-	@$(CC) $(CFLAGS) -o $(NAME) $(SRC) main.c -Llibft -lft
-	@echo "$(GREEN)./$(NAME) ready.$(NC)"
+	@$(CC) $(CFLAGS) -o $(NAME) $(SRC) -Llibft -lft
+	@echo "$(LGREEN)./$(GREEN)$(NAME)$(LGREEN) ready.$(NC)"
 
 clean:
 	@echo "$(LRED)Removing objects and misc...$(NC)"

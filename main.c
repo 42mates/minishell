@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:47:13 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/15 14:45:50 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/15 18:10:04 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,8 @@ int	main(int ac, const char **av, char **env)
 {
 	int	res;
 
+	if (!ac || !av || !env)
+		return (0);
+	res = 0;
 	return (res);
 }
