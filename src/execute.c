@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:20:40 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/08 14:18:14 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/15 12:32:31 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	cmd_error(const char *cmd)
 {
-	write(2, "Error: command not found: ", 26);
 	write(2, cmd, ft_strlen(cmd));
+	write(2, ": command not found", 19);
 	write(2, "\n", 1);
 }
 
@@ -66,14 +66,14 @@ int	execute(const char *cmd, char **envp)
 	int		i;
 
 	if (!cmd || !*cmd || !envp)
-		return (cmd_error(""), 1);
+		return (cmd_error(""), 127);
 	args = ft_split_charset(cmd, SPACES);
 	if (ft_strchr(cmd, '/'))
 	{
 		if (args[0][0] == '~')
 			args[0] = set_home_path(args[0], TRUE);
 		execve(args[0], args, envp);
-		return (report_and_clean(args[0], args, NULL), 1);
+		return (report_and_clean(args[0], args, NULL), 127);
 	}
 	path = get_cmd_paths(envp, args[0]);
 	if (!path)
@@ -84,5 +84,5 @@ int	execute(const char *cmd, char **envp)
 	i = 0;
 	while (path[i])
 		execve(path[i++], args, envp);
-	return (report_and_clean(args[0], args, path), 1);
+	return (report_and_clean(args[0], args, path), 127);
 }

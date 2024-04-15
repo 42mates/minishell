@@ -1,11 +1,25 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
+#    Updated: 2024/04/15 13:25:50 by mbecker          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = pipex
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRC = 	pipex.c \
-		execute/execute.c \
-		execute/set_home_path.c
+SRC = 	main.c \
+		src/execute.c \
+		src/set_home_path.c \
+		src/here_doc.c \
+		src/pipex.c
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:38:21 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/08 14:17:57 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/15 13:18:02 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
  * @param limiter The delimiter to stop reading input.
  * @param fd The file descriptor to write the input to.
  */
-static void redirect_input(const char *limiter, int fd)
+static void	redirect_input(const char *limiter, int fd)
 {
-	char *line;
+	char	*line;
 
-	write(STDOUT_FILENO,"> ", 2);
+	write(STDOUT_FILENO, "> ", 2);
 	line = get_next_line(STDIN_FILENO);
 	while (line)
 	{
@@ -35,22 +35,22 @@ static void redirect_input(const char *limiter, int fd)
 		}
 		write(fd, line, ft_strlen(line));
 		free(line);
-		write(STDOUT_FILENO,"> ", 2);
+		write(STDOUT_FILENO, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
 	}
 }
 
 /**
  * Implements the here document functionality by redirecting input from the user
- * until a specified delimiter is encountered.  
+ * until a specified delimiter is encountered.
  * The input is then passed to the parent process through a pipe.
  *
  * @param limiter The delimiter to stop reading input.
  */
-void here_doc(const char *limiter)
+void	here_doc(const char *limiter)
 {
-	pid_t reader;
-	int pipe_fd[2];
+	pid_t	reader;
+	int		pipe_fd[2];
 
 	if (pipe(pipe_fd) == -1)
 	{
