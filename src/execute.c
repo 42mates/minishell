@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:20:40 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/15 12:32:31 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/15 14:51:23 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	**get_cmd_paths(char **envp, char *cmd)
  *
  * @param cmd The command to execute.
  * @param envp The array of environment variables.
- * @return execve exits the process if the command is found, otherwise 1.
+ * @return execve exits the process if the command is found, otherwise 127.
  */
 int	execute(const char *cmd, char **envp)
 {
