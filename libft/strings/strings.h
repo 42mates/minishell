@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:48:31 by mbecker           #+#    #+#             */
-/*   Updated: 2024/03/29 17:35:34 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/15 13:16:37 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int			ft_strcmp(const char *s1, const char *s2);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 //ft_strcmp.c
 
-char    	*ft_strcpy(char *dst, const char *src);
-char    	*ft_strncpy(char *dst, const char *src, size_t len);
-size_t  	ft_strlcpy(char *dest, const char *src, size_t size);
+char		*ft_strcpy(char *dst, const char *src);
+char		*ft_strncpy(char *dst, const char *src, size_t len);
+size_t		ft_strlcpy(char *dest, const char *src, size_t size);
 //ft_strcpy.c
 
 char		*ft_strdup(const char *s1);

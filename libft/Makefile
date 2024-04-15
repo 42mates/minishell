@@ -6,7 +6,7 @@
 #    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 15:00:14 by mbecker           #+#    #+#              #
-#    Updated: 2024/03/29 17:35:54 by mbecker          ###   ########.fr        #
+#    Updated: 2024/04/02 13:48:41 by mbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ STR =	strings/ft_atoi.c \
 		strings/ft_strdup.c \
 		strings/ft_strjoin.c \
 		strings/ft_wordcount.c
-OTHER =	other/ft_free.c
+OTHER =	other/freetab.c
 
 SRC	=	$(FILES) $(STR) $(OTHER)
 OBJ	=	$(SRC:.c=.o)
@@ -43,8 +43,6 @@ YELLOW	=\033[1;33m
 LYELLOW	=\033[0;33m
 GREY	=\033[1;37m
 NC		=\033[0m
-
-.PHONY	: all clean fclean re
 
 all: 	$(NAME)
 
@@ -66,3 +64,5 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+.PHONY	: all clean fclean re

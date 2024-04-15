@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 16:42:24 by mbecker           #+#    #+#             */
-/*   Updated: 2024/03/29 17:27:12 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/02 14:02:54 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <errno.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <sys/wait.h>
 
 # include "macros.h"
 // all macros are in macros.h
