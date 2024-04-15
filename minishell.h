@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   files.h                                            :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 15:46:08 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/08 15:02:46 by mbecker          ###   ########.fr       */
+/*   Created: 2024/04/15 13:17:30 by mbecker           #+#    #+#             */
+/*   Updated: 2024/04/15 13:17:31 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILES_H
-# define FILES_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-# include "../libft.h"
+# include "libft/libft.h"
 
-typedef struct s_gnl_fd_data
+typedef struct s_pipex
 {
-	int				fd;
-	char			stash[BUFFER_SIZE + 1];
-}					t_gnl_fd_data;
+	int		nb_cmds;
+	int		status;
+	char	**envp;
+	int		infile;
+	int		outfile;
+}			t_pipex;
 
-char	*get_next_line(int fd);
-//get_next_line.c
+int		execute(const char *cmd, char **envp);
+char	*set_home_path(char *str, int free_str);
+// in execute/
+
+void	here_doc(const char *limiter);
+int		pipex(char const **cmds, char **envp, int infile, int outfile);
 
 #endif

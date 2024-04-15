@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:48:19 by mbecker           #+#    #+#             */
-/*   Updated: 2024/03/29 17:10:05 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/05 17:11:01 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "../libft.h"
 
 void	freetab(char **tab, int heap);
-//ft_free.c
+//freetab.c
 
 #endif
