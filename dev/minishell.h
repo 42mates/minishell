@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/15 20:25:50 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/16 10:18:29 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,9 @@ getenv, tcsetattr, tcgetattr, tg
 # include <readline/history.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include "list.h"
 
-# define PROMT "$> "
-
-/* 
-template for funtions for linked list
-*/
-typedef int				(*t_cmp_key)(const void	*key_1, const void *key_2);
-typedef void			(*t_dst_key)(void	*key);
-typedef void			(*t_dst_con)(void	*content);
-
-/*
-element of linked list
-*/
-typedef struct s_elem
-{
-	void			*key;
-	void			*content;
-	struct s_list	*next;
-}	t_elem;
-
-typedef struct s_list
-{
-	t_elem		*head;
-	t_cmp_key	cmp_key;
-	t_dst_key	dst_key;
-	t_dst_con	dst_con;
-}	t_list;
-
+# define PROMT "$> " // what we must use as a promt?
 
 typedef struct s_data	t_data;
 
@@ -66,7 +41,6 @@ typedef for ptr to builtin function
 example: int ft_echo(t_info *data, t_list *cmd)
 */
 typedef int				(*t_builtin)(t_data *, t_list *);
-
 
 /*
 builtins and f_builtins to connect commands with functions

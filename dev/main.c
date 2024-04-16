@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:13:18 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/15 20:24:56 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/16 10:19:05 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	free_data(t_data *data)
 	(void) data; // mockup
 	return ;
 }
-
 
 char	*ft_readline(void)
 {
