@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/16 10:18:29 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:27:08 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,22 @@ getenv, tcsetattr, tcgetattr, tg
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include "list.h"
+# include "lexer.h"
 
 # define PROMT "$> " // what we must use as a promt?
+
+int						g_signal;
 
 typedef struct s_data	t_data;
 
 /* 
 typedef for ptr to builtin function
-example: int ft_echo(t_info *data, t_list *cmd)
+example: int ft_echo(t_data *data, t_list *cmd)
 */
 typedef int				(*t_builtin)(t_data *, t_list *);
 
@@ -57,5 +62,11 @@ typedef struct s_data
 
 int		ft_strlen(const char *s);
 int		ft_strcmp(const char *s1, const char *s2);
+
+// signal.c
+void	signal_handler(int signum);
+
+// error_handler.c
+int		error_handler(int ret, char *m, char mode, int signum);
 
 #endif

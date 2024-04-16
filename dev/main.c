@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:13:18 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/16 10:19:05 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:17:28 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,12 @@ unset	- no options
 env		- no options or arguments
 exit	- no options
 
-We can use custom linked list with keys for nodes:
-- ptr to head element:
-	elem->key
-	elem->content
-	elem->next_elem
-- set comporator for keys
-- set destructor for keys and values
-
 */
 
 int	init_data(t_data *data, char **env)
 {
 	(void) env; // mockup
+	g_signal = 0;
 	data->flag_exit = 0;
 	//char		**env;
 	//t_list		env_lts; // init new list (with malloc)
@@ -87,42 +80,38 @@ char	*ft_readline(void)
 }
 
 /* new token list, read line, add history */
-void	main_begining(t_list **tokens)
+/* SIGINT = Ctrl + C */
+void	main_begining(t_list **toks)
 {
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, signal_handler);
 	errno = 0;
-	tokens = NULL; // mockup // init new list (with malloc) 
-}
-
-/* clear tokens sequence */
-void	main_ending(void *var)
-{
-	(void) var; // mockup
-	return ;
+	*toks = list_new(cmp_tok, NULL, free);
 }
 
 int	main(int ac, const char **av, char **env)
 {
 	char	*line;
 	t_data	data;
-	t_list	*tokens;
+	t_list	*toks;
 
 	(void) ac;
 	(void) av;
-	init_data(&data, env);
+	if (init_data(&data, env))
+		return (EXIT_FAILURE);
 	while (!data.flag_exit)
 	{
-		main_begining(&tokens);
+		main_begining(&toks);
 		line = ft_readline();
 		if (line == NULL)
 			data.flag_exit = 1;
 		else if (line && *line)
 		{
-			// analyse and get tokens from line
-			// 		if OK parse tokens -> run builtins
-			printf("%s\n", line); // mockup of builtins
-			free (line);
+			if (lexer(line, toks))
+				parser(&data, toks);
+			free(line);
 		}
-		main_ending(NULL);
+		list_free(toks);
 	}
 	free_data(&data);
 	return (EXIT_SUCCESS); // return correct EXIT_CODE
