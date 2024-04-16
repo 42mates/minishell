@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:15:47 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/16 13:31:17 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:55:48 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ element of linked list
 */
 typedef struct s_elem
 {
-	struct s_list	*next;
-	void			*key;
-	void			*val;
+	void	*next;
+	void	*key;
+	void	*val;
 }	t_elem;
 
 /*
@@ -65,7 +65,7 @@ int		list_contains_key(t_list *list, void *key);
 void	*list_get(t_list *list, void *key);
 void	list_free(t_list *list);
 
-int		cmp_int(void *key_1, void *key_2);
-int		cmp_str(void *key_1, void *key_2);
+int		cmp_int(const void *key_1, const void *key_2);
+int		cmp_str(const void *key_1, const void *key_2);
 
 #endif
