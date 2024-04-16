@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:19:32 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/16 13:37:19 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:21:45 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	list_put(t_list *list, void *key, void *val)
 
 	if (!list)
 		return (0);
+	if (list_contains_key(list, key))
+		return (0);
 	if (!list->head)
 	{
 		list->head = elem_new(key, val);
@@ -89,7 +91,7 @@ int	list_replace(t_list *list, void *key, void *new_val)
 	e_ptr = list->head;
 	while (1)
 	{
-		if (list->cmp_key(key, e_ptr->key) == 0)
+		if ((list->cmp_key(key, e_ptr->key)) == 0)
 		{
 			if (list->dst_val)
 				list->dst_val(e_ptr->val);
@@ -139,7 +141,7 @@ int	list_del(t_list *list, void *key)
 	e_prev = NULL;
 	while (e_curr)
 	{
-		if (list->cmp_key(key, e_curr->key) == 0)
+		if ((list->cmp_key(key, e_curr->key)) == 0)
 		{
 			elem_del(list, e_curr, e_prev);
 			return (1);
@@ -238,12 +240,22 @@ void	list_free(t_list *list)
 Comporators.
 Do we need another comparator?
 */
-int	cmp_int(void *key_1, void *key_2)
+int	cmp_int(const void *key_1, const void *key_2)
 {
-	return ((int)key_1 - (int)key_2);
+	return ((const int *) key_1 - (const int *) key_2);
 }
 
-int	cmp_str(void *key_1, void *key_2)
+static int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+int	cmp_str(const void *key_1, const void *key_2)
 {
 	return (ft_strcmp((const char *)key_1, (const char *)key_2));
 }
