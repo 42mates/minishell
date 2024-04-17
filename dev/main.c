@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:13:18 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/16 20:17:28 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:44:14 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ exit	- no options
 int	init_data(t_data *data, char **env)
 {
 	(void) env; // mockup
-	g_signal = 0;
 	data->flag_exit = 0;
 	//char		**env;
 	//t_list		env_lts; // init new list (with malloc)
@@ -86,7 +85,7 @@ void	main_begining(t_list **toks)
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signal_handler);
 	errno = 0;
-	*toks = list_new(cmp_tok, NULL, free);
+	*toks = list_new(cmp_int, NULL, free);
 }
 
 int	main(int ac, const char **av, char **env)
@@ -97,6 +96,7 @@ int	main(int ac, const char **av, char **env)
 
 	(void) ac;
 	(void) av;
+	// g_signal = 0;
 	if (init_data(&data, env))
 		return (EXIT_FAILURE);
 	while (!data.flag_exit)
@@ -107,8 +107,12 @@ int	main(int ac, const char **av, char **env)
 			data.flag_exit = 1;
 		else if (line && *line)
 		{
-			if (lexer(line, toks))
-				parser(&data, toks);
+			if (lexer(line, toks) == 0)
+			{
+				printf("\n===> After Lexer\n\n");
+				test_print_tokens(toks);
+				// parser(&data, toks);
+			}
 			free(line);
 		}
 		list_free(toks);

@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 20:13:17 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/16 20:42:31 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:53:11 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	error_handler(int ret, char *m, char mode, int signum)
 	{
 		write(STDERR_FILENO, m, ft_strlen(m));
 		write(STDERR_FILENO, "\n", 1);
-		g_signal = signum;
+		(void)signum; // mockup
+		// g_signal = signum;
 		return (ret);
 	}
 	if (errno != 0 && mode)
@@ -33,7 +34,7 @@ int	error_handler(int ret, char *m, char mode, int signum)
 			perror(m);
 		else
 			perror("Error minishell: ");
-		g_signal = SIGHUP;
+		// g_signal = SIGHUP;
 	}
 	else if (errno != 0)
 		perror("Oh, it's an EPIC error.. ");

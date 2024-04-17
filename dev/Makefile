@@ -6,18 +6,20 @@
 #    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 11:00:13 by akurochk          #+#    #+#              #
-#    Updated: 2024/04/16 20:22:25 by akurochk         ###   ########.fr        #
+#    Updated: 2024/04/17 19:02:37 by akurochk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 
 SRCS	= main.c \
-		signal.c \
+		error_hendler.c \
 		ft_str.c \
-		erroe_handler.c \
+		ft_substr.c \
 		lexer.c \
-		list.c
+		list.c \
+		signal.c \
+		test_lexer.c
 
 OBJS	= $(SRCS:.c=.o)
 

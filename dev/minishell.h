@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/16 20:27:08 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:02:19 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ getenv, tcsetattr, tcgetattr, tg
 
 # define PROMT "$> " // what we must use as a promt?
 
-int						g_signal;
+// int						g_signal;
 
 typedef struct s_data	t_data;
 
@@ -68,5 +68,11 @@ void	signal_handler(int signum);
 
 // error_handler.c
 int		error_handler(int ret, char *m, char mode, int signum);
+
+// ft_substr.c
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+
+//TEST
+void	test_print_tokens(t_list *toks);
 
 #endif
