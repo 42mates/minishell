@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:19:32 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/16 16:21:45 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:59:23 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,13 @@ int	list_put(t_list *list, void *key, void *val)
 
 	if (!list)
 		return (0);
-	if (list_contains_key(list, key))
-		return (0);
 	if (!list->head)
 	{
 		list->head = elem_new(key, val);
 		return (list->head != NULL);
 	}
 	e_ptr = list->head;
-	while (e_ptr->next != NULL)
+	while (e_ptr->next)
 		e_ptr = e_ptr->next;
 	e_ptr->next = elem_new(key, val);
 	return (e_ptr->next != NULL);
@@ -242,7 +240,12 @@ Do we need another comparator?
 */
 int	cmp_int(const void *key_1, const void *key_2)
 {
-	return ((const int *) key_1 - (const int *) key_2);
+	int	*a;
+	int	*b;
+
+	a = (int *)key_1;
+	b = (int *)key_2;
+	return (*a - *b);
 }
 
 static int	ft_strcmp(const char *s1, const char *s2)
@@ -259,3 +262,10 @@ int	cmp_str(const void *key_1, const void *key_2)
 {
 	return (ft_strcmp((const char *)key_1, (const char *)key_2));
 }
+
+// int		cmp_tok(const void *key_1, const void *key_2)
+// {
+// 	(void) key_1;
+// 	(void) key_2;
+// 	return (0); // okay, how to compare tokens ?
+// }
