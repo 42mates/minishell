@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:13:18 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/17 19:44:14 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:36:42 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,99 @@ exit	- no options
 
 */
 
+int	str_contains(const char *s, const char c)
+{
+	if (s)
+	{
+		while (*s)
+		{
+			if (*s == c)
+				return (1);
+			s++;
+		}
+	}
+	return (0);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*ret;
+	int		i;
+
+	if (!s)
+		return (NULL);
+	i = 0;
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!ret)
+		return (NULL);
+	while (s[i])
+	{
+		ret[i] = s[i];
+		i++;
+	}
+	ret[i] = '\0';
+	return (ret);
+}
+
+/*
+Returns 0 if OK.
+Returns 1 if error.
+*/
+int	str_split(const char *s, const char *sep, char **dst1, char **dst2)
+{
+	int	i;
+	int	j;
+
+	if (!s || !sep)
+		return (1);
+	i = 0;
+	while (s[i] && !str_contains(sep, s[i]))
+		i++;
+	j = i;
+	*dst1 = (char *)malloc(sizeof(char) * (i + 1));
+	if (!dst1)
+		return (1);
+	while (j--)
+		(*dst1)[j] = s[j];
+	(*dst1)[i] = '\0';
+	if (!s[i])
+		*dst2 = NULL;
+	else
+		*dst2 = ft_strdup(s + i + 1);
+	if (dst2)
+		return (0);
+	free(*dst1);
+	return (1);
+}
+
+int	env_parser(t_list *env_lst, char **env)
+{
+	int		i;
+	char	*key;
+	char	*val;
+
+	if (!env_lst || !env || !*env)
+		return (error_handler(1, "Error: env_parser", 1, 0));
+	i = -1;
+	while (env[++i])
+	{
+		if (str_split(env[i], "=", &key, &val))
+			return (error_handler(1, "Error: env_parser", 1, 0));
+		if (!list_put(env_lst, key, val))
+			return (error_handler(1, "Error: env_parser", 1, 0));
+	}
+	return (0);
+}
+
 int	init_data(t_data *data, char **env)
 {
-	(void) env; // mockup
 	data->flag_exit = 0;
-	//char		**env;
-	//t_list		env_lts; // init new list (with malloc)
+	data->env = NULL;
+	data->env_lst = list_new(cmp_int, free, free);
+	if (!data->env_lst)
+		return (error_handler(1, "Error: init_data", 1, 0));
+	if (env_parser(data->env_lst, env))
+		return (1);
 	// parce env to env_lst
 	data->builtins[0] = "echo";
 	data->builtins[1] = "cd";
@@ -56,7 +143,7 @@ int	init_data(t_data *data, char **env)
 	data->f_builtins[5] = &ft_env;
 	data->f_builtins[6] = &ft_exit;
 	*/
-	return (0); // set correct status
+	return (0);
 }
 
 /*
@@ -99,6 +186,7 @@ int	main(int ac, const char **av, char **env)
 	// g_signal = 0;
 	if (init_data(&data, env))
 		return (EXIT_FAILURE);
+	test_print_env(data.env_lst);					// TEST
 	while (!data.flag_exit)
 	{
 		main_begining(&toks);
@@ -110,7 +198,7 @@ int	main(int ac, const char **av, char **env)
 			if (lexer(line, toks) == 0)
 			{
 				printf("\n===> After Lexer\n\n");
-				test_print_tokens(toks);
+				test_print_tokens(toks);			// TEST
 				// parser(&data, toks);
 			}
 			free(line);

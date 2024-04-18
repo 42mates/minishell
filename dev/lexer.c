@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:13:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/17 19:51:00 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:31:11 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static int	is_space(const char c)
 	return ((c >= 9 && c <= 13) || c == ' ');
 }
 
-static int	is_operator(const char c)
+static int	is_operator(const char c, const char c2)
 {
 	return (c == '(' || c == ')' || c == '|'
-		|| c == '&' || c == '<' || c == '>');
+		|| (c == '&' && c2 == '&') || c == '<' || c == '>');
 }
 
 /*
@@ -123,7 +123,8 @@ int	lexer_get_word(t_list *toks, const char *line, long i, long *end)
 	char	*s_str;
 
 	*end = 0;
-	while (!is_space(line[i + *end]) && !is_operator(line[i + *end])
+	while (!is_space(line[i + *end])
+		&& !is_operator(line[i + *end], line[i + *end + 1])
 		&& line[i + *end] != '\'' && line[i + *end] != '\"' && line[i + *end])
 		*end = *end + 1;
 	s_str = ft_substr(line, i, *end);
@@ -154,10 +155,10 @@ static int	lexer_get_token(t_list *toks, const char *line, long *i)
 		if (lexer_get_quotes(toks, line, *i, &end))
 			return (error_handler(1, "Erorr: lexer_get_quotes", 1, 0));
 		if (end == 0)
-			return (error_handler(1, "Error: unclosed quotes", 1, 0));
+			return (error_handler(1, "Error: unclosed quotes", 0, 0));
 		*i = *i + end + 1;
 	}
-	else if (is_operator(line[*i]))
+	else if (is_operator(line[*i], line[*i + 1]))
 	{
 		if (lexer_get_operator(toks, line, *i, &end))
 			return (1);

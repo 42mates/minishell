@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/17 19:02:19 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:38:37 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_data
 {
 	int			flag_exit;
 	char		**env;
-	t_list		env_lst;
+	t_list		*env_lst;
 	char		*builtins[7];
 	t_builtin	f_builtins[7];
 }	t_data;
@@ -74,5 +74,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 //TEST
 void	test_print_tokens(t_list *toks);
+void	test_print_env(t_list *env);
 
 #endif
