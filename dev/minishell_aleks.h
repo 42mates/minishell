@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/17 19:02:19 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:49:06 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,11 @@ typedef struct s_data
 	t_builtin	f_builtins[7];
 }	t_data;
 
-int		ft_strlen(const char *s);
-int		ft_strcmp(const char *s1, const char *s2);
-
 // signal.c
 void	signal_handler(int signum);
 
 // error_handler.c
 int		error_handler(int ret, char *m, char mode, int signum);
-
-// ft_substr.c
-char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 //TEST
 void	test_print_tokens(t_list *toks);

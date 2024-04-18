@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_tabdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 17:25:30 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/18 17:54:23 by mbecker          ###   ########.fr       */
+/*   Created: 2023/10/30 16:37:55 by mbecker           #+#    #+#             */
+/*   Updated: 2024/02/23 16:11:00 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-#include "minishell_aleks.h"
+#include "tab.h"
 
-void	signal_handler(int signum)
+char	**ft_tabdup(char **tab)
 {
-	if (signum == SIGINT)
+	char	**new_tab;
+	int		i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	new_tab = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!new_tab)
+		return (0);
+	i = 0;
+	while (tab[i])
 	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 1);
-		rl_redisplay();
+		new_tab[i] = ft_strdup(tab[i]);
+		if (!new_tab[i])
+		{
+			freetab(new_tab, TRUE);
+			return (0);
+		}
+		i++;
 	}
+	new_tab[i] = 0;
+	return (new_tab);
 }

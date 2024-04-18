@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:09:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/17 16:46:20 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:50:46 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "strings.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   comparators.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 17:25:30 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/18 17:54:23 by mbecker          ###   ########.fr       */
+/*   Created: 2024/04/18 16:32:42 by mbecker           #+#    #+#             */
+/*   Updated: 2024/04/18 16:39:23 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-#include "minishell_aleks.h"
+#include "list.h"
 
-void	signal_handler(int signum)
+int cmp_int(const void *key_1, const void *key_2)
 {
-	if (signum == SIGINT)
-	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 1);
-		rl_redisplay();
-	}
+	return (*(int *)key_1 - *(int *)key_2);
 }
+
+int	cmp_str(const void *key_1, const void *key_2)
+{
+	return (ft_strcmp((const char *)key_1, (const char *)key_2));
+}
+
+// int		cmp_tok(const void *key_1, const void *key_2)
+// {
+// 	(void) key_1;
+// 	(void) key_2;
+// 	return (0); // okay, how to compare tokens ?
+// }

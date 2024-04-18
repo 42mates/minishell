@@ -6,7 +6,7 @@
 #    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 15:00:14 by mbecker           #+#    #+#              #
-#    Updated: 2024/04/02 13:48:41 by mbecker          ###   ########.fr        #
+#    Updated: 2024/04/18 17:50:03 by mbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,11 @@ CFLAGS 	= -Wall -Wextra -Werror
 NAME 	= libft.a
 
 FILES =	files/get_next_line.c
+
+LIST  =	list/comparators.c \
+		list/list_a.c \
+		list/list_b.c 
+
 STR =	strings/ft_atoi.c \
 		strings/ft_is.c \
 		strings/ft_len.c \
@@ -25,10 +30,14 @@ STR =	strings/ft_atoi.c \
 		strings/ft_strcpy.c \
 		strings/ft_strdup.c \
 		strings/ft_strjoin.c \
-		strings/ft_wordcount.c
+		strings/ft_substr.c \
+		strings/ft_wordcount.c \
+		tab/ft_tabdup.c \
+		tab/ft_tabjoin.c
+
 OTHER =	other/freetab.c
 
-SRC	=	$(FILES) $(STR) $(OTHER)
+SRC	=	$(FILES) $(LIST) $(STR) $(OTHER)
 OBJ	=	$(SRC:.c=.o)
 OBJDIR	= .obj/files .obj/str .obj/other
 
