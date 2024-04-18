@@ -6,13 +6,11 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:27:25 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/18 15:59:52 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/18 17:55:02 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h>
-#include "list.h"
+#include "../minishell.h"
 
 // gcc test_list.c list.c -o test_list
 

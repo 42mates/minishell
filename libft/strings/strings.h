@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:48:31 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/15 13:16:37 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/18 17:49:45 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ char		*ft_strndup(const char *src, size_t size);
 
 char		*ft_strjoin(char *s1, char *s2, int free_s1, int free_s2);
 //ft_strjoin.c
+
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+//ft_substr.c
 
 size_t		ft_wordcount(const char *str, char sep);
 size_t		ft_wordcount_cset(const char *str, char *charset);
