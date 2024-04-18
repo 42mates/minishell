@@ -6,20 +6,26 @@
 #    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/04/15 17:09:01 by mbecker          ###   ########.fr        #
+#    Updated: 2024/04/16 17:57:52 by mbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+NAME = test
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = 	main.c \
+		\
 		src/execute.c \
 		src/set_home_path.c \
 		src/here_doc.c \
-		src/pipex.c
+		src/pipex.c \
+		\
+		builtins/ft_echo.c \
+		builtins/ft_cd.c \
+		builtins/ft_pwd.c \
+
 
 all: $(NAME)
 
@@ -33,6 +39,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@make -C ./libft fclean
 	@echo "$(RED)FULL CLEAN FINISHED$(NC)"
 
 re: fclean all
