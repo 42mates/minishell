@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:27:25 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/16 16:39:58 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:59:52 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int	main(void)
 
 // Delete by key -> if key in list -> get val -> print val
 	printf("\n==B==\n");
-	list_del(ints, &key2);
-	list_del(ints, &key3);
-	list_del(ints, &key4);
+	list_del_one(ints, &key2);
+	list_del_one(ints, &key3);
+	list_del_one(ints, &key4);
 	if (list_contains_key(ints, &key1))
 		printf("%s\n", (char *)list_get(ints, &key1));
 	if (list_contains_key(ints, &key2))					// deleted
@@ -147,9 +147,9 @@ int	main(void)
 
 // Delete by key -> if key in list -> get val -> print val
 	printf("\n==B==\n");
-	list_del(strs, skey2);
-	list_del(strs, skey3);
-	list_del(strs, skey4);
+	list_del_one(strs, skey2);
+	list_del_one(strs, skey3);
+	list_del_one(strs, skey4);
 	if (list_contains_key(strs, skey1))
 		printf("%s\n", (char *)list_get(strs, skey1));
 	if (list_contains_key(strs, skey2))					// deleted

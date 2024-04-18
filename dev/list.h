@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:15:47 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/17 15:59:34 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:10:01 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,9 @@ t_list	*list_new(t_cmp_key cmp_key, t_dst_key dst_key, t_dst_val dst_val);
 
 int		list_put(t_list *list, void *key, void *val);
 int		list_replace(t_list *list, void *key, void *new_val);
-int		list_del(t_list *list, void *key);
+int		list_del_one(t_list *list, void *key);
 
 int		list_size(t_list *list);
-int		list_contains_key(t_list *list, void *key);
 void	*list_get(t_list *list, void *key);
 void	list_free(t_list *list);
 
