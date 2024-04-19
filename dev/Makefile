@@ -6,7 +6,7 @@
 #    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 11:00:13 by akurochk          #+#    #+#              #
-#    Updated: 2024/04/17 19:02:37 by akurochk         ###   ########.fr        #
+#    Updated: 2024/04/19 14:08:10 by akurochk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS	= main.c \
 		ft_substr.c \
 		lexer.c \
 		list.c \
+		parser.c \
 		signal.c \
 		test_lexer.c
 
@@ -41,5 +42,10 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+test: re
+	make clean
+	clear
+	
 
 .PHONY: all clean fclean re

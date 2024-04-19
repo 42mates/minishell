@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/18 14:38:37 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:39:52 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ getenv, tcsetattr, tcgetattr, tg
 # include <unistd.h>
 # include "list.h"
 # include "lexer.h"
+# include "parser.h"
 
 # define PROMT "$> " // what we must use as a promt?
 
@@ -67,10 +68,13 @@ int		ft_strcmp(const char *s1, const char *s2);
 void	signal_handler(int signum);
 
 // error_handler.c
-int		error_handler(int ret, char *m, char mode, int signum);
+int		errors(int ret, char *m, char mode, int signum);
 
 // ft_substr.c
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+
+// parser.c
+int	parser(t_data *data, t_list *toks);
 
 //TEST
 void	test_print_tokens(t_list *toks);

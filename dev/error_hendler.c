@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 20:13:17 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/17 18:53:11 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:05:55 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ m		- error message.
 mode	- 1 to use perror() and SIGHUP signal.
 signum	- signal number.
 */
-int	error_handler(int ret, char *m, char mode, int signum)
+int	errors(int ret, char *m, char mode, int signum)
 {
 	if (m && *m && !mode)
 	{

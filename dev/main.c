@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:13:18 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/18 14:36:42 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:53:20 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,14 @@ int	env_parser(t_list *env_lst, char **env)
 	char	*val;
 
 	if (!env_lst || !env || !*env)
-		return (error_handler(1, "Error: env_parser", 1, 0));
+		return (errors(1, "Error: env_parser", 1, 0));
 	i = -1;
 	while (env[++i])
 	{
 		if (str_split(env[i], "=", &key, &val))
-			return (error_handler(1, "Error: env_parser", 1, 0));
+			return (errors(1, "Error: env_parser", 1, 0));
 		if (!list_put(env_lst, key, val))
-			return (error_handler(1, "Error: env_parser", 1, 0));
+			return (errors(1, "Error: env_parser", 1, 0));
 	}
 	return (0);
 }
@@ -122,10 +122,9 @@ int	init_data(t_data *data, char **env)
 	data->env = NULL;
 	data->env_lst = list_new(cmp_int, free, free);
 	if (!data->env_lst)
-		return (error_handler(1, "Error: init_data", 1, 0));
+		return (errors(1, "Error: init_data", 1, 0));
 	if (env_parser(data->env_lst, env))
 		return (1);
-	// parce env to env_lst
 	data->builtins[0] = "echo";
 	data->builtins[1] = "cd";
 	data->builtins[2] = "pwd";
@@ -186,7 +185,7 @@ int	main(int ac, const char **av, char **env)
 	// g_signal = 0;
 	if (init_data(&data, env))
 		return (EXIT_FAILURE);
-	test_print_env(data.env_lst);					// TEST
+	// test_print_env(data.env_lst);					// TEST
 	while (!data.flag_exit)
 	{
 		main_begining(&toks);
@@ -197,9 +196,11 @@ int	main(int ac, const char **av, char **env)
 		{
 			if (lexer(line, toks) == 0)
 			{
-				printf("\n===> After Lexer\n\n");
-				test_print_tokens(toks);			// TEST
-				// parser(&data, toks);
+				// printf("\n===> After Lexer\n\n");
+				// test_print_tokens(toks);			// TEST
+				printf("\n===> Before Parser\n\n");
+				parser(&data, toks);
+				printf("\n===> After Parser\n\n");
 			}
 			free(line);
 		}

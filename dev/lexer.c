@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:13:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/18 12:31:11 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:05:55 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ int	lexer_get_operator(t_list *toks, const char *line, long i, long *end)
 
 	t = get_operator_type(line, i);
 	if (t == L_ANOTH)
-		return (error_handler(1, "Error: get_operator_type", 0, 42));
+		return (errors(1, "Error: get_operator_type", 0, 42));
 	if (!list_put(toks, (int *)t, NULL))
-		return (error_handler(1, "Erorr: lexer_get_operator", 1, 0));
+		return (errors(1, "Erorr: lexer_get_operator", 1, 0));
 	if (t == L_OR || t == L_AND || t == L_RE_DOC || t == L_RE_APP)
 		*end = 1;
 	else
@@ -153,9 +153,9 @@ static int	lexer_get_token(t_list *toks, const char *line, long *i)
 	if (line[*i] == '\'' || line[*i] == '\"')
 	{
 		if (lexer_get_quotes(toks, line, *i, &end))
-			return (error_handler(1, "Erorr: lexer_get_quotes", 1, 0));
+			return (errors(1, "Erorr: lexer_get_quotes", 1, 0));
 		if (end == 0)
-			return (error_handler(1, "Error: unclosed quotes", 0, 0));
+			return (errors(1, "Error: unclosed quotes", 0, 0));
 		*i = *i + end + 1;
 	}
 	else if (is_operator(line[*i], line[*i + 1]))
@@ -167,7 +167,7 @@ static int	lexer_get_token(t_list *toks, const char *line, long *i)
 	else if (line[*i])
 	{
 		if (lexer_get_word(toks, line, *i, &end))
-			return (error_handler(1, "Erorr: lexer_get_word", 1, 0));
+			return (errors(1, "Erorr: lexer_get_word", 1, 0));
 		*i = *i + end;
 	}
 	return (0);
@@ -186,7 +186,7 @@ int	lexer(const char *line, t_list *toks)
 	{
 		if (line[i] && is_space(line[i])
 			&& !list_put(toks, (int *)L_SPACE, NULL))
-			return (error_handler(1, "Error: lexer", 1, 0));
+			return (errors(1, "Error: lexer", 1, 0));
 		while (line[i] && is_space(line[i]))
 			i++;
 		if (lexer_get_token(toks, line, &i))

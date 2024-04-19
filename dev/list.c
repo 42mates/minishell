@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:19:32 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/17 15:59:23 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:21:51 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,25 +213,27 @@ void	*list_get(t_list *list, void *key)
 /*
 Destructs keys and values, then frees element, then frees list. 
 */
-void	list_free(t_list *list)
+void	list_free(void *list)
 {
 	t_elem	*e_curr;
 	t_elem	*e_next;
+	t_list	*l;
 
+	l = (t_list *)list;
 	if (!list)
 		return ;
-	e_curr = list->head;
+	e_curr = l->head;
 	while (e_curr)
 	{
 		e_next = e_curr->next;
-		if (list->dst_key)
-			list->dst_key(e_curr->key);
-		if (list->dst_val)
-			list->dst_val(e_curr->val);
+		if (l->dst_key)
+			l->dst_key(e_curr->key);
+		if (l->dst_val)
+			l->dst_val(e_curr->val);
 		free(e_curr);
 		e_curr = e_next;
 	}
-	free(list);
+	free(l);
 }
 
 /*
