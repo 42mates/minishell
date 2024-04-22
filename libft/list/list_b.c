@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list2.c                                            :+:      :+:    :+:   */
+/*   list_b.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:43:32 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/18 16:43:36 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/22 15:13:28 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,13 @@ void	*list_get(t_list *list, void *key)
 /**
  * Frees the memory allocated for a linked list and its elements.
  */
-void list_free(t_list *list)
+void	list_free(t_list *list)
 {
-	t_elem *e_curr;
-	t_elem *e_next;
+	t_elem	*e_curr;
+	t_elem	*e_next;
 
 	if (!list)
-		return;
-
+		return ;
 	e_curr = list->head;
 	while (e_curr)
 	{
