@@ -11,4 +11,6 @@ minishell
 
 # Debug files
 *.dSYM/
+test.msh
+test.posix
 
