@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:48:31 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/22 15:12:58 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/24 17:16:44 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	**ft_split_charset(char const *s, char *charset);
 
 char	*ft_strchr(const char *str, int c);
 char	*ft_strrchr(const char *str, int c);
+char	*ft_strchrset(char *s, char *set);
 // ft_strchr.c
 
 int		ft_strcmp(const char *s1, const char *s2);
