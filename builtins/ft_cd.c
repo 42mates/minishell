@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:22:52 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/18 17:44:54 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/22 16:28:22 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_cd(char *path, t_list *list)
 	char	*errorstr;
 	int		exit_status;
 	char	*oldpwd;
-	
+
 	oldpwd = getcwd(NULL, 0);
 	exit_status = chdir(path);
 	if (path && *path && exit_status)
@@ -26,11 +26,7 @@ int	ft_cd(char *path, t_list *list)
 			errorstr = strerror(errno);
 		else
 			errorstr = "File name too long";
-		write(2, "cd: ", 4);
-		write(2, errorstr, ft_strlen(errorstr));
-		write(2, ": ", 2);
-		write(2, path, ft_strlen(path));
-		write(2, "\n", 1);
+		builtin_error("cd", path, errorstr);
 		return (-exit_status);
 	}
 	list_replace(list, "OLDPWD", oldpwd);

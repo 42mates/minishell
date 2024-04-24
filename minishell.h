@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:17:30 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/18 17:46:00 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/23 17:22:09 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ int		pipex(char const **cmds, char **envp, int infile, int outfile);
 int		ft_echo(char **args);
 int		ft_cd(char *path, t_list *list);
 int		ft_pwd(void);
-
+int		ft_export(char **arg, t_list *env);
+void	builtin_error(char *builtin, char *arg, char *msg);
+void	print_var(t_elem *node, char *prefix);
 //  in builtins directory
 
 #endif

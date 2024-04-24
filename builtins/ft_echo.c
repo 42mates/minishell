@@ -6,11 +6,33 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:41:45 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/17 12:26:30 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/22 16:28:13 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	check_option(char **args, int *i)
+{
+	int	j;
+
+	while (args[++(*i)])
+	{
+		j = 1;
+		if (!ft_strncmp(args[*i], "-n", 2))
+		{
+			while (args[*i][++j])
+			{
+				if (args[*i][j] != 'n')
+					return (--(*i));
+			}
+		}
+		else
+			return (--(*i));
+	}
+	*i = 1;
+	return (1);
+}
 
 /**
  * Reproduce the behavior of the echo command, with the `-n` option..
@@ -21,15 +43,13 @@
 int	ft_echo(char **args)
 {
 	int		i;
-	int		newline;
+	int		is_option;
 	char	*str;
-	
+
 	if (!args[1])
 		return (write(1, "\n", 1), 0);
-	newline = ft_strcmp(args[1], "-n");
 	i = 0;
-	if (!newline)
-		i++;
+	is_option = check_option(args, &i);
 	while (args[++i])
 	{
 		str = args[i];
@@ -37,7 +57,7 @@ int	ft_echo(char **args)
 		if (args[i + 1])
 			write(STDOUT_FILENO, " ", 1);
 	}
-	if (newline)
+	if (!is_option)
 		write(STDOUT_FILENO, "\n", 1);
 	return (EXIT_SUCCESS);
 }
