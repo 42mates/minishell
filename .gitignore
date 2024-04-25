@@ -8,6 +8,8 @@
 # Executables
 *.out
 minishell
+exe
+test
 
 # Debug files
 *.dSYM/
