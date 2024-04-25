@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 12:40:24 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:26:29 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_itoa(int n);
 char	*ft_uitoa(unsigned int n);
 char	**ft_split(char const *s, char c);
+int		ft_str_split(const char *s, const char *sep, char **dst1, char **dst2);
+int		ft_str_contains(const char *s, const char c);
 
 // signal.c
 void	handler_signal(int signum);

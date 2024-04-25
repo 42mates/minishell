@@ -6,7 +6,7 @@
 #    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 11:00:13 by akurochk          #+#    #+#              #
-#    Updated: 2024/04/25 14:11:32 by akurochk         ###   ########.fr        #
+#    Updated: 2024/04/25 15:26:11 by akurochk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,17 @@ SRCS	= main.c \
 	utils/ft_itoa.c \
 	utils/ft_split.c \
 	utils/ft_str.c \
+	utils/ft_strdup.c \
 	utils/ft_substr.c \
+	utils/ft_str_concat.c \
+	utils/ft_str_split.c \
 	parser/group.c \
 	parser/heredoc.c \
 	lexer/lexer.c \
+	lexer/lexer2.c \
 	list/list.c \
+	list/list2.c \
+	list/list3.c \
 	parser/parser_star.c \
 	parser/parser.c \
 	parser/pipes.c \

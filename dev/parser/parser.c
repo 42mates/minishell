@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:06:56 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:08:57 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ Returns 1 if can't create element in extra.
 */
 int	parse_sub_token(t_elem *e_elem, t_list *extra)
 {
-	if (((long)e_elem->key))
+	if (is_extra(e_elem->key))
 		return (!list_put(extra, e_elem->key, ft_strdup((char *)e_elem->val)));
 	return (!list_put(extra, e_elem->key, e_elem->val));
 }
@@ -436,6 +436,7 @@ t_list	*parse_extra(t_list *grp, t_data *data)
 	{
 		level += ((long)e_elem->key == L_PAR_L)
 			+ ((long)e_elem->key == L_PAR_R) * (-1);
+		printf("parse_extra LVL_=[%d]\n", level);
 		printf("parse_extra ELEM=[%ld][%s]\n", (long)e_elem->key, (char*)e_elem->val);
 		if (level > 0 && parse_sub_token(e_elem, extra))
 			return (list_free(extra), NULL);

@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:59:44 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/16 20:26:15 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:44:07 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ Here we can set constants to represent lexical part of input.
 # define L_S_QUOT	12	// '
 # define L_D_QUOT	13	// "
 
-int	lexer(const char *line, t_list *toks);
+int		lexer(const char *line, t_list *toks);
+int		lexer_get_word(t_list *toks, const char *line, long i, long *end);
+long	get_operator_type(const char *line, long i);
+int		is_operator(const char c, const char c2);
+int		is_space(const char c);
 
 #endif
