@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:15:47 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/18 15:19:07 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/23 11:32:26 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ void	list_free(void *list);
 
 int		cmp_int(const void *key_1, const void *key_2);
 int		cmp_str(const void *key_1, const void *key_2);
-// int		cmp_tok(const void *key_1, const void *key_2);
 
 #endif

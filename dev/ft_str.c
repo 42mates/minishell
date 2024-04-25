@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:51:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/16 20:23:43 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:54:14 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,19 @@ int	ft_strlen(const char *s)
 	while (s[len])
 		len++;
 	return (len);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	if (c < 0)
+		return (NULL);
+	while (*s)
+	{
+		if (*s == (unsigned char)c)
+			return ((char *)s);
+		s++;
+	}
+	if (*s == (unsigned char)c)
+		return ((char *)s);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:13:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/19 12:05:55 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/25 11:48:39 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	lexer_get_operator(t_list *toks, const char *line, long i, long *end)
 
 	t = get_operator_type(line, i);
 	if (t == L_ANOTH)
-		return (errors(1, "Error: get_operator_type", 0, 42));
+		return (errors(1, "Error: get_operator_type", 0, 258));
 	if (!list_put(toks, (int *)t, NULL))
 		return (errors(1, "Erorr: lexer_get_operator", 1, 0));
 	if (t == L_OR || t == L_AND || t == L_RE_DOC || t == L_RE_APP)

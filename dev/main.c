@@ -6,12 +6,13 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:13:18 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/19 12:53:20 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:39:51 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	g_signal = 0;
 /*
 
 MAIN loop:
@@ -118,7 +119,8 @@ int	env_parser(t_list *env_lst, char **env)
 
 int	init_data(t_data *data, char **env)
 {
-	data->flag_exit = 0;
+	data->flag_exit = 1;
+	data->flag_env = 1;
 	data->env = NULL;
 	data->env_lst = list_new(cmp_int, free, free);
 	if (!data->env_lst)
@@ -148,10 +150,13 @@ int	init_data(t_data *data, char **env)
 /*
 Here code must free everything
 */
-void	free_data(t_data *data)
+void	main_exit(t_data *data)
 {
-	(void) data; // mockup
-	return ;
+	write(STDOUT_FILENO, "exit\n", 5);
+	free_str_array(data->env, -1);
+	list_free(data->env_lst);
+	free(data->g_signal_str);
+	rl_clear_history();
 }
 
 char	*ft_readline(void)
@@ -168,10 +173,15 @@ char	*ft_readline(void)
 /* SIGINT = Ctrl + C */
 void	main_begining(t_list **toks)
 {
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, signal_handler);
+	signal(SIGINT, handler_signal);
 	errno = 0;
 	*toks = list_new(cmp_int, NULL, free);
+}
+
+void	main_postaction(t_list *toks)
+{
+	list_free(toks);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 int	main(int ac, const char **av, char **env)
@@ -182,30 +192,22 @@ int	main(int ac, const char **av, char **env)
 
 	(void) ac;
 	(void) av;
-	// g_signal = 0;
 	if (init_data(&data, env))
 		return (EXIT_FAILURE);
-	// test_print_env(data.env_lst);					// TEST
-	while (!data.flag_exit)
+	while (data.flag_exit)
 	{
 		main_begining(&toks);
 		line = ft_readline();
 		if (line == NULL)
-			data.flag_exit = 1;
-		else if (line && *line)
+			data.flag_exit = 0;
+		else if (line != NULL && *line)
 		{
 			if (lexer(line, toks) == 0)
-			{
-				// printf("\n===> After Lexer\n\n");
-				// test_print_tokens(toks);			// TEST
-				printf("\n===> Before Parser\n\n");
 				parser(&data, toks);
-				printf("\n===> After Parser\n\n");
-			}
 			free(line);
 		}
-		list_free(toks);
+		main_postaction(toks);
 	}
-	free_data(&data);
-	return (EXIT_SUCCESS); // return correct EXIT_CODE
+	main_exit(&data);
+	return (g_signal);
 }

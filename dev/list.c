@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:19:32 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/18 15:21:51 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/24 17:04:47 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,7 @@ int	cmp_int(const void *key_1, const void *key_2)
 	return (*a - *b);
 }
 
-static int	ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	int	i;
 
@@ -264,10 +264,3 @@ int	cmp_str(const void *key_1, const void *key_2)
 {
 	return (ft_strcmp((const char *)key_1, (const char *)key_2));
 }
-
-// int		cmp_tok(const void *key_1, const void *key_2)
-// {
-// 	(void) key_1;
-// 	(void) key_2;
-// 	return (0); // okay, how to compare tokens ?
-// }
