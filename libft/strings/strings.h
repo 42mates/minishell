@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:48:31 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/24 17:16:44 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/25 19:33:08 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
 // ft_is.c
+
+char	*ft_itoa(int n);
+// ft_itoa.c
 
 char	**ft_split(char const *s, char c);
 char	**ft_split_charset(char const *s, char *charset);

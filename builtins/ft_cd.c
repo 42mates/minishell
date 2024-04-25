@@ -6,13 +6,20 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:22:52 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/22 16:28:22 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:15:38 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_cd(char *path, t_list *list)
+/**
+ * Changes the current working directory to the specified path.
+ *
+ * @param path The path to the directory to change to.
+ * @param env The environment variables list.
+ * @return The exit status of the function.
+ */
+int	ft_cd(char *path, t_list *env)
 {
 	char	*errorstr;
 	int		exit_status;
@@ -29,8 +36,8 @@ int	ft_cd(char *path, t_list *list)
 		builtin_error("cd", path, errorstr);
 		return (-exit_status);
 	}
-	list_replace(list, "OLDPWD", oldpwd);
-	list_replace(list, "PWD", getcwd(NULL, 0));
+	list_replace(env, "OLDPWD", oldpwd);
+	list_replace(env, "PWD", getcwd(NULL, 0));
 	return (EXIT_SUCCESS);
 }
 

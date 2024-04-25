@@ -6,7 +6,7 @@
 #    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 15:00:14 by mbecker           #+#    #+#              #
-#    Updated: 2024/04/23 15:01:49 by mbecker          ###   ########.fr        #
+#    Updated: 2024/04/25 19:33:23 by mbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ LIST  =	list/comparators.c \
 
 STR =	strings/ft_atoi.c \
 		strings/ft_is.c \
+		strings/ft_itoa.c \
 		strings/ft_len.c \
 		strings/ft_split.c \
 		strings/ft_strchr.c \

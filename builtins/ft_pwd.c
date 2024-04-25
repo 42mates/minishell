@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:36:35 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/22 11:54:29 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/25 19:27:18 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_pwd(void)
 {
 	char	*path;
 
-	path = getcwd(NULL, 0); //missing protections, to check
+	path = getcwd(NULL, 0);
 	if (!path)
 		return (perror("pwd"), EXIT_FAILURE);
 	else
