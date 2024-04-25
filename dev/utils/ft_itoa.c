@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:34:19 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/24 15:51:19 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:07:06 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 static char	*ft_malloc_res(char *array)
 {

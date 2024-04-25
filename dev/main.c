@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:13:18 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 12:39:51 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:06:44 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 int	g_signal = 0;
 /*

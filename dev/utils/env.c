@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:24:16 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 11:11:29 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:07:01 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 char	**env_make(t_list *env)
 {

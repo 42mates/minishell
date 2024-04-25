@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:17:15 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 11:57:07 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:06:52 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 t_group	*group_new(int type)
 {

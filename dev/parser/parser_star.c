@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:37:01 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/24 16:14:57 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:06:54 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 /*
 Cleans array.

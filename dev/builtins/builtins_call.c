@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:05:29 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/24 15:44:16 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:06:46 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 int	builtins_exe(int i, t_elem *e_cmd, t_data *data, t_fd *fd)
 {

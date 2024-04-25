@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:29:10 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/23 19:55:49 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:07:07 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 static int	ft_get_array_size(const char *str, char c)
 {

@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_str.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 17:25:30 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 12:44:47 by akurochk         ###   ########.fr       */
+/*   Created: 2023/05/03 15:51:38 by akurochk          #+#    #+#             */
+/*   Updated: 2024/04/25 14:07:07 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
-void	handler_signal(int signum)
+int	ft_strlen(const char *s)
 {
-	if (signum == SIGINT)
+	int	len;
+
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	if (c < 0)
+		return (NULL);
+	while (*s)
 	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 1);
-		rl_redisplay();
+		if (*s == (unsigned char)c)
+			return ((char *)s);
+		s++;
 	}
-}
-
-void	handler_heredoc(int signum)
-{
-	(void)signum;
-	write(2, "\n", 1);
-	exit (130);
-}
-
-void	handler_executor(int signum)
-{
-	if (signum == SIGINT)
-		write(2, "\n", 1);
-	else if (signum == SIGQUIT)
-		write(2, "Exit: handler_executor\n", 5);
+	if (*s == (unsigned char)c)
+		return ((char *)s);
+	return (NULL);
 }

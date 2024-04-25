@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:50 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/24 19:58:37 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:06:58 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 int	redir_fd(int in, int out)
 {
