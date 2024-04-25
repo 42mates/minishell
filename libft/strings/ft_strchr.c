@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 16:36:48 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/24 17:41:41 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/25 12:42:17 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,21 @@ char	*ft_strrchr(const char *str, int c)
  * @return The ASCII value of the first character found in the set,
  *  or 0 if no match is found.
  */
-int	ft_strchrset(char *s, char *set)
+char	*ft_strchrset(char *s, char *set)
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	if (!s || !set)
+		return (NULL);
 	while (s[i])
 	{
 		j = 0;
 		while (set[j])
 		{
 			if (s[i] == set[j++])
-				return (s[i]);
+				return (&s[i]);
 		}
 		i++;
 	}

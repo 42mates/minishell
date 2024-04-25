@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:22:17 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/24 17:20:05 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/25 14:07:36 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@
 
 # define SPACES " \t\n"
 # define MALLOC_ERR "Error: malloc failed\n"
-# define PATH_ERR "Error: invalid or missing path\n"
-
-//# define PROMPT "\033[0;34m( ͡° ͜ʖ ͡°)\033[0m> "
-# define PROMPT "\033[0;34m./test.export.sh: line X\033[0m> " //Remove for LENNT
+# define PATH_ERR "Error: invalid or missing path\n" 
 
 #endif
