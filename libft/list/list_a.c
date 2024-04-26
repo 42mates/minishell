@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.c                                             :+:      :+:    :+:   */
+/*   list_a.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:19:32 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/18 16:42:36 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/23 15:51:09 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,3 +119,26 @@ int	list_replace(t_list *list, void *key, void *new_val)
 	return (e_ptr->next != NULL);
 }
 
+/**
+ * Frees the memory allocated for a linked list and its elements.
+ */
+void	list_free(t_list *list)
+{
+	t_elem	*e_curr;
+	t_elem	*e_next;
+
+	if (!list)
+		return ;
+	e_curr = list->head;
+	while (e_curr)
+	{
+		e_next = e_curr->next;
+		if (list->dst_key)
+			list->dst_key(e_curr->key);
+		if (list->dst_val)
+			list->dst_val(e_curr->val);
+		free(e_curr);
+		e_curr = e_next;
+	}
+	free(list);
+}

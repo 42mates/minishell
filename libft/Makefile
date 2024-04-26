@@ -6,7 +6,7 @@
 #    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 15:00:14 by mbecker           #+#    #+#              #
-#    Updated: 2024/04/18 17:50:03 by mbecker          ###   ########.fr        #
+#    Updated: 2024/04/25 19:33:23 by mbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,13 @@ FILES =	files/get_next_line.c
 
 LIST  =	list/comparators.c \
 		list/list_a.c \
-		list/list_b.c 
+		list/list_b.c \
+		list/list_dup.c \
+		list/tab_to_list.c 
 
 STR =	strings/ft_atoi.c \
 		strings/ft_is.c \
+		strings/ft_itoa.c \
 		strings/ft_len.c \
 		strings/ft_split.c \
 		strings/ft_strchr.c \
@@ -35,7 +38,8 @@ STR =	strings/ft_atoi.c \
 		tab/ft_tabdup.c \
 		tab/ft_tabjoin.c
 
-OTHER =	other/freetab.c
+OTHER =	other/freetab.c \
+		other/ft_calloc.c
 
 SRC	=	$(FILES) $(LIST) $(STR) $(OTHER)
 OBJ	=	$(SRC:.c=.o)

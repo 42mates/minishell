@@ -6,31 +6,23 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:47:13 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/18 12:56:23 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/25 19:55:34 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	main(int ac, const char **av, char **env)
-{
-	int	res;
-	char *grep[] = {"grep", "-e", "^\tif", "-e", "^\t\treturn", "main.c", NULL};
-	
+{	
 	if (!ac || !av || !env)
-		return (execve("/bin/grep", grep, env));
+		return (write(2, "Check for protection condition in main\n", 39), 1);
+
+	t_list *env_list = tab_to_list(env);
+	env_set(av, env_list);
 
 
+	char *args[] = {"export", NULL};
+	ft_export(args, env_list);
 
-	ft_pwd();
-
-	//char buffer[1024];
-	//int readval = read(0, buffer, 1024);
-	//buffer[readval - 1] = 0;
-	//ft_cd(buffer);
-
-	ft_pwd();
-
-	res = 0;
-	return (res);
+	return (0);
 }

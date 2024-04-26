@@ -6,16 +6,17 @@
 #    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/04/16 17:57:52 by mbecker          ###   ########.fr        #
+#    Updated: 2024/04/25 19:50:35 by mbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = test
+NAME = exe
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = 	main.c \
+		handle_env.c \
 		\
 		src/execute.c \
 		src/set_home_path.c \
@@ -25,7 +26,8 @@ SRC = 	main.c \
 		builtins/ft_echo.c \
 		builtins/ft_cd.c \
 		builtins/ft_pwd.c \
-
+		builtins/ft_export.c \
+		builtins/builtin_utils.c \
 
 all: $(NAME)
 
@@ -58,13 +60,17 @@ LYELLOW =\033[0;33m
 GREY =\033[1;37m
 NC =\033[0m
 
-tester: all
-	@if [ ! -d "pipex.tester" ]; then \
-		echo "$(GREEN)Cloning tester...$(LGREEN)"; \
-		git clone https://github.com/vfurmane/pipex-tester pipex.tester; \
-	fi
-	@chmod +x pipex.tester/run.sh
-	@echo "$(YELLOW)Tester ready.$(NC)"
-	@echo "$(RED)Running tester...$(NC)"
-	@printf "..\nn" | pipex.tester/run.sh
+f: libft
+	@$(CC) -g -o $(NAME) $(SRC) -Llibft -lft
+	@echo "$(LGREEN)./$(GREEN)$(NAME)$(LGREEN) ready.$(NC)"
+
+#tester: all
+#	@if [ ! -d "pipex.tester" ]; then \
+#		echo "$(GREEN)Cloning tester...$(LGREEN)"; \
+#		git clone https://github.com/vfurmane/pipex-tester pipex.tester; \
+#	fi
+#	@chmod +x pipex.tester/run.sh
+#	@echo "$(YELLOW)Tester ready.$(NC)"
+#	@echo "$(RED)Running tester...$(NC)"
+#	@printf "..\nn" | pipex.tester/run.sh
 	

@@ -6,13 +6,13 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:32:42 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/18 16:39:23 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/22 15:13:19 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-int cmp_int(const void *key_1, const void *key_2)
+int	cmp_int(const void *key_1, const void *key_2)
 {
 	return (*(int *)key_1 - *(int *)key_2);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list2.c                                            :+:      :+:    :+:   */
+/*   list_b.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:43:32 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/18 16:43:36 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/23 17:02:34 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,26 +103,24 @@ void	*list_get(t_list *list, void *key)
 }
 
 /**
- * Frees the memory allocated for a linked list and its elements.
+ * Retrieves an element from a linked list based on a given key.
+ *
+ * @param list The linked list to search in.
+ * @param key The key to match against the elements in the list.
+ * @return A pointer to the matching element, or NULL if no match is found.
  */
-void list_free(t_list *list)
+t_elem	*list_get_elem(t_list *list, void *key)
 {
-	t_elem *e_curr;
-	t_elem *e_next;
+	t_elem	*e_ptr;
 
-	if (!list)
-		return;
-
-	e_curr = list->head;
-	while (e_curr)
+	if (!list || list_size(list) == 0)
+		return (NULL);
+	e_ptr = list->head;
+	while (e_ptr)
 	{
-		e_next = e_curr->next;
-		if (list->dst_key)
-			list->dst_key(e_curr->key);
-		if (list->dst_val)
-			list->dst_val(e_curr->val);
-		free(e_curr);
-		e_curr = e_next;
+		if (list->cmp_key(e_ptr->key, key) == 0)
+			return (e_ptr);
+		e_ptr = e_ptr->next;
 	}
-	free(list);
+	return (NULL);
 }

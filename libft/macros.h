@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:22:17 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/08 12:06:00 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/25 14:07:36 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 
 # define SPACES " \t\n"
 # define MALLOC_ERR "Error: malloc failed\n"
-# define PATH_ERR "Error: invalid or missing path\n"
-
-# define LENNY "( ͡° ͜ʖ ͡°)> "
+# define PATH_ERR "Error: invalid or missing path\n" 
 
 #endif

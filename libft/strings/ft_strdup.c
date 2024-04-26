@@ -6,25 +6,27 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 16:37:55 by mbecker           #+#    #+#             */
-/*   Updated: 2024/03/29 17:33:54 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/24 12:17:42 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "strings.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *src)
 {
 	int		len;
 	char	*dest;
 
-	len = ft_strlen(s1) + 1;
+	if (!src)
+		return (NULL);
+	len = ft_strlen(src) + 1;
 	dest = malloc(len * sizeof(char));
 	if (!dest)
 		return (0);
 	len = 0;
-	while (s1[len])
+	while (src[len])
 	{
-		dest[len] = s1[len];
+		dest[len] = src[len];
 		len++;
 	}
 	dest[len] = 0;
@@ -37,6 +39,8 @@ char	*ft_strndup(const char *src, size_t size)
 	size_t	i;
 
 	i = 0;
+	if (!src)
+		return (NULL);
 	while (src[i])
 		i++;
 	ptr = (char *)malloc(size + 1);
