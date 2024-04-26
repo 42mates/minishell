@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:29:51 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:06:51 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:18:38 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ pid_t	executor(t_group *cmds, t_data *data)
 
 	signal(SIGQUIT, handler_executor);
 	signal(SIGINT, handler_executor);
-	if (cmds->type & PARSER_PIPE)
+	if (PARSER_PIPE & cmds->type)
 		return (pipes(cmds, data));
 	if (((t_cmd_info *)cmds->cmds->head->val)->flag & CMD_SUB)
 		return (subshell(cmds, data));

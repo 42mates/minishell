@@ -6,7 +6,7 @@
 #    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 11:00:13 by akurochk          #+#    #+#              #
-#    Updated: 2024/04/25 15:26:11 by akurochk         ###   ########.fr        #
+#    Updated: 2024/04/26 14:58:25 by akurochk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS	= main.c \
 	utils/env.c \
 	utils/error_handler.c \
 	parser/executor.c \
+	parser/parser_groups.c \
 	utils/ft_itoa.c \
 	utils/ft_split.c \
 	utils/ft_str.c \

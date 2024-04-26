@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:50 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:06:58 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:20:12 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	subshell(t_group *cmds, t_data *data)
 	int		pid;
 	t_fd	fd;
 
-	printf("===>			subshell\n");
+	printf("===>			SUBSHELL\n");
 	fd.fds[0] = get_fd_in((t_cmd_info *)cmds->cmds->head->val);
 	fd.pfd[0] = -1;
 	if (fd.fds[0] == -1)

@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:19:32 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:19:46 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:10:13 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	list_free(void *list)
 	if (!list)
 		return ;
 	e_curr = l->head;
-	while (e_curr)
+	while (e_curr != NULL)
 	{
 		e_next = e_curr->next;
-		if (l->dst_key)
+		if (l->dst_key != NULL)
 			l->dst_key(e_curr->key);
-		if (l->dst_val)
+		if (l->dst_val != NULL)
 			l->dst_val(e_curr->val);
 		free(e_curr);
 		e_curr = e_next;

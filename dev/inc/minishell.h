@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:26:29 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:03:27 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 // parser.c
 int		parser(t_data *data, t_list *toks);
+
+// parser_groups.c
+int		parse_groups(t_list *grps, t_list *toks);
+int		parse_is_or_and_valid(t_list *grps);
 
 // heredoc.c
 int		parse_manage_heredoc(t_group *cmds);

@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:53:13 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:06:50 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:13:15 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	common(t_group *cmds, t_data *data)
 	t_elem	*cmd;
 
 	cmd = cmds->cmds->head;
-	fd.fds[0] = get_fd_in(cmd->val);
 	fd.pfd[0] = -1;
+	fd.fds[0] = get_fd_in(cmd->val);
 	if (fd.fds[0] == -1)
 		return (errors(-1, "Error: common: fd_in", 1, 0));
 	fd.fds[1] = get_fd_out(cmd->val);
