@@ -6,22 +6,13 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:20:40 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/29 12:22:10 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/29 17:04:08 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	clean_exit(char *errorstr, char **tab1, char **tab2)
-{
-	print_error(NULL, errorstr, CMD_NOT_FOUND);
-	if (tab1)
-		freetab(tab1, TRUE);
-	if (tab2)
-		freetab(tab2, TRUE);
-}
-
-char	**get_cmd_paths(char *cmd, char **envp)
+static char	**get_cmd_paths(char *cmd, char **envp)
 {
 	int		i;
 	char	**path;
@@ -49,7 +40,7 @@ char	**get_cmd_paths(char *cmd, char **envp)
 /**
  * Executes a command with the given arguments and environment variables.
  *
- * @param cmd The command to execute.
+ * @param args The command to execute and its arguments.
  * @param envp The array of environment variables.
  * @return execve exits the process if the command is found, otherwise 127.
  */
