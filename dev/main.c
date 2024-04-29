@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:13:18 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/29 14:30:08 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:24:54 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int	main(int ac, const char **av, char **env)
 		{
 			if (lexer(line, toks) == 0)
 			{
-				test_print_tokens(toks); //============TEST
+				// test_print_tokens(toks); //============TEST
 				parser(&data, toks);
 			}
 			free(line);

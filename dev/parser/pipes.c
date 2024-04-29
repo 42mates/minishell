@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:46:02 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/26 19:20:08 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:29:39 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	pipes(t_group *cmds, t_data *data)
 	t_fd	fd;
 
 	fd.pfd[0] = -1;
-	printf("===>			PIPES\n");
+	// printf("===>			PIPES\n");
 	e_cmd = cmds->cmds->head;
 	while (e_cmd)
 	{

@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 19:34:14 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/26 19:18:24 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:26:52 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,19 +126,19 @@ int	command_call(t_elem *e_cmd, t_data *data, t_fd *fd)
 		exit(1);
 	close(fd->pfd[0]);
 	path = list_get(data->env_lst, "PATH");
-	printf("PATH=%s\n", path);
+	// printf("PATH=%s\n", path);
 	if (command_acces(e_cmd, path, &filepath))
 		exit(g_signal);
-	printf("filepath=%s\n", filepath);
+	// printf("filepath=%s\n", filepath);
 	if (prepare_argv(e_cmd, &argv, filepath))
 		exit(g_signal);
 
-	printf("Filepath =%s\n", filepath);
-	int i = -1;
-	while (argv[++i])
-		printf("argv =%s\n", argv[i]);
+	// printf("Filepath =%s\n", filepath);
+	// int i = -1;
+	// while (argv[++i])
+	// 	printf("argv =%s\n", argv[i]);
 	
-	printf("\033[0;35m\n----------execve----------\n");
+	// printf("\033[0;35m\n----------execve----------\n");
 	if (execve(filepath, argv, data->env) == -1)
 		exit(errors(127, "Error: command_call: execve", 1, 0));
 	return (1);
