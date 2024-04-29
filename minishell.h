@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:17:30 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/25 19:57:25 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/29 12:38:20 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@
 // Characters that cannot be part of a environment variable key/name 
 # define INVALID_KEY "!@#%^&*()-+={}[]|:;'\",<>./? \t\n\v\f\r"
 
+// Default $PATH
+# define STD_PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# define CMD_NOT_FOUND "command not found"
+
 typedef struct s_pipex
 {
 	int		nb_cmds;
@@ -43,11 +48,12 @@ typedef struct s_pipex
 	int		outfile;
 }			t_pipex;
 
-int		execute(const char *cmd, char **envp);
+/**** SOURCE ****/
+
+int		execute(char **args, char **envp);
 char	*set_home_path(char *str, int free_str);
 void	here_doc(const char *limiter);
-int		pipex(char const **cmds, char **envp, int infile, int outfile);
-//  in src directory
+int		pipex(char ***cmds, char **envp, int infile, int outfile);
 
 /**** BUILTINS ****/
 
@@ -55,10 +61,11 @@ int		ft_echo(char **args);
 int		ft_cd(char *path, t_list *list);
 int		ft_pwd(void);
 int		ft_export(char **arg, t_list *env);
-
-void	builtin_error(char *builtin, char *arg, char *msg);
 void	print_var(t_elem *node, char *prefix);
-char	*get_last_arg(char **args);
+
+/**** ERROR ****/
+
+void	print_error(char *builtin, char *arg, char *msg);
 
 /**** ENVIRONMENT ****/
 
