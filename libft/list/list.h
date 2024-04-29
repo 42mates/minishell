@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:15:47 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/23 15:51:30 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/29 16:46:48 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int		cmp_str(const void *key_1, const void *key_2);
 // int		cmp_tok(const void *key_1, const void *key_2);
 
 t_list	*tab_to_list(char **tab);
+char	**list_to_tab(t_list *list);
+
 
 t_list	*list_dup(t_list *list, void *(keydup)(void *), void *(valdup)(void *));
 t_list	*list_dup_str(t_list *list);
