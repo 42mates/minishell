@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:22:52 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/25 17:15:38 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:10:27 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_cd(char *path, t_list *env)
 			errorstr = strerror(errno);
 		else
 			errorstr = "File name too long";
-		builtin_error("cd", path, errorstr);
+		print_error("cd", path, errorstr);
 		return (-exit_status);
 	}
 	list_replace(env, "OLDPWD", oldpwd);

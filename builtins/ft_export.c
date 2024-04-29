@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:39:16 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/25 18:35:11 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:10:30 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	get_key_val(char *arg, char **key, char **val)
 	if (!*arg || *arg == '=' || ft_isdigit(*arg)
 		|| (invalid && (!sep || invalid < sep)))
 	{
-		builtin_error("export", arg, "not a valid identifier");
+		print_error("export", arg, "not a valid identifier");
 		return (EXIT_FAILURE);
 	}
 	if (sep)

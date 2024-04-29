@@ -6,7 +6,7 @@
 #    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/04/25 19:50:35 by mbecker          ###   ########.fr        #
+#    Updated: 2024/04/29 11:13:46 by mbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = 	main.c \
 		handle_env.c \
+		error.c \
 		\
 		src/execute.c \
 		src/set_home_path.c \

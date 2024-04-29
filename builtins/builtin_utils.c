@@ -6,30 +6,11 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:44:14 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/25 18:13:08 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/29 16:55:55 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	builtin_error(char *builtin, char *arg, char *msg)
-{
-	int	is_export;
-
-	write(2, PROMPT, ft_strlen(PROMPT) - 2);
-	write(2, ": ", 2);
-	is_export = !ft_strcmp(builtin, "export");
-	write(2, builtin, ft_strlen(builtin));
-	write(2, ": ", 2);
-	if (is_export)
-		write(2, "`", 1);
-	write(2, arg, ft_strlen(arg));
-	if (is_export)
-		write(2, "'", 1);
-	write(2, ": ", 2);
-	write(2, msg, ft_strlen(msg));
-	write(2, "\n", 1);
-}
 
 void	print_var(t_elem *node, char *prefix)
 {

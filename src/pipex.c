@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:20:40 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/15 17:07:10 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/29 13:01:46 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	exit_error(char *msg)
 }
 
 // util function for pipex. do not use elsewhere.
-static void	first(const char *cmd, t_pipex *data, int pipefd[2], int prev[2])
+static void	first(char **cmd, t_pipex *data, int pipefd[2], int prev[2])
 {
 	pid_t	pid;
 
@@ -41,7 +41,7 @@ static void	first(const char *cmd, t_pipex *data, int pipefd[2], int prev[2])
 }
 
 // util function for pipex. do not use elsewhere.
-static void	middle(const char *cmd, t_pipex *data, int pipefd[2], int prev[2])
+static void	middle(char **cmd, t_pipex *data, int pipefd[2], int prev[2])
 {
 	close(prev[1]);
 	dup2(prev[0], STDIN_FILENO);
@@ -50,7 +50,7 @@ static void	middle(const char *cmd, t_pipex *data, int pipefd[2], int prev[2])
 }
 
 // util function for pipex. do not use elsewhere.
-static void	last(const char *cmd, t_pipex *data, int prev[2])
+static void	last(char **cmd, t_pipex *data, int prev[2])
 {
 	pid_t	pid;
 
@@ -73,14 +73,14 @@ static void	last(const char *cmd, t_pipex *data, int prev[2])
 /**
  * Executes the pipe `|` command.
  *
- * @param cmds An array of strings containing the commands and their options:
- * {"ls -l", "wc -c", NULL}.
+ * @param cmds A pointer to an array of strings containing the commands and 
+ * their options: {{"ls", "-l"}, {"wc", "-c"}, NULL}.
  * @param envp An array of strings containing the environment variables.
  * @param infile the final input fd.
  * @param outfile the final output fd.
  * @return Returns the last command's exit status code.
  */
-int	pipex(char const **cmds, char **envp, int infile, int outfile)
+int	pipex(char ***cmds, char **envp, int infile, int outfile)
 {
 	t_pipex	data;
 	int		i;
@@ -88,7 +88,10 @@ int	pipex(char const **cmds, char **envp, int infile, int outfile)
 	int		prev[2];
 
 	i = 0;
-	data = (t_pipex){ft_tablen(cmds), 0, envp, infile, outfile};
+	while (cmds && cmds[i++])
+		;
+	data = (t_pipex){--i, 0, envp, infile, outfile};
+	i = 0;
 	if (infile != STDIN_FILENO)
 	{
 		dup2(infile, STDIN_FILENO);

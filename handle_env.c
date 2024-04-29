@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:14:49 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/25 19:56:28 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/29 12:16:22 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 void	env_set(char const **argv, t_list *env)
 {
+	char	**oldpwd;
+	
+	oldpwd = malloc(sizeof(char *) * 3);
+	oldpwd[0] = ft_strdup("export");
+	oldpwd[0] = ft_strdup("OLDPWD");
+	oldpwd[0] = NULL;
+	ft_export(oldpwd, env);
 	env_set_pwd(env);
 	env_set_shlvl(env);
 	env_set__((char **)argv, env);
@@ -26,7 +33,7 @@ void	env_set(char const **argv, t_list *env)
  * @note "_" is the last argument of the last command executed: 
  * @note  - Pipes are treated as one command -> `ls libft | cat | echo $_` will 
  * print the last argument before ls.
- * @note  - Redirections are not treated as arguments -> `ls >file | echo $_` 
+ * @note  - Redirections are not treated as arguments -> `ls >file && echo $_` 
  * will print `ls`.
  *
  * @param args The array of arguments.
@@ -54,12 +61,12 @@ void	env_set_shlvl(t_list *env)
 
 	shlvl = list_get(env, "SHLVL");
 	if (!shlvl)
-		list_replace(env, "SHLVL", "1");
+		list_replace(env, "SHLVL", ft_strdup("1"));
 	else
 	{
 		shlvl_int = ft_atoi(shlvl);
 		if (shlvl_int < 0)
-			list_replace(env, "SHLVL", "0");
+			list_replace(env, "SHLVL", ft_strdup("0"));
 		else
 		{
 			shlvl_int++;
