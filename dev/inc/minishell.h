@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/26 15:03:27 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:36:47 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,5 +192,6 @@ int		builtins_call(int i, t_elem *e_cmd, t_data *data, t_fd *fd);
 //TEST
 void	test_print_tokens(t_list *toks);
 void	test_print_env(t_list *env);
+int		TEST_builtin(t_data *data, t_list *argv);
 
 #endif

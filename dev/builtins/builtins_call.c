@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:05:29 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/26 19:38:24 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:39:32 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	builtins_exe(int i, t_elem *e_cmd, t_data *data, t_fd *fd)
 		exit (1);
 	close(fd->pfd[0]);
 	printf("\033[0;32m>>>>> builtin <<<<<\033[0m\n");
-	// exit((*data->f_builtins[i])(e_cmd->key, data));	//<======== builtins
-	(void)i;
-	(void)e_cmd;
-	(void)data;
-	exit (-1); // error
+	exit((*data->f_builtins[i])(data, e_cmd->key));	//<======== builtins
+	// (void)i;
+	// (void)e_cmd;
+	// (void)data;
+	// exit (-1); // error
 }
 
 int	builtins_call(int i, t_elem *e_cmd, t_data *data, t_fd *fd)
@@ -46,11 +46,11 @@ int	builtins_call(int i, t_elem *e_cmd, t_data *data, t_fd *fd)
 		return (errors(1, "Error: builtins_call: redir_fd", 1, 0));
 	}
 	printf("\033[0;32m>>>>> builtin <<<<<\033[0m\n");
-	// res = (*data->f_builtins[i])(e_cmd->key, data);	//<======== builtins
-	(void)i;
-	(void)e_cmd;
-	(void)data;
-	res = -1; // error
+	res = (*data->f_builtins[i])(data, e_cmd->key);	//<======== builtins
+	// (void)i;
+	// (void)e_cmd;
+	// (void)data;
+	// res = -1; // error
 	dup2(in_out[0], STDIN_FILENO);
 	dup2(in_out[1], STDOUT_FILENO);
 	close(in_out[0]);

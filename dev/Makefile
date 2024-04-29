@@ -6,7 +6,7 @@
 #    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 11:00:13 by akurochk          #+#    #+#              #
-#    Updated: 2024/04/26 14:58:25 by akurochk         ###   ########.fr        #
+#    Updated: 2024/04/29 14:27:18 by akurochk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRCS	= main.c \
 	parser/parser.c \
 	parser/pipes.c \
 	utils/signal.c \
-	parser/subshell.c
+	parser/subshell.c \
+	tests/test_builtins.c
 #	test_cmp.c
 #	test_lexer.c
 

@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:13:18 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 15:29:45 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:30:08 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int	init_data(t_data *data, char **env)
 	data->builtins[4] = "unset";
 	data->builtins[5] = "env";
 	data->builtins[6] = "exit";
-	data->f_builtins[0] = NULL; // &ft_echo;
-	data->f_builtins[1] = NULL; // &ft_cd;
-	data->f_builtins[2] = NULL; // &ft_pwd;
-	data->f_builtins[3] = NULL; // &ft_export;
-	data->f_builtins[4] = NULL; // &ft_unset;
-	data->f_builtins[5] = NULL; // &ft_env;
-	data->f_builtins[6] = NULL; // &ft_exit;
+	data->f_builtins[0] = &TEST_builtin; // &ft_echo;
+	data->f_builtins[1] = &TEST_builtin; // &ft_cd;
+	data->f_builtins[2] = &TEST_builtin; // &ft_pwd;
+	data->f_builtins[3] = &TEST_builtin; // &ft_export;
+	data->f_builtins[4] = &TEST_builtin; // &ft_unset;
+	data->f_builtins[5] = &TEST_builtin; // &ft_env;
+	data->f_builtins[6] = &TEST_builtin; // &ft_exit;
 	return (0);
 }
 
