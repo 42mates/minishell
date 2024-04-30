@@ -15,4 +15,4 @@ test
 *.dSYM/
 test.msh
 test.posix
-
+.vscode/
