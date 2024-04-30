@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   comparators.c                                      :+:      :+:    :+:   */
+/*   test_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 16:32:42 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/30 16:31:31 by akurochk         ###   ########.fr       */
+/*   Created: 2024/04/29 14:18:54 by akurochk          #+#    #+#             */
+/*   Updated: 2024/04/30 16:58:33 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include "../../minishell.h"
 
-int	cmp_int(const void *key_1, const void *key_2)
+int	TEST_builtin(t_data *data, t_list *argv)
 {
-	int	*a;
-	int	*b;
+	t_elem	*arg;
+	int		i;
 
-	a = (int *)key_1;
-	b = (int *)key_2;
-	return (*a - *b);
-}
-
-int	cmp_str(const void *key_1, const void *key_2)
-{
-	return (ft_strcmp((const char *)key_1, (const char *)key_2));
+	(void)data;
+	arg = argv->head;
+	i = 0;
+	printf("\033[0;32m\nVals of l_list *argv \\\033[0m\n");
+	while (arg != NULL)
+	{
+		printf("\033[0;32m   argv[%d]=[%s]\033[0m\n", i, (char *)arg->val);
+		i++;
+		arg = arg->next;
+	}
+	printf("\033[0;32mVals of l_list *argv / \n\n\033[0m");
+	return (0);
 }

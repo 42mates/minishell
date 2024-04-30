@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:10:08 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/25 19:34:26 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/30 16:19:54 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,32 @@ char	*ft_itoa(int n)
 	}
 	res[i] = 0;
 	ft_revert_inttab(res);
+	return (res);
+}
+
+char	*ft_uitoa(unsigned int n)
+{
+	unsigned int	buf;
+	unsigned int	i;
+	char			*res;
+
+	buf = n;
+	i = 0;
+	while (buf)
+	{
+		i++;
+		buf = buf / 10;
+	}
+	if (i == 0)
+		i = 1;
+	res = (char *)malloc(sizeof(char) * (i + 1));
+	if (NULL == res)
+		return (NULL);
+	res[i] = '\0';
+	while (i--)
+	{
+		res[i] = n % 10 + '0';
+		n = n / 10;
+	}
 	return (res);
 }

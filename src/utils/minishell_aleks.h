@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell_aleks.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/18 17:49:06 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/30 16:10:29 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ strerror, perror, isatty, ttyname, ttyslot, ioctl,
 getenv, tcsetattr, tcgetattr, tg
 */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef MINISHELL_ALEKS_H
+# define MINISHELL_ALEKS_H
 
 # include <errno.h>
 # include <readline/readline.h>

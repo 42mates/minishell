@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/04/29 11:13:46 by mbecker          ###   ########.fr        #
+#    Updated: 2024/04/30 17:05:00 by akurochk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,31 @@ SRC = 	main.c \
 		builtins/ft_pwd.c \
 		builtins/ft_export.c \
 		builtins/builtin_utils.c \
+		\
+		src/builtins/builtins_call.c \
+		src/builtins/command_call.c \
+		src/parser/common.c \
+		src/utils/env.c \
+		src/utils/error_handler.c \
+		src/parser/executor.c \
+		src/parser/parser_groups.c \
+		src/utils/ft_str_concat.c \
+		src/utils/ft_str_split.c \
+		src/parser/group.c \
+		src/parser/heredoc.c \
+		src/lexer/lexer.c \
+		src/lexer/lexer2.c \
+		src/parser/parser_star.c \
+		src/parser/parser.c \
+		src/parser/pipes.c \
+		src/utils/signal.c \
+		src/parser/subshell.c \
+		src/tests/test_builtins.c
 
 all: $(NAME)
 
 $(NAME): libft
-	@$(CC) $(CFLAGS) -o $(NAME) $(SRC) -Llibft -lft
+	@$(CC) $(CFLAGS) -o $(NAME) $(SRC) -Llibft -lft -lreadline
 	@echo "$(LGREEN)./$(GREEN)$(NAME)$(LGREEN) ready.$(NC)"
 
 clean:

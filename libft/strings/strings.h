@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:48:31 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/25 19:33:08 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/30 16:20:51 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		ft_isprint(int c);
 // ft_is.c
 
 char	*ft_itoa(int n);
+char	*ft_uitoa(unsigned int n);
 // ft_itoa.c
 
 char	**ft_split(char const *s, char c);

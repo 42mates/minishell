@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 17:25:30 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/18 17:54:23 by mbecker          ###   ########.fr       */
+/*   Created: 2024/04/18 16:33:46 by akurochk          #+#    #+#             */
+/*   Updated: 2024/04/23 14:06:44 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-#include "minishell_aleks.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-void	signal_handler(int signum)
-{
-	if (signum == SIGINT)
-	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 1);
-		rl_redisplay();
-	}
-}
+# define PARSER_BASE	0b0010000
+# define PARSER_PIPE	0b1000000
+
+# define CMD_APP		0b001	// >>
+# define CMD_INS		0b010	// <<
+# define CMD_SUB		0b100	// subshell
+
+#endif

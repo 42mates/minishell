@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_a.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:19:32 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/23 15:51:09 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/30 16:25:48 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,23 +122,25 @@ int	list_replace(t_list *list, void *key, void *new_val)
 /**
  * Frees the memory allocated for a linked list and its elements.
  */
-void	list_free(t_list *list)
+void	list_free(void *list)
 {
 	t_elem	*e_curr;
 	t_elem	*e_next;
+	t_list	*l;
 
+	l = (t_list *)list;
 	if (!list)
 		return ;
-	e_curr = list->head;
-	while (e_curr)
+	e_curr = l->head;
+	while (e_curr != NULL)
 	{
 		e_next = e_curr->next;
-		if (list->dst_key)
-			list->dst_key(e_curr->key);
-		if (list->dst_val)
-			list->dst_val(e_curr->val);
+		if (l->dst_key != NULL)
+			l->dst_key(e_curr->key);
+		if (l->dst_val != NULL)
+			l->dst_val(e_curr->val);
 		free(e_curr);
 		e_curr = e_next;
 	}
-	free(list);
+	free(l);
 }

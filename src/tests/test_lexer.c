@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   test_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:55:29 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/18 17:54:23 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/30 16:58:33 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-#include "minishell_aleks.h"
+#include "../../minishell.h"
 
 void	test_print_tokens(t_list *toks)
 {
@@ -31,4 +30,24 @@ void	test_print_tokens(t_list *toks)
 		i++;
 	}
 	printf("\ntest_print_tokens B\n\n");
+}
+
+void	test_print_env(t_list *env)
+{
+	if (!env)
+		printf("\ntest_print_env X\n");
+	printf("\ntest_print_env A\n\n");
+	t_elem *e_ptr = env->head;
+	long i = 0;
+	while (e_ptr)
+	{
+		char *key = (char *)(e_ptr->key);
+		char *val = (char *)(e_ptr->val);
+		printf("Env [%ld]	", i);
+		printf("Key [%s]		", key);
+		printf("Val [%s]\n", val);
+		e_ptr = e_ptr->next;
+		i++;
+	}
+	printf("\ntest_print_env B\n\n");
 }
