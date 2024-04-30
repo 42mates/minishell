@@ -6,33 +6,12 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/29 15:29:22 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:31:59 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "parser.h"
-
-void	TEST_print_extra(t_list	*extra)
-{
-	if (extra->head == NULL)
-	{
-		printf("\033[0;31m\n===TEST_print_extra===\n");
-		printf("=========NULL=========\n");
-		printf("===TEST_print_extra===\n\n\033[0m");
-		return ;
-	}
-
-	t_elem *elem = extra->head;
-
-	printf("\033[0;31m\n===TEST_print_extra===\n");
-	while (elem != NULL)
-	{
-		printf("EXTRA key=[%ld] val=[%s]\n", (long)(elem->key), (char *)(elem->val));
-		elem = elem->next;
-	}
-	printf("===TEST_print_extra===\n\n\033[0m");
-}
 
 /*---PARSE RUN GROUP---*/
 
@@ -49,7 +28,6 @@ Returns 1 if can't create element in extra.
 */
 int	parse_sub_token(t_elem *e_elem, t_list *extra)
 {
-	// printf("E_ELEM KEY is_extra =%d\n", is_extra(e_elem->key));
 	if (is_extra(e_elem->key))
 		return (!list_put(extra, e_elem->key, ft_strdup((char *)e_elem->val)));
 	return (!list_put(extra, e_elem->key, e_elem->val));
@@ -72,10 +50,8 @@ void	parse_token_second_loop(t_list *extra, char *word, t_list *words)
 
 	free(word);
 	e_word = words->head;
-	// printf("parse_token_second_loop\n");
 	while (e_word != NULL)
 	{
-		// printf("parse_token_second_loop [%s]\n", (char *)(e_word->val));
 		list_put(extra, (void *)L_WORD, e_word->val);
 		if (e_word->next)
 			list_put(extra, (void *)L_SPACE, NULL);
@@ -349,8 +325,6 @@ t_list	*parse_extra(t_list *grp, t_data *data)
 	{
 		level += ((long)(e_elem->key) == L_PAR_L)
 			+ ((long)(e_elem->key) == L_PAR_R) * (-1);
-		// printf("parse_extra LVL_=[%d]\n", level);
-		// printf("parse_extra ELEM=[%ld][%s]\n", (long)e_elem->key, (char*)e_elem->val);
 		if (level > 0 && parse_sub_token(e_elem, extra))
 			return (list_free(extra), NULL);
 		else if (level == 0 && parse_token(&e_elem, extra, data))
@@ -528,10 +502,8 @@ pid_t	parse_manage_group(long type, t_list *grp, t_data *data)
 			return (-1);
 		if (parse_prepare_grp(extra, cmds))
 			return (group_free(cmds), list_free(extra), -1);
-		// printf("LS=[%s]\n", (char *)(((t_list *)(cmds->cmds->head->key))->head->val));
 		if (parse_manage_heredoc(cmds))
 			return (group_free(cmds), list_free(extra), -1);
-		// printf("LS=[%s]\n", (char *)(((t_list *)(cmds->cmds->head->key))->head->val));
 		pid = executor(cmds, data);
 		group_free(cmds);
 		list_free(extra);
@@ -549,7 +521,6 @@ void	parse_wait_all(int pid, int *status)
 	while (child > 0)
 	{
 		child = waitpid(0, status, 0);
-		// printf("\033[0m=====> parse_wait_all child=[%d] PID=[%d]\n", child, pid);
 		if (pid == child)
 		{
 			g_signal = WEXITSTATUS(*status);
@@ -607,31 +578,6 @@ int	parse_groups_exe(t_list *grps, t_data *data)
 }
 
 /*---PARSER---*/
-void	TEST_print_group(t_list	*gs)
-{
-	t_elem *g = gs->head;
-	t_list *group;
-	t_elem *e_group;
-
-	printf("\n===TEST_print_group===\n");
-	while (g != NULL)
-	{
-		if (g->val == NULL)
-			printf("TOKEN key=[%ld] val=[%s]\n", (long)(g->key), (char *)(g->val));
-		else
-		{
-			group = g->val;
-			e_group = group->head;
-			while (e_group != NULL)
-			{
-				printf("GROUP key=[%ld] val=[ k=[%ld], v=[%s] ]\n", (long)(g->key), (long)(e_group->key), (char *)(e_group->val));
-				e_group = e_group->next;
-			}
-		}
-		g = g->next;
-	}
-	printf("===TEST_print_group===\n\n");
-}
 
 /*
 Returns 0 if OK.
