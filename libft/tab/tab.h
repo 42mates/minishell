@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macros.h                                           :+:      :+:    :+:   */
+/*   tab.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 17:22:17 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/25 14:07:36 by mbecker          ###   ########.fr       */
+/*   Created: 2024/02/23 16:28:57 by mbecker           #+#    #+#             */
+/*   Updated: 2024/02/23 16:28:58 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MACROS_H
-# define MACROS_H
+#ifndef TAB_H
+# define TAB_H
 
-# define TRUE 1
-# define FALSE 0
+# include "../libft.h"
 
-# define BUFFER_SIZE 4096
-# define FD_MAX 512
+char		**ft_tabdup(char **tab);
 
-# define SPACES " \t\n"
-# define MALLOC_ERR "Error: malloc failed\n"
-# define PATH_ERR "Error: invalid or missing path\n" 
+char		**ft_tabjoin(char **tab, char *str, int free_tab, int free_str);
 
 #endif

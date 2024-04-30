@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:21:51 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:21:54 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:58:34 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../minishell.h"
 
 char	*ft_str_concat(const char *s1, char c, const char *s2, char use_c)
 {

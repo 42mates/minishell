@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:58:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/26 19:16:03 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:58:32 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../minishell.h"
 
 static int	is_or_and(long key)
 {

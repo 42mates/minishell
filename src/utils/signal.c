@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:25:30 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:07:09 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:58:34 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../minishell.h"
 
 void	handler_signal(int signum)
 {

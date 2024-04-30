@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:13:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:39:14 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:58:31 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../minishell.h"
 
 int	is_space(const char c)
 {

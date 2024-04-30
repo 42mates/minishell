@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 20:13:17 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:07:05 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:58:34 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../minishell.h"
 
 /* 
 ret		- return val of function.
@@ -24,7 +24,6 @@ int	errors(int ret, const char *m, char mode, int signum)
 	{
 		write(STDERR_FILENO, m, ft_strlen(m));
 		write(STDERR_FILENO, "\n", 1);
-		// (void)signum; // mockup
 		g_signal = signum;
 		return (ret);
 	}

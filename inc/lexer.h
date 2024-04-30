@@ -6,14 +6,14 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:59:44 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:44:07 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:59:23 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-# include "minishell.h"
+# include "../minishell.h"
 
 /*
 Here we can set constants to represent lexical part of input.

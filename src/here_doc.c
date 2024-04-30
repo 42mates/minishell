@@ -6,11 +6,11 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:38:21 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/15 13:18:02 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/04/15 17:07:03 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 /**
  * Redirects input from the user until a specified delimiter is encountered.

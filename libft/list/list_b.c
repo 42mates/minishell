@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list2.c                                            :+:      :+:    :+:   */
+/*   list_b.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 10:19:32 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:19:13 by akurochk         ###   ########.fr       */
+/*   Created: 2024/04/18 16:43:32 by mbecker           #+#    #+#             */
+/*   Updated: 2024/04/23 17:02:34 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/list.h"
+#include "list.h"
 
-/*
-Relinks elements.
-Destructs and free node.
-*/
+/**
+ * Deletes an element's content from a linked list. To use in list_del_one only.
+ */
 static void	elem_del(t_list *list, t_elem *curr, t_elem *prev)
 {
 	if (prev)
@@ -29,11 +28,14 @@ static void	elem_del(t_list *list, t_elem *curr, t_elem *prev)
 	free(curr);
 }
 
-/*
-Returns 0 if list == NULL.
-Returns 1 if node was deleted or if didn't find node with the same key.
-*/
-int	list_del(t_list *list, void *key)
+/**
+ * Deletes an element from the list based on the given key.
+ *
+ * @param list The list from which to delete the element.
+ * @param key The key of the element to be deleted.
+ * @return 1 if the element was successfully deleted, 0 otherwise.
+ */
+int	list_del_one(t_list *list, void *key)
 {
 	t_elem	*e_curr;
 	t_elem	*e_prev;
@@ -54,12 +56,12 @@ int	list_del(t_list *list, void *key)
 		e_prev = e_curr;
 		e_curr = e_curr->next;
 	}
-	return (1);
+	return (0);
 }
 
-/*
-Returnes list size or 0 for empty list
-*/
+/**
+ * @return The size of the linked list `list`.
+ */
 int	list_size(t_list *list)
 {
 	int		size;
@@ -77,30 +79,13 @@ int	list_size(t_list *list)
 	return (size);
 }
 
-/*
-Returns 1 if the list contains the key.
-Returns 0 if not.
-*/
-int	list_contains_key(t_list *list, void *key)
-{
-	t_elem	*e_ptr;
-
-	if (!list || list_size(list) == 0)
-		return (0);
-	e_ptr = list->head;
-	while (e_ptr)
-	{
-		if (list->cmp_key(e_ptr->key, key) == 0)
-			return (1);
-		e_ptr = e_ptr->next;
-	}
-	return (0);
-}
-
-/*
-Returns ptr to a value from the list according the key.
-Returns NULL if list emty or no key in list.
-*/
+/**
+ * Retrieves the value associated with the given key from a linked list.
+ *
+ * @param list The linked list to search in.
+ * @param key The key to search for.
+ * @return The value associated with the key, or NULL if the key is not found.
+ */
 void	*list_get(t_list *list, void *key)
 {
 	t_elem	*e_ptr;
@@ -112,6 +97,29 @@ void	*list_get(t_list *list, void *key)
 	{
 		if (list->cmp_key(e_ptr->key, key) == 0)
 			return (e_ptr->val);
+		e_ptr = e_ptr->next;
+	}
+	return (NULL);
+}
+
+/**
+ * Retrieves an element from a linked list based on a given key.
+ *
+ * @param list The linked list to search in.
+ * @param key The key to match against the elements in the list.
+ * @return A pointer to the matching element, or NULL if no match is found.
+ */
+t_elem	*list_get_elem(t_list *list, void *key)
+{
+	t_elem	*e_ptr;
+
+	if (!list || list_size(list) == 0)
+		return (NULL);
+	e_ptr = list->head;
+	while (e_ptr)
+	{
+		if (list->cmp_key(e_ptr->key, key) == 0)
+			return (e_ptr);
 		e_ptr = e_ptr->next;
 	}
 	return (NULL);

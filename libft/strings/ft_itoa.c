@@ -5,69 +5,78 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 11:34:19 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:07:06 by akurochk         ###   ########.fr       */
+/*   Created: 2023/07/17 12:10:08 by mbecker           #+#    #+#             */
+/*   Updated: 2024/04/30 16:19:54 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "strings.h"
 
-static char	*ft_malloc_res(char *array)
+/**
+ * returns the length of a number.
+ */
+static short int	ft_numlen(long long num)
 {
-	char	*result;
-	int		end;
-	int		i;
+	short int			len;
 
-	end = ft_strlen(array);
-	result = malloc(sizeof(char) * (end + 1));
-	if (!result)
-		return (NULL);
-	i = 0;
-	while (--end >= 0)
-		result[i++] = array[end];
-	result[i] = 0;
-	return (result);
+	len = 1;
+	if (num < 0)
+	{
+		len++;
+		num = -num;
+	}
+	while (num >= 10)
+	{
+		len++;
+		num /= 10;
+	}
+	return (len);
 }
 
-static char	*ft_malloc_zero(void)
+static void	ft_revert_inttab(char *s)
 {
-	char	*r;
+	int		start;
+	int		end;
+	char	temp;
 
-	r = malloc(sizeof(char) * 2);
-	if (!r)
-		return (NULL);
-	r[0] = '0';
-	r[1] = 0;
-	return (r);
+	start = 0;
+	end = ft_strlen(s) - 1;
+	if (s[start] == '-')
+		start++;
+	while (start < end)
+	{
+		temp = s[start];
+		s[start++] = s[end];
+		s[end--] = temp;
+	}
 }
 
 char	*ft_itoa(int n)
 {
-	char			res[12];
-	int				i;
-	int				sign;
-	long int		nb;
+	char		*res;
+	long long	ln;
+	int			i;
 
-	if (n == 0)
-		return (ft_malloc_zero());
-	nb = (long int)n;
-	sign = 1;
-	if (nb < 0)
-	{
-		sign *= -1;
-		nb = -nb;
-	}
 	i = 0;
-	while (nb)
+	ln = n;
+	res = (char *)malloc(ft_numlen(ln) + 1);
+	if (!res)
+		return (NULL);
+	if (ln == 0)
+		res[i++] = '0';
+	if (ln < 0)
 	{
-		res[i] = nb % 10 + '0';
-		nb = nb / 10;
-		i++;
-	}
-	if (sign == -1)
 		res[i++] = '-';
+		ln = -ln;
+	}
+	while (ln > 0)
+	{
+		res[i++] = (ln % 10) + 48;
+		ln /= 10;
+	}
 	res[i] = 0;
-	return (ft_malloc_res(res));
+	ft_revert_inttab(res);
+	return (res);
 }
 
 char	*ft_uitoa(unsigned int n)

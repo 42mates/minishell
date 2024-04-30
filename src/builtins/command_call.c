@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 19:34:14 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/29 17:28:04 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:58:30 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../minishell.h"
 
 /*
 Checks possible paths.

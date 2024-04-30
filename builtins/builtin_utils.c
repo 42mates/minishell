@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macros.h                                           :+:      :+:    :+:   */
+/*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 17:22:17 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/25 14:07:36 by mbecker          ###   ########.fr       */
+/*   Created: 2024/04/19 17:44:14 by mbecker           #+#    #+#             */
+/*   Updated: 2024/04/29 16:55:55 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MACROS_H
-# define MACROS_H
+#include "../minishell.h"
 
-# define TRUE 1
-# define FALSE 0
+void	print_var(t_elem *node, char *prefix)
+{
+	char	*special;
 
-# define BUFFER_SIZE 4096
-# define FD_MAX 512
-
-# define SPACES " \t\n"
-# define MALLOC_ERR "Error: malloc failed\n"
-# define PATH_ERR "Error: invalid or missing path\n" 
-
-#endif
+	special = ft_strchrset(node->val, " \t\n\"\\$");
+	write(1, prefix, ft_strlen(prefix));
+	write(1, node->key, ft_strlen(node->key));
+	if (node->val)
+	{
+		write(1, "=\"", 2);
+		write(1, node->val, ft_strlen(node->val));
+		write(1, "\"", 1);
+	}
+	write(1, "\n", 1);
+}

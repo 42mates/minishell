@@ -6,12 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/29 17:31:59 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:03:39 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
-#include "parser.h"
+#include "../../minishell.h"
 
 /*---PARSE RUN GROUP---*/
 
@@ -86,15 +85,6 @@ void	parse_init_fpack(t_field_pack *f_pack, t_chunk_info *c_info,
 	f_pack->c_info = c_info;
 }
 
-
-int	ft_isalnum(int c)
-{
-	if ((c >= '0' && c <= '9')
-		|| (c >= 'a' && c <= 'z')
-		|| (c >= 'A' && c <= 'Z'))
-		return (1);
-	return (0);
-}
 
 int update_g_signal_str(t_data *data)
 {

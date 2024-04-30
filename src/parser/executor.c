@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:29:51 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/26 19:18:38 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:58:31 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../minishell.h"
 
 pid_t	executor(t_group *cmds, t_data *data)
 {

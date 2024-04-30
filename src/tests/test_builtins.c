@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:18:54 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/29 14:37:36 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:58:33 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../minishell.h"
 
 int	TEST_builtin(t_data *data, t_list *argv)
 {

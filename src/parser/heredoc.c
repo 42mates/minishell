@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:58:50 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:22:01 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:58:32 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../minishell.h"
 
 int	heredoc_file_swap(char *file, t_cmd_info *cmd_info, t_list *files)
 {

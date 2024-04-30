@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:13:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:43:17 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:58:30 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../minishell.h"
 
 /*
 Returns the position of the second quotes relative to the first quotes.

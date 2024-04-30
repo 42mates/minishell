@@ -6,13 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:47:13 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/30 15:00:05 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:00:23 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-#include "../inc/minishell.h"
 
 int	g_signal = 0;
 /*
@@ -91,7 +89,7 @@ void	main_begining(t_list **toks, char **line)
 	signal(SIGINT, handler_signal);
 	errno = 0;
 	*toks = list_new(cmp_int, NULL, free);
-	*line = readline(PROMT);
+	*line = readline(PROMPT);
 	if (*line && **line)
 		add_history(*line);
 }

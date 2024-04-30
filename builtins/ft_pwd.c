@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macros.h                                           :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 17:22:17 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/25 14:07:36 by mbecker          ###   ########.fr       */
+/*   Created: 2024/04/16 16:36:35 by mbecker           #+#    #+#             */
+/*   Updated: 2024/04/25 19:27:18 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MACROS_H
-# define MACROS_H
+#include "../minishell.h"
 
-# define TRUE 1
-# define FALSE 0
+int	ft_pwd(void)
+{
+	char	*path;
 
-# define BUFFER_SIZE 4096
-# define FD_MAX 512
-
-# define SPACES " \t\n"
-# define MALLOC_ERR "Error: malloc failed\n"
-# define PATH_ERR "Error: invalid or missing path\n" 
-
-#endif
+	path = getcwd(NULL, 0);
+	if (!path)
+		return (perror("pwd"), EXIT_FAILURE);
+	else
+	{
+		write(1, path, ft_strlen(path));
+		write(1, "\n", 1);
+		free(path);
+	}
+	return (EXIT_SUCCESS);
+}

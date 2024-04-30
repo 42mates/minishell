@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:46:02 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/29 17:28:09 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:58:32 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../minishell.h"
 
 int	get_fd_in(t_cmd_info *cmd_info)
 {

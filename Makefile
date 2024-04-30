@@ -3,29 +3,58 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/04/15 13:25:50 by mbecker          ###   ########.fr        #
+#    Updated: 2024/04/30 17:05:00 by akurochk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pipex
+NAME = exe
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = 	main.c \
+		handle_env.c \
+		error.c \
+		\
 		src/execute.c \
 		src/set_home_path.c \
 		src/here_doc.c \
-		src/pipex.c
+		src/pipex.c \
+		\
+		builtins/ft_echo.c \
+		builtins/ft_cd.c \
+		builtins/ft_pwd.c \
+		builtins/ft_export.c \
+		builtins/builtin_utils.c \
+		\
+		src/builtins/builtins_call.c \
+		src/builtins/command_call.c \
+		src/parser/common.c \
+		src/utils/env.c \
+		src/utils/error_handler.c \
+		src/parser/executor.c \
+		src/parser/parser_groups.c \
+		src/utils/ft_str_concat.c \
+		src/utils/ft_str_split.c \
+		src/parser/group.c \
+		src/parser/heredoc.c \
+		src/lexer/lexer.c \
+		src/lexer/lexer2.c \
+		src/parser/parser_star.c \
+		src/parser/parser.c \
+		src/parser/pipes.c \
+		src/utils/signal.c \
+		src/parser/subshell.c \
+		src/tests/test_builtins.c
 
 all: $(NAME)
 
 $(NAME): libft
-	@$(CC) $(CFLAGS) -o $(NAME) $(SRC) main.c -Llibft -lft
-	@echo "$(GREEN)./$(NAME) ready.$(NC)"
+	@$(CC) $(CFLAGS) -o $(NAME) $(SRC) -Llibft -lft -lreadline
+	@echo "$(LGREEN)./$(GREEN)$(NAME)$(LGREEN) ready.$(NC)"
 
 clean:
 	@echo "$(LRED)Removing objects and misc...$(NC)"
@@ -33,6 +62,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@make -C ./libft fclean
 	@echo "$(RED)FULL CLEAN FINISHED$(NC)"
 
 re: fclean all
@@ -51,13 +81,17 @@ LYELLOW =\033[0;33m
 GREY =\033[1;37m
 NC =\033[0m
 
-tester: all
-	@if [ ! -d "pipex.tester" ]; then \
-		echo "$(GREEN)Cloning tester...$(LGREEN)"; \
-		git clone https://github.com/vfurmane/pipex-tester pipex.tester; \
-	fi
-	@chmod +x pipex.tester/run.sh
-	@echo "$(YELLOW)Tester ready.$(NC)"
-	@echo "$(RED)Running tester...$(NC)"
-	@printf "..\nn" | pipex.tester/run.sh
+f: libft
+	@$(CC) -g -o $(NAME) $(SRC) -Llibft -lft
+	@echo "$(LGREEN)./$(GREEN)$(NAME)$(LGREEN) ready.$(NC)"
+
+#tester: all
+#	@if [ ! -d "pipex.tester" ]; then \
+#		echo "$(GREEN)Cloning tester...$(LGREEN)"; \
+#		git clone https://github.com/vfurmane/pipex-tester pipex.tester; \
+#	fi
+#	@chmod +x pipex.tester/run.sh
+#	@echo "$(YELLOW)Tester ready.$(NC)"
+#	@echo "$(RED)Running tester...$(NC)"
+#	@printf "..\nn" | pipex.tester/run.sh
 	

@@ -6,11 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:09:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/25 14:07:08 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:43:00 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "strings.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
