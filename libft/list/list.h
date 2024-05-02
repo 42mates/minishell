@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:15:47 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/30 16:44:44 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/02 17:01:27 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int		cmp_int(const void *key_1, const void *key_2);
 int		cmp_str(const void *key_1, const void *key_2);
 
 t_list	*tab_to_list(char **tab);
-char	**list_to_tab(t_list *list);
+char	**list_to_env(t_list *list);
+char	**list_to_argv(t_list *lst);
 
 t_list	*list_dup(t_list *list, void *(keydup)(void *), void *(valdup)(void *));
 t_list	*list_dup_str(t_list *list);
