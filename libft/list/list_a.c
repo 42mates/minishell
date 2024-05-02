@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_a.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:19:32 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/30 16:25:48 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/02 13:45:47 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	list_put(t_list *list, void *key, void *val)
  * Add or replace the value associated with a given key in a linked list.
  *
  * @param list The linked list.
- * @param key The key to search for.
+ * @param key The key to search for. MUST BE A STRING LITTERAL.
  * @param new_val The new value to replace the existing value with.
  * @return 1 if the replacement was successful, 0 otherwise.
  */
@@ -115,7 +115,7 @@ int	list_replace(t_list *list, void *key, void *new_val)
 		else
 			break ;
 	}
-	e_ptr->next = elem_new(key, new_val);
+	e_ptr->next = elem_new(ft_strdup(key), new_val);
 	return (e_ptr->next != NULL);
 }
 
