@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:14:49 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/29 12:16:22 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/02 18:22:53 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	env_set(char const **argv, t_list *env)
 {
-	char	**oldpwd;
+	char	*oldpwd;
 	
-	oldpwd = malloc(sizeof(char *) * 3);
-	oldpwd[0] = ft_strdup("export");
-	oldpwd[0] = ft_strdup("OLDPWD");
-	oldpwd[0] = NULL;
-	ft_export(oldpwd, env);
+	if (!list_get(env, "OLDPWD"))
+	{
+		oldpwd = ft_strdup("OLDPWD");
+		list_replace(env, oldpwd, NULL);
+	}
 	env_set_pwd(env);
 	env_set_shlvl(env);
 	env_set__((char **)argv, env);
@@ -41,7 +41,9 @@ void	env_set(char const **argv, t_list *env)
  */
 void	env_set__(char **args, t_list *env)
 {
+	//printf("lst_get(env, \"_\") = %s\n", (char *)list_get(env, "_"));
 	list_replace(env, "_", ft_strdup(args[ft_tablen((const char **)args) - 1]));
+	
 }
 
 /**

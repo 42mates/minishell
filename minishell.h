@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:17:30 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/30 17:02:36 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/02 17:35:04 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 // Prompt for minishell
 // # define PROMPT "\033[0;34m( ͡° ͜ʖ ͡°)\033[0m> "
-# define PROMPT "\033[0;34mmsh> \033[0m> "
+# define PROMPT "\033[0;34mmsh> \033[0m"
 // Characters that cannot be part of a environment variable key/name 
 # define INVALID_KEY "!@#%^&*()-+={}[]|:;'\",<>./? \t\n\v\f\r"
 
@@ -64,10 +64,10 @@ int		pipex(char ***cmds, char **envp, int infile, int outfile);
 
 /**** BUILTINS ****/
 
-int		ft_echo(char **args);
-int		ft_cd(char *path, t_list *list);
-int		ft_pwd(void);
-int		ft_export(char **arg, t_list *env);
+int		ft_echo(t_data *data, t_list *args);
+int		ft_cd(t_data *data, t_list *args);
+int		ft_pwd(t_data *data, t_list *args);
+int		ft_export(t_data *data, t_list *args);
 void	print_var(t_elem *node, char *prefix);
 
 /**** ERROR ****/

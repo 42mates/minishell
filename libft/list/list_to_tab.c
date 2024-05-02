@@ -6,13 +6,13 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:46:33 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/29 16:46:35 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/02 17:14:58 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-char	**list_to_tab(t_list *list)
+char	**list_to_env(t_list *list)
 {
 	char	**tab;
 	t_elem	*node;
@@ -35,4 +35,30 @@ char	**list_to_tab(t_list *list)
 	}
 	tab[i] = NULL;
 	return (tab);
+}
+
+/**
+ * Converts the values of all nodes il `lst` to an array of strings.
+ *
+ * @param lst The linked list to convert.
+ * @return the array or NULL if memory allocation fails.
+ */
+char	**list_to_argv(t_list *lst)
+{
+	char	**argv;
+	t_elem	*node;
+	int		i;
+
+	argv = malloc(sizeof(char *) * (list_size(lst) + 1));
+	if (!argv)
+		return (NULL);
+	i = 0;
+	node = lst->head;
+	while (node)
+	{
+		argv[i++] = node->val;
+		node = node->next;
+	}
+	argv[i] = NULL;
+	return (argv);
 }

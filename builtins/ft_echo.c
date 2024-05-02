@@ -6,13 +6,13 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:41:45 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/22 16:28:13 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/02 17:33:40 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	check_option(char **args, int *i)
+static int	check_option(char **args, int *i)
 {
 	int	j;
 
@@ -40,7 +40,7 @@ int	check_option(char **args, int *i)
  * @param args The NULL-terminated arguments to be written to the 
  * standard output.
  */
-int	ft_echo(char **args)
+static int	builtin_echo(char **args)
 {
 	int		i;
 	int		is_option;
@@ -60,4 +60,18 @@ int	ft_echo(char **args)
 	if (!is_option)
 		write(STDOUT_FILENO, "\n", 1);
 	return (EXIT_SUCCESS);
+}
+
+int ft_echo(t_data *data, t_list *args)
+{
+	char	**argv;
+	int		ret;
+
+	(void)data;
+	argv = list_to_argv(args);
+	if (!argv)
+		return (print_error("echo", NULL, "malloc failed"), EXIT_FAILURE);
+	ret = builtin_echo(argv);
+	free(argv);
+	return (ret);
 }
