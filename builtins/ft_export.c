@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:39:16 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/29 11:10:30 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/02 17:24:03 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	get_key_val(char *arg, char **key, char **val)
  * @note Export handles incorrect key names, but not `$`, `''` or `""`.
  * @note arg[0] must be "export" and arg[last] must be NULL.
  */
-int	ft_export(char **arg, t_list *env)
+static int	builtin_export(char **arg, t_list *env)
 {
 	char	*key;
 	char	*val;
@@ -92,4 +92,18 @@ int	ft_export(char **arg, t_list *env)
 			status = EXIT_FAILURE;
 	}
 	return (status);
+}
+
+int	ft_export(t_data *data, t_list *args)
+{
+	char	**argv;
+	int		ret;
+
+	(void)data;
+	argv = list_to_argv(args);
+	if (!argv)
+		return (print_error("export", NULL, "malloc failed"), EXIT_FAILURE);
+	ret = builtin_export(argv, data->env_lst);
+	free(argv);
+	return (ret);
 }

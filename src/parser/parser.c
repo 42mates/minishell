@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/30 17:03:39 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:15:35 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 
 int	is_extra(void *key)
 {
-	return ((long)key == L_WORD
-		|| (long)key == L_S_QUOT
+	return ((long)key == L_WORD || (long)key == L_S_QUOT
 		|| (long)key == L_D_QUOT);
 }
 
@@ -59,7 +58,7 @@ void	parse_token_second_loop(t_list *extra, char *word, t_list *words)
 	list_free(words);
 }
 
-void parse_token_field_free(t_list *chunks, char **word)
+void	parse_token_field_free(t_list *chunks, char **word)
 {
 	if (chunks)
 		list_free(chunks);
@@ -77,16 +76,15 @@ int	parse_alloc_c_info(t_chunk_info **c_info, int start, int end)
 	return (0);
 }
 
-void	parse_init_fpack(t_field_pack *f_pack, t_chunk_info *c_info,
-	int *i, int *size)
+void	parse_init_fpack(t_field_pack *f_pack, t_chunk_info *c_info, int *i,
+		int *size)
 {
 	f_pack->i = i;
 	f_pack->size = size;
 	f_pack->c_info = c_info;
 }
 
-
-int update_g_signal_str(t_data *data)
+int	update_g_signal_str(t_data *data)
 {
 	free(data->g_signal_str);
 	data->g_signal_str = ft_itoa(g_signal);
@@ -124,14 +122,14 @@ int	get_var(const char *s, t_data *data, char **ptr_env, int *pos)
 	var_name = ft_substr(s, 0, i);
 	if (!var_name)
 		return (errors(1, "Error: get_var", 1, 0));
-	ptr_env = list_get(data->env_lst, var_name);
+	*ptr_env = (char *)list_get(data->env_lst, var_name);
 	*pos = *pos + i;
 	free(var_name);
 	return (0);
 }
 
-int	parse_colect_from_env(char *s, t_data *data,
-	t_list *chunks, t_field_pack *f_pack)
+int	parse_colect_from_env(char *s, t_data *data, t_list *chunks,
+		t_field_pack *f_pack)
 {
 	char	*ptr_env;
 
@@ -154,7 +152,7 @@ int	parse_colect_from_env(char *s, t_data *data,
 	return (0);
 }
 
-int 	parse_collect_chunks(char *s, t_data *data, t_list *chunks, int *size)
+int	parse_collect_chunks(char *s, t_data *data, t_list *chunks, int *size)
 {
 	int				i;
 	int				j;
@@ -187,7 +185,7 @@ int 	parse_collect_chunks(char *s, t_data *data, t_list *chunks, int *size)
 }
 
 int	parse_token_field_pre(t_list *str, t_data *data, t_list *chunks,
-	t_elem_info *e_info)
+		t_elem_info *e_info)
 {
 	t_elem			*e_elem;
 	t_chunk_info	*c_info;
@@ -196,7 +194,6 @@ int	parse_token_field_pre(t_list *str, t_data *data, t_list *chunks,
 	e_elem = str->head;
 	while (e_elem)
 	{
-
 		if ((long)e_elem->key == L_S_QUOT || e_info->flag)
 		{
 			if (parse_alloc_c_info(&c_info, 0, ft_strlen((char *)e_elem->val)))
@@ -204,14 +201,14 @@ int	parse_token_field_pre(t_list *str, t_data *data, t_list *chunks,
 			e_info->size = e_info->size + c_info->end;
 			if (!list_put(chunks, c_info, e_elem->val))
 			{
-				free (c_info);
+				free(c_info);
 				return (errors(1, "Error: parse_token_field_pre", 1, 0));
 			}
 		}
-		else if (parse_collect_chunks((char *)e_elem->val,	data, chunks, &(e_info->size)))
+		else if (parse_collect_chunks((char *)e_elem->val, data, chunks,
+				&(e_info->size)))
 			return (1);
 		e_elem = e_elem->next;
-
 	}
 	e_info->flag = 0;
 	return (0);
@@ -394,8 +391,8 @@ int	parse_manage_token(t_elem **e_elem, t_cmd_info *cmd_info, t_list *argv)
 		return (errors(1, "Error: someting goes REALLY wrong", 0, 777));
 	if ((long)(*e_elem)->key == L_PAR_L || (long)(*e_elem)->key == L_PAR_R)
 	{
-		cmd_info->level += ((long)(*e_elem)->key == L_PAR_L)
-			+ (-1) * ((long)(*e_elem)->key == L_PAR_R);
+		cmd_info->level += ((long)(*e_elem)->key == L_PAR_L) + (-1)
+			* ((long)(*e_elem)->key == L_PAR_R);
 		cmd_info->flag |= CMD_SUB;
 		if ((cmd_info->level == 1 && (long)(*e_elem)->key == L_PAR_L)
 			|| (cmd_info->level == 0 && (long)(*e_elem)->key == L_PAR_R))
@@ -403,8 +400,8 @@ int	parse_manage_token(t_elem **e_elem, t_cmd_info *cmd_info, t_list *argv)
 	}
 	if ((long)(*e_elem)->key == L_SPACE && cmd_info->level == 0)
 		return (0);
-	if ((cmd_info->flag & CMD_SUB)
-		&& cmd_info->level == 0 && (long)(*e_elem)->key == L_WORD)
+	if ((cmd_info->flag & CMD_SUB) && cmd_info->level == 0
+		&& (long)(*e_elem)->key == L_WORD)
 		return (errors(1, "Error: parse_manage_token: extra token", 0, 258));
 	if (((long)(*e_elem)->key == L_WORD || cmd_info->level > 0)
 		&& !list_put(argv, (*e_elem)->key, (*e_elem)->val))
@@ -424,8 +421,8 @@ int	parse_grp_cmd(t_elem *e_elem, t_list *cmds)
 		return (errors(1, "Error: parse_grp_cmd: cmd_info_init", 1, 0));
 	argv = list_new(NULL, NULL, NULL);
 	if (argv == NULL)
-		return (free(cmd_info),
-			errors(1, "Error: parse_grp_cmd: list_new", 1, 0));
+		return (free(cmd_info), errors(1, "Error: parse_grp_cmd: list_new", 1,
+				0));
 	while (e_elem != NULL && ((long)e_elem->key != L_PIPE || cmd_info->level))
 	{
 		if (parse_manage_token(&e_elem, cmd_info, argv))
@@ -443,8 +440,7 @@ int	parse_grp_cmd(t_elem *e_elem, t_list *cmds)
 	return (parse_grp_cmd_free(argv, cmd_info, 1));
 }
 
-
-int	parse_grp_pipe (t_list *extra, t_list *cmds)
+int	parse_grp_pipe(t_list *extra, t_list *cmds)
 {
 	t_elem	*e_elem;
 
@@ -514,7 +510,7 @@ void	parse_wait_all(int pid, int *status)
 		if (pid == child)
 		{
 			g_signal = WEXITSTATUS(*status);
-			if (WIFSIGNALED(*status))  // 0 if was stopped by signal
+			if (WIFSIGNALED(*status)) // 0 if was stopped by signal
 			{
 				g_signal = WTERMSIG(*status);
 				if (g_signal != 131)
@@ -528,8 +524,8 @@ void	parse_wait_all(int pid, int *status)
 
 int	parse_check_chain(t_elem *e_elem, int *chain)
 {
-	if ((g_signal == 0 && ((long)e_elem->key == L_OR))
-		|| (g_signal != 0 && ((long)e_elem->key == L_AND)))
+	if ((g_signal == 0 && ((long)e_elem->key == L_OR)) || (g_signal != 0
+			&& ((long)e_elem->key == L_AND)))
 		return (1);
 	*chain = 0;
 	return (0);
@@ -574,7 +570,7 @@ Returns 0 if OK.
 */
 int	parser(t_data *data, t_list *toks) /*-OK-*/
 {
-	t_list	*grps;
+	t_list *grps;
 
 	grps = list_new(NULL, NULL, list_free);
 	if (grps == NULL)

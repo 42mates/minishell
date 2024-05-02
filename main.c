@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:47:13 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/30 17:00:23 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:36:20 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	env_parser(t_list *env_lst, char **env)
 	char	*key;
 	char	*val;
 
-	if (!env_lst || !env || !*env)
+	if (!env_lst)
 		return (errors(1, "Error: env_parser", 1, 0));
 	i = -1;
 	while (env[++i])
@@ -48,7 +48,7 @@ int	init_data(t_data *data, char **env)
 	data->flag_exit = 1;
 	data->flag_env = 1;
 	data->env = NULL;
-	data->env_lst = list_new(cmp_int, free, free);
+	data->env_lst = list_new((t_cmp_key)ft_strcmp, free, free);
 	if (!data->env_lst)
 		return (errors(1, "Error: init_data", 1, 0));
 	if (env_parser(data->env_lst, env))
@@ -60,10 +60,10 @@ int	init_data(t_data *data, char **env)
 	data->builtins[4] = "unset";
 	data->builtins[5] = "env";
 	data->builtins[6] = "exit";
-	data->f_builtins[0] = &TEST_builtin; // &ft_echo;
-	data->f_builtins[1] = &TEST_builtin; // &ft_cd;
-	data->f_builtins[2] = &TEST_builtin; // &ft_pwd;
-	data->f_builtins[3] = &TEST_builtin; // &ft_export;
+	data->f_builtins[0] = &ft_echo; // &ft_echo;
+	data->f_builtins[1] = &ft_cd; // &ft_cd;
+	data->f_builtins[2] = &ft_pwd; // &ft_pwd;
+	data->f_builtins[3] = &ft_export; // &ft_export;
 	data->f_builtins[4] = &TEST_builtin; // &ft_unset;
 	data->f_builtins[5] = &TEST_builtin; // &ft_env;
 	data->f_builtins[6] = &TEST_builtin; // &ft_exit;
@@ -107,10 +107,9 @@ int	main(int ac, const char **av, char **env)
 	t_data	data;
 	t_list	*toks;
 
-	(void) ac;
-	(void) av;
-	if (init_data(&data, env))
+	if (!ac || !av || init_data(&data, env))
 		return (EXIT_FAILURE);
+	env_set(av, data.env_lst);
 	while (data.flag_exit)
 	{
 		main_begining(&toks, &line);
