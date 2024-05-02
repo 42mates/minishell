@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:46:33 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/02 17:02:01 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/02 17:14:58 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**list_to_argv(t_list *lst)
 	node = lst->head;
 	while (node)
 	{
-		argv[i++] = node->key;
+		argv[i++] = node->val;
 		node = node->next;
 	}
 	argv[i] = NULL;
