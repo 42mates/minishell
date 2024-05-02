@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 19:34:14 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/30 16:58:30 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:04:47 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,9 @@ int	prepare_argv(t_elem *e_cmd, char ***argv, char *filepath)
 	while (e_curr)
 	{
 		(*argv)[i] = ft_strdup((char *)e_curr->val);
-		if (*(argv)[i] == NULL && free_str_array(*argv, i) == NULL)
-			errors(1, "Error: prepare_argv: ft_strdup", 1, 0);
+		if ((*argv)[i] == NULL)
+			if (free_str_array(*argv, i) == NULL)
+				errors(1, "Error: prepare_argv: ft_strdup", 1, 0);
 		e_curr = e_curr->next;
 		i++;
 	}

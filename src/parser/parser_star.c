@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:37:01 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/30 16:58:32 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:00:09 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ int	have_match2(const char *w, const char **p)
 			p[0]++;
 			p[1]++;
 		}
-		// else if (*p[0] == '\\' && *(p[0] + 1) == '*' && *p[1] == '*' && p[1])
-		// {
-		// 	p[0] = p[0] + 2;
-		// 	p[1]++;
-		// }
+		else if (*p[0] == '\\' && *(p[0] + 1) == '*' && *p[1] == '*' && p[1])
+		{
+			p[0] = p[0] + 2;
+			p[1]++;
+		}
 		else if (handle_star(w, p))
 			return (0);
 	}
@@ -83,10 +83,11 @@ int	have_match(const char *s, const char *w)
 	p[1] = s;
 	p[2] = NULL;
 	p[3] = NULL;
-	if (ft_strcmp(w, "*\0") == 0)
-		return (1);
-	if (w[0] != '.' && s[0] == '.')
+	if ((s[0] == '.' && ft_strcmp(w, "*") == 0)
+		|| ft_strcmp(w, "*.") == 0)
 		return (0);
+	if (ft_strcmp(w, "*") == 0)
+		return (1);
 	return (have_match2(w, p));
 }
 
