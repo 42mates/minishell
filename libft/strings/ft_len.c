@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 16:38:31 by mbecker           #+#    #+#             */
-/*   Updated: 2024/03/29 17:34:39 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/13 18:01:35 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,26 @@ size_t	ft_tablen(const char **tab)
 	while (tab[i])
 		i++;
 	return (i);
+}
+
+/**
+ * Returns the number of digits in `num` 
+ * @note 420 numlen = 3.
+ */
+int	ft_numlen(long long num)
+{
+	short int			len;
+
+	len = 1;
+	if (num < 0)
+	{
+		len++;
+		num = -num;
+	}
+	while (num >= 10)
+	{
+		len++;
+		num /= 10;
+	}
+	return (len);
 }

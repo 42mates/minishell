@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:10:08 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/30 16:19:54 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:11:09 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "strings.h"
-
-/**
- * returns the length of a number.
- */
-static short int	ft_numlen(long long num)
-{
-	short int			len;
-
-	len = 1;
-	if (num < 0)
-	{
-		len++;
-		num = -num;
-	}
-	while (num >= 10)
-	{
-		len++;
-		num /= 10;
-	}
-	return (len);
-}
 
 static void	ft_revert_inttab(char *s)
 {
