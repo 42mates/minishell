@@ -6,23 +6,13 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:47:13 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/02 18:36:20 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/14 17:13:14 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_signal = 0;
-/*
-BUILTINS:
-echo	- option -n
-cd		- only a relative or absolute path
-pwd		- no options
-export	- no options
-unset	- no options
-env		- no options or arguments
-exit	- no options
-*/
 
 int	env_parser(t_list *env_lst, char **env)
 {
@@ -49,6 +39,7 @@ int	init_data(t_data *data, char **env)
 	data->flag_env = 1;
 	data->env = NULL;
 	data->env_lst = list_new((t_cmp_key)ft_strcmp, free, free);
+	data->g_signal_str = NULL;
 	if (!data->env_lst)
 		return (errors(1, "Error: init_data", 1, 0));
 	if (env_parser(data->env_lst, env))
@@ -60,13 +51,13 @@ int	init_data(t_data *data, char **env)
 	data->builtins[4] = "unset";
 	data->builtins[5] = "env";
 	data->builtins[6] = "exit";
-	data->f_builtins[0] = &ft_echo; // &ft_echo;
-	data->f_builtins[1] = &ft_cd; // &ft_cd;
-	data->f_builtins[2] = &ft_pwd; // &ft_pwd;
-	data->f_builtins[3] = &ft_export; // &ft_export;
+	data->f_builtins[0] = &ft_echo;
+	data->f_builtins[1] = &ft_cd;
+	data->f_builtins[2] = &ft_pwd;
+	data->f_builtins[3] = &ft_export;
 	data->f_builtins[4] = &TEST_builtin; // &ft_unset;
 	data->f_builtins[5] = &TEST_builtin; // &ft_env;
-	data->f_builtins[6] = &TEST_builtin; // &ft_exit;
+	data->f_builtins[6] = &ft_exit;
 	return (0);
 }
 
@@ -118,11 +109,11 @@ int	main(int ac, const char **av, char **env)
 		else if (line != NULL && *line)
 		{
 			if (lexer(line, toks) == 0)
-				parser(&data, toks);
+				parser(&data, toks);	//if exit: exit must have acces to all data to free everything, or be handled in parser as exit signal.
 			free(line);
 		}
 		main_postaction(toks);
 	}
-	main_exit(&data);
+	main_exit(&data); //necessary for ctrl+D
 	return (g_signal);
 }

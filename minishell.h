@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:17:30 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/02 17:35:04 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/13 18:26:38 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int		ft_echo(t_data *data, t_list *args);
 int		ft_cd(t_data *data, t_list *args);
 int		ft_pwd(t_data *data, t_list *args);
 int		ft_export(t_data *data, t_list *args);
+int		ft_exit(t_data *data, t_list *args);
 void	print_var(t_elem *node, char *prefix);
 
 /**** ERROR ****/
