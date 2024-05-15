@@ -6,7 +6,7 @@
 #    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/05/14 15:04:26 by mbecker          ###   ########.fr        #
+#    Updated: 2024/05/15 18:54:47 by mbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRC = 	main.c \
 		builtins/ft_cd.c \
 		builtins/ft_pwd.c \
 		builtins/ft_export.c \
+		builtins/ft_unset.c \
+		builtins/ft_env.c \
 		builtins/ft_exit.c \
 		builtins/builtin_utils.c \
 		\

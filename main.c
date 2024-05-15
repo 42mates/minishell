@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:47:13 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/14 17:13:14 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/15 18:54:15 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	init_data(t_data *data, char **env)
 	data->f_builtins[1] = &ft_cd;
 	data->f_builtins[2] = &ft_pwd;
 	data->f_builtins[3] = &ft_export;
-	data->f_builtins[4] = &TEST_builtin; // &ft_unset;
-	data->f_builtins[5] = &TEST_builtin; // &ft_env;
+	data->f_builtins[4] = &ft_unset;
+	data->f_builtins[5] = &ft_env;
 	data->f_builtins[6] = &ft_exit;
 	return (0);
 }

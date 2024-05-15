@@ -6,24 +6,36 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:44:14 by mbecker           #+#    #+#             */
-/*   Updated: 2024/04/29 16:55:55 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/15 16:16:51 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	print_var(t_elem *node, char *prefix)
+/**
+ * Prints the environment variable information as `key=value`.
+ * 
+ * @param node The node containing the variable information.
+ * @param prefix The optional prefix to be printed before the variable 
+ * information (feature for export when used without arguments).
+ */
+void print_var(t_elem *node, char *prefix)
 {
-	char	*special;
+	char *special;
 
 	special = ft_strchrset(node->val, " \t\n\"\\$");
 	write(1, prefix, ft_strlen(prefix));
 	write(1, node->key, ft_strlen(node->key));
-	if (node->val)
+	if (node->val && prefix)
 	{
 		write(1, "=\"", 2);
 		write(1, node->val, ft_strlen(node->val));
 		write(1, "\"", 1);
+	}
+	else if (node->val)
+	{
+		write(1, "=", 1);
+		write(1, node->val, ft_strlen(node->val));
 	}
 	write(1, "\n", 1);
 }

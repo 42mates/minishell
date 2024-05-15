@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_call.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:05:29 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/30 16:58:30 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/15 18:17:31 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	builtins_exe(int i, t_elem *e_cmd, t_data *data, t_fd *fd)
 	if (redir_fd(fd->fds[0], fd->fds[1]))
 		exit (1);
 	close(fd->pfd[0]);
-	printf("\033[0;32m>>>>> builtins_exe <<<<<\033[0m\n");
+	//printf("\033[0;32m>>>>> builtins_exe <<<<<\033[0m\n");
 	exit((*data->f_builtins[i])(data, e_cmd->key));
 
 }
@@ -42,7 +42,7 @@ int	builtins_call(int i, t_elem *e_cmd, t_data *data, t_fd *fd)
 		close(in_out[1]);
 		return (errors(1, "Error: builtins_call: redir_fd", 1, 0));
 	}
-	printf("\033[0;32m>>>>> builtins_call <<<<<\033[0m\n");
+	//printf("\033[0;32m>>>>> builtins_call <<<<<\033[0m\n");
 	res = (*data->f_builtins[i])(data, e_cmd->key);
 	dup2(in_out[0], STDIN_FILENO);
 	dup2(in_out[1], STDOUT_FILENO);
