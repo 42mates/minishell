@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/05/15 18:54:47 by mbecker          ###   ########.fr        #
+#    Updated: 2024/05/16 16:48:03 by akurochk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,22 +35,32 @@ SRC = 	main.c \
 		\
 		src/builtins/builtins_call.c \
 		src/builtins/command_call.c \
-		src/parser/common.c \
-		src/utils/env.c \
-		src/utils/error_handler.c \
-		src/parser/executor.c \
-		src/parser/parser_groups.c \
-		src/utils/ft_str_concat.c \
-		src/utils/ft_str_split.c \
-		src/parser/group.c \
-		src/parser/heredoc.c \
+		\
 		src/lexer/lexer.c \
 		src/lexer/lexer2.c \
+		\
+		src/parser/common.c \
+		src/parser/executor.c \
+		src/parser/group.c \
+		src/parser/heredoc.c \
+		src/parser/parser_dollar.c \
+		src/parser/parser_groups.c \
+		src/parser/parser_manage_group.c \
+		src/parser/parser_manage_group2.c \
 		src/parser/parser_star.c \
+		src/parser/parser_token_field.c \
+		src/parser/parser_token.c \
+		src/parser/parser_utils.c \
 		src/parser/parser.c \
 		src/parser/pipes.c \
-		src/utils/signal.c \
 		src/parser/subshell.c \
+		\
+		src/utils/ft_str_split.c \
+		src/utils/ft_str_concat.c \
+		src/utils/error_handler.c \
+		src/utils/signal.c \
+		src/utils/env.c \
+		\
 		src/tests/test_builtins.c
 
 all: $(NAME)
