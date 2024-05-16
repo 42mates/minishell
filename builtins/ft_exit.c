@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:35:28 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/14 17:18:26 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/16 13:19:45 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,31 +54,14 @@ int	ft_exit(t_data *data, t_list *args)
 	unsigned char	exit_status;
 	long long		nb;
 
-	write(STDOUT_FILENO, "exit\n", 5);
 	nb = 0;
 	exit_status = exit_parsing(args->head, &nb);
 	if (exit_status == 1)
 		return (exit_status);
 	else if (!exit_status)
 		exit_status = (unsigned char)nb;
-
-	printf("\033[0;34mexiting program with code \033[1;34m%hhu\n\033[0m", exit_status);
-
-	/*****  CASE 1 - use of exit()  *****/
-
-	// freeing all variables. 
-	//  Missing freeing of main's line string and toks list
-	free_str_array(data->env, -1);
-	list_free(data->env_lst);
-	if (data->g_signal_str)
-		free(data->g_signal_str);
-	rl_clear_history();
-
-	//exits directly the program
-	exit(exit_status);
-
-	/*****  CASE 2 - use of return  *****/
-	//return (exit_status);
-	// exit or return? see if parser needs freeing
+	g_signal = exit_status;
+	data->flag_exit = 0;
+	return (exit_status);
 }
 //9223372036854775808 LONGMIN
