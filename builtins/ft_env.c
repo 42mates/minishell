@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:22:19 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/15 18:08:49 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/16 16:10:27 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	ft_env(t_data *data, t_list *args)
 			print_var(env, NULL);
 		env = env->next;
 	}
-	return (0);
+	g_signal = EXIT_SUCCESS;
+	return (EXIT_SUCCESS);
 }

@@ -6,31 +6,31 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:36:35 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/02 17:34:05 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/16 16:20:06 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int builtin_pwd(void)
+int	ft_pwd(t_data *data, t_list *args)
 {
 	char	*path;
 
+	(void)data;
+	(void)args;
 	path = getcwd(NULL, 0);
 	if (!path)
-		return (perror("pwd"), EXIT_FAILURE);
+	{
+		print_error("pwd", "error retrieving current directory: getcwd",
+			strerror(errno));
+		return (EXIT_FAILURE);
+	}
 	else
 	{
 		write(1, path, ft_strlen(path));
 		write(1, "\n", 1);
 		free(path);
 	}
+	g_signal = EXIT_SUCCESS;
 	return (EXIT_SUCCESS);
-}
-
-int	ft_pwd(t_data *data, t_list *args)
-{
-	(void)data;
-	(void)args;
-	return (builtin_pwd());
 }

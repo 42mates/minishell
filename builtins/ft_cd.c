@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:22:52 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/02 17:40:27 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/16 16:07:17 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ int	ft_cd(t_data *data, t_list *args)
 		return (print_error("cd", NULL, "malloc failed"), EXIT_FAILURE);
 	exit_status = builtin_cd(argv, data->env_lst);
 	free(argv);
+	g_signal = exit_status;
 	return (exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:39:16 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/02 17:24:03 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/16 16:08:47 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,14 @@ static int	builtin_export(char **arg, t_list *env)
 int	ft_export(t_data *data, t_list *args)
 {
 	char	**argv;
-	int		ret;
+	int		exit_status;
 
 	(void)data;
 	argv = list_to_argv(args);
 	if (!argv)
 		return (print_error("export", NULL, "malloc failed"), EXIT_FAILURE);
-	ret = builtin_export(argv, data->env_lst);
+	exit_status = builtin_export(argv, data->env_lst);
 	free(argv);
-	return (ret);
+	g_signal = exit_status;
+	return (exit_status);
 }

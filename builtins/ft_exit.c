@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:35:28 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/16 13:19:45 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/16 16:10:52 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	ft_exit(t_data *data, t_list *args)
 		return (exit_status);
 	else if (!exit_status)
 		exit_status = (unsigned char)nb;
-	g_signal = exit_status;
 	data->flag_exit = 0;
+	g_signal = exit_status;
 	return (exit_status);
 }
 //9223372036854775808 LONGMIN

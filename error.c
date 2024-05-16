@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:08:38 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/02 13:27:16 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/16 16:22:55 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_error(char *builtin, char *arg, char *msg)
 	int	is_export;
 
 	is_export = !ft_strcmp(builtin, "export");
-	write(2, "minishell", 9);
+	write(2, "msh", 3);
 	write(2, ": ", 2);
 	if (builtin)
 	{

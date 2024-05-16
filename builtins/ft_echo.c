@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:41:45 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/02 17:33:40 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/16 16:10:07 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,14 @@ static int	builtin_echo(char **args)
 int ft_echo(t_data *data, t_list *args)
 {
 	char	**argv;
-	int		ret;
+	int		exit_status;
 
 	(void)data;
 	argv = list_to_argv(args);
 	if (!argv)
 		return (print_error("echo", NULL, "malloc failed"), EXIT_FAILURE);
-	ret = builtin_echo(argv);
+	exit_status = builtin_echo(argv);
 	free(argv);
-	return (ret);
+	g_signal = exit_status;
+	return (exit_status);
 }
