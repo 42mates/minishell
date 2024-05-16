@@ -8,6 +8,7 @@
 # Executables
 *.out
 minishell
+msh
 exe
 test
 

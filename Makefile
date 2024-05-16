@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
+#    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/04/30 17:05:00 by akurochk         ###   ########.fr        #
+#    Updated: 2024/05/15 18:54:47 by mbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = exe
+NAME = msh
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
@@ -28,6 +28,9 @@ SRC = 	main.c \
 		builtins/ft_cd.c \
 		builtins/ft_pwd.c \
 		builtins/ft_export.c \
+		builtins/ft_unset.c \
+		builtins/ft_env.c \
+		builtins/ft_exit.c \
 		builtins/builtin_utils.c \
 		\
 		src/builtins/builtins_call.c \
