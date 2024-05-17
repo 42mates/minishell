@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:35:28 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/16 16:10:52 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/17 17:59:38 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,16 @@ static int	ft_strisdigit(char *str)
 static int	exit_parsing(t_elem *head, long long *nb)
 {
 	t_elem	*tmp;
+	int		len;
 
 	tmp = head->next;
 	if (!tmp)
 		return (0);
 	*nb = ft_atol(tmp->val);
-	if (!ft_strisdigit(tmp->val) || (int)ft_strlen(tmp->val) != ft_numlen(*nb))
+	len = (int)ft_strlen(tmp->val);
+	if (*(char *)tmp->val == '+')
+		len--;
+	if (!ft_strisdigit(tmp->val) || len != ft_numlen(*nb))
 	{
 		print_error("exit", tmp->val, "numeric argument required");
 		return (2);
@@ -56,9 +60,7 @@ int	ft_exit(t_data *data, t_list *args)
 
 	nb = 0;
 	exit_status = exit_parsing(args->head, &nb);
-	if (exit_status == 1)
-		return (exit_status);
-	else if (!exit_status)
+	if (!exit_status)
 		exit_status = (unsigned char)nb;
 	data->flag_exit = 0;
 	g_signal = exit_status;
