@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:46:02 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/30 16:58:32 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:25:27 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	pipes(t_group *cmds, t_data *data)
 	t_elem	*e_cmd;
 	t_fd	fd;
 
-	fd.pfd[0] = -1;
+	fd.pfd[0] = -1; //debug
 	e_cmd = cmds->cmds->head;
 	while (e_cmd)
 	{

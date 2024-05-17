@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:13:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/30 16:58:31 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:16:47 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ int	lexer_get_word(t_list *toks, const char *line, long i, long *end)
 	char	*s_str;
 
 	*end = 0;
-	while (!is_space(line[i + *end])
+	while (line[i + *end] && !is_space(line[i + *end])
 		&& !is_operator(line[i + *end], line[i + *end + 1])
-		&& line[i + *end] != '\'' && line[i + *end] != '\"' && line[i + *end])
-		*end = *end + 1;
+		&& line[i + *end] != '\'' && line[i + *end] != '\"')
+		*end += 1;
 	s_str = ft_substr(line, i, *end);
 	if (!s_str)
 		return (1);
