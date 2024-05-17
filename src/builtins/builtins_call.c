@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:05:29 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/15 18:17:31 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/17 16:26:28 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	builtins_exe(int i, t_elem *e_cmd, t_data *data, t_fd *fd)
 		return (pid);
 	if (redir_fd(fd->fds[0], fd->fds[1]))
 		exit (1);
-	close(fd->pfd[0]);
+	if (fd->pfd[0] != -1)
+		close(fd->pfd[0]);
 	//printf("\033[0;32m>>>>> builtins_exe <<<<<\033[0m\n");
 	exit((*data->f_builtins[i])(data, e_cmd->key));
 

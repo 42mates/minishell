@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:53:13 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/30 16:58:31 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:24:58 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	common(t_group *cmds, t_data *data)
 	t_elem	*cmd;
 
 	cmd = cmds->cmds->head;
-	fd.pfd[0] = -1;
+	fd.pfd[0] = -1; //debug
 	fd.fds[0] = get_fd_in(cmd->val);
 	if (fd.fds[0] == -1)
 		return (errors(-1, "Error: common: fd_in", 1, 0));

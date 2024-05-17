@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_manage_group2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/16 16:43:12 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:57:23 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	parse_manage_token2(t_elem **e_elem, t_cmd_info *cmd_info)
 		*e_elem = parse_get_next_nonspace_token(*e_elem);
 		if (*e_elem == NULL || (long)(*e_elem)->key != L_WORD)
 			return (errors(1, "Error: parse error near '>' or '>>'", 0, 258));
-		cmd_info->f_in = (*e_elem)->val;
+		cmd_info->f_out = (*e_elem)->val;
 		return (0);
 	}
 	return (0);

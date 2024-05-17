@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_call.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 19:34:14 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/02 16:04:47 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:15:11 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,8 @@ int	command_call(t_elem *e_cmd, t_data *data, t_fd *fd)
 		return (pid);
 	if (redir_fd(fd->fds[0], fd->fds[1]))
 		exit(1);
-	close(fd->pfd[0]);
+	if (fd->pfd[0] != -1)
+		close(fd->pfd[0]);
 	path = list_get(data->env_lst, "PATH");
 	if (command_acces(e_cmd, path, &filepath))
 		exit(g_signal);

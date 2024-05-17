@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
+#    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/05/16 16:48:03 by akurochk         ###   ########.fr        #
+#    Updated: 2024/05/17 16:38:27 by mbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = msh
+NAME = minishell
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
@@ -98,13 +98,9 @@ f: libft
 	@$(CC) -g -o $(NAME) $(SRC) -Llibft -lft
 	@echo "$(LGREEN)./$(GREEN)$(NAME)$(LGREEN) ready.$(NC)"
 
-#tester: all
-#	@if [ ! -d "pipex.tester" ]; then \
-#		echo "$(GREEN)Cloning tester...$(LGREEN)"; \
-#		git clone https://github.com/vfurmane/pipex-tester pipex.tester; \
-#	fi
-#	@chmod +x pipex.tester/run.sh
-#	@echo "$(YELLOW)Tester ready.$(NC)"
-#	@echo "$(RED)Running tester...$(NC)"
-#	@printf "..\nn" | pipex.tester/run.sh
-	
+TEST = test.c
+
+test: libft
+	@$(CC) -g -o test $(TEST) -Llibft -lft -lreadline
+	@echo "$(LGREEN)./$(RED)test$(LGREEN) ready.$(NC)"
+

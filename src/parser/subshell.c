@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subshell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:50 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/30 16:58:33 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:27:21 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	subshell_exe(t_elem *e_cmd, t_data *data, t_fd *fd)
 		return (pid);
 	if (redir_fd(fd->fds[0], fd->fds[1]))
 		return (-1);
-	close(fd->pfd[0]);
+	if (fd->pfd[0] != -1)
+		close(fd->pfd[0]);
 	parser(data, (t_list *)e_cmd->key);
 	exit (g_signal);
 }
@@ -62,7 +63,7 @@ int	subshell(t_group *cmds, t_data *data)
 	t_fd	fd;
 
 	fd.fds[0] = get_fd_in((t_cmd_info *)cmds->cmds->head->val);
-	fd.pfd[0] = -1;
+	fd.pfd[0] = -1; //debug
 	if (fd.fds[0] == -1)
 		return (errors(1, "Error: subshell: get_fd_in", 1, 0));
 	fd.fds[1] = get_fd_out((t_cmd_info *)cmds->cmds->head->val);
