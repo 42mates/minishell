@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:50 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/17 16:27:21 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 12:52:39 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	redir_fd(int in, int out)
 	}
 	return (0);
 }
-
 
 int	subshell_exe(t_elem *e_cmd, t_data *data, t_fd *fd)
 {
@@ -63,7 +62,7 @@ int	subshell(t_group *cmds, t_data *data)
 	t_fd	fd;
 
 	fd.fds[0] = get_fd_in((t_cmd_info *)cmds->cmds->head->val);
-	fd.pfd[0] = -1; //debug
+	fd.pfd[0] = -1;
 	if (fd.fds[0] == -1)
 		return (errors(1, "Error: subshell: get_fd_in", 1, 0));
 	fd.fds[1] = get_fd_out((t_cmd_info *)cmds->cmds->head->val);

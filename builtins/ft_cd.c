@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:22:52 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/16 16:07:17 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 12:44:01 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	builtin_cd(char **argv, t_list *env)
 	list_replace(env, "OLDPWD", oldpwd);
 	list_replace(env, "PWD", getcwd(NULL, 0));
 	return (EXIT_SUCCESS);
-} 
+}
 
 int	ft_cd(t_data *data, t_list *args)
 {

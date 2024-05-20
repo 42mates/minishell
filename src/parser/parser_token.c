@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/16 16:25:17 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/20 12:52:01 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
 
 static void	parse_token_first_loop(t_list **str, t_elem **e_elem)
 {

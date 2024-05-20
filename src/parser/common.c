@@ -6,12 +6,11 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:53:13 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/17 16:24:58 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 12:50:08 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
 
 /*
 mode: 1 run builtins_exe for pipes function, 0 for builtins_call.
@@ -32,7 +31,6 @@ int	common_exe(t_elem *e_cmd, t_data *data, t_fd *fd, int mode)
 	return (builtins_call(i, e_cmd, data, fd));
 }
 
-
 int	common(t_group *cmds, t_data *data)
 {
 	int		pid;
@@ -40,7 +38,7 @@ int	common(t_group *cmds, t_data *data)
 	t_elem	*cmd;
 
 	cmd = cmds->cmds->head;
-	fd.pfd[0] = -1; //debug
+	fd.pfd[0] = -1;
 	fd.fds[0] = get_fd_in(cmd->val);
 	if (fd.fds[0] == -1)
 		return (errors(-1, "Error: common: fd_in", 1, 0));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:29:51 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/30 16:58:31 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/20 12:50:29 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 pid_t	executor(t_group *cmds, t_data *data)
 {
-
 	signal(SIGQUIT, handler_executor);
 	signal(SIGINT, handler_executor);
 	if (PARSER_PIPE & cmds->type)
@@ -40,5 +39,3 @@ int	get_builtins_num(t_elem *e_cmd, t_data *data)
 			return (i);
 	return (i);
 }
-
-

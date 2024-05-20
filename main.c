@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:47:13 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/17 16:32:05 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 12:42:43 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ Here code must free everything
 void	main_exit(t_data *data)
 {
 	write(STDOUT_FILENO, "exit\n", 5);
-	//printf("\033[0;34mexiting msh with code \033[1;34m%d\033[0m\n", g_signal);
 	free_str_array(data->env, -1);
 	list_free(data->env_lst);
 	free(data->g_signal_str);
@@ -85,13 +84,6 @@ void	main_begining(t_list **toks, char **line)
 	if (*line && **line)
 		add_history(*line);
 }
-
-void	main_postaction(t_list *toks)
-{
-	list_free(toks);
-	signal(SIGQUIT, SIG_IGN);
-}
-
 
 int	main(int ac, const char **av, char **env)
 {
@@ -113,8 +105,9 @@ int	main(int ac, const char **av, char **env)
 				parser(&data, toks);
 			free(line);
 		}
-		main_postaction(toks);
+		list_free(toks);
+		signal(SIGQUIT, SIG_IGN);
 	}
-	main_exit(&data); //necessary for ctrl+D
+	main_exit(&data);
 	return (g_signal);
 }

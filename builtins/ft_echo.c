@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:41:45 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/16 16:10:07 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 12:44:18 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	builtin_echo(char **args)
 	return (EXIT_SUCCESS);
 }
 
-int ft_echo(t_data *data, t_list *args)
+int	ft_echo(t_data *data, t_list *args)
 {
 	char	**argv;
 	int		exit_status;

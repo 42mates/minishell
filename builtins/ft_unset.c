@@ -6,13 +6,13 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:22:05 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/15 19:02:03 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 12:44:51 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_unset(t_data *data, t_list *args) //arguments parsing yet to do
+int	ft_unset(t_data *data, t_list *args)
 {
 	t_elem	*tmp;
 	t_elem	*env;
@@ -21,7 +21,7 @@ int	ft_unset(t_data *data, t_list *args) //arguments parsing yet to do
 	while (tmp)
 	{
 		env = data->env_lst->head;
-		while(env)
+		while (env)
 		{
 			if (ft_strcmp(env->key, tmp->val) == 0)
 			{
