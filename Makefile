@@ -6,7 +6,7 @@
 #    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/05/20 16:58:06 by mbecker          ###   ########.fr        #
+#    Updated: 2024/05/20 18:20:50 by mbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,4 +107,4 @@ test: libft
 
 tester: all
 	@if [ ! -d minishell_tester ]; then git clone https://github.com/LucasKuhn/minishell_tester.git; fi
-	@cd minishell_tester && ./tester | grep -v "✅"
+	@cd minishell_tester && ./tester #| grep -v "✅"

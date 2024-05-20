@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 17:03:10 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 17:25:36 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	parse_grp_cmd(t_elem *e_elem, t_list *cmds)
 		e_elem = e_elem->next;
 	}
 	if (!list_size(argv) && cmd_info->f_out == NULL && cmd_info->f_in == NULL)
-		return (parse_grp_cmd_free(argv, cmd_info, 2));
+		return (parse_grp_cmd_free(argv, cmd_info, 2)); //no2
 	if (e_elem == NULL || (long)e_elem->key == L_PIPE)
 	{
 		if (!list_put(cmds, argv, cmd_info))

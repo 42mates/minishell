@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 20:13:17 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 17:03:16 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 18:16:25 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@ int	parse_grp_cmd_free(t_list *argv, t_cmd_info *cmd_info, int mode)
 {
 	list_free(argv);
 	free(cmd_info);
-	if (mode == 1)
+	if (mode == 1 || mode == 2)
 		return (1);
-	else if (mode == 2)
-		return (errors(1, NULL, "Error: syntax error", 258));
 	else if (mode == 3)
-		return (errors(1, NULL, "Error: parse_grp_cmd", 1));
+		return (errors(1, NULL, "Error: parse_grp_cmd_free", 1));
 	return (0);
 }
 

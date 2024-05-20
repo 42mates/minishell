@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:46:02 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 16:00:16 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 18:18:00 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	fd_set_val(t_fd *fd, t_elem *e_cmd, t_group *cmds)
 {
 	fd->fds[0] = get_fd_in((t_cmd_info *)e_cmd->val);
 	if (fd->fds[0] == -1)
-		return (errors(-1, "debug: fd_set_val", "get_fd_in", 1));
+		return (errors(-1, (char *)e_cmd->val, strerror(errno), 1));
 	fd->fds[1] = get_fd_out((t_cmd_info *)e_cmd->val);
 	if (fd->fds[1] == -1)
-		return (errors(-1, "debug: fd_set_val", "get_fd_out", 1));
+		return (errors(-1, (char *)e_cmd->val, strerror(errno), 1));
 	if (e_cmd != cmds->cmds->head && fd->fds[0] == STDIN_FILENO)
 		fd->fds[0] = fd->pfd[0];
 	return (0);

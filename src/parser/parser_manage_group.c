@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 15:50:48 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 18:10:11 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	parse_prepare_grp(t_list *extra, t_group *cmds)
 {
 	if (cmds->type & PARSER_PIPE)
 		return (parse_grp_pipe(extra, cmds->cmds));
-	return (parse_grp_cmd(extra->head, cmds->cmds));
+	return (parse_grp_cmd(extra->head, cmds->cmds)); //no3
 }
 
 /*
@@ -93,7 +93,9 @@ pid_t	parse_manage_group(long type, t_list *grp, t_data *data)
 		cmds = group_new(type);
 		if (!cmds)
 			return (-1);
-		if (parse_prepare_grp(extra, cmds))
+		//printf("parse_manage_group\n");
+		//printf("Value of cmd->cmds->head->val: %ld\n", (long)cmds->cmds->head->key);
+		if (parse_prepare_grp(extra, cmds)) //no4
 			return (group_free(cmds), list_free(extra), -1);
 		if (parse_manage_heredoc(cmds))
 			return (group_free(cmds), list_free(extra), -1);

@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:53:13 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 15:40:13 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 19:02:42 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ int	common(t_group *cmds, t_data *data)
 	fd.pfd[0] = -1;
 	fd.fds[0] = get_fd_in(cmd->val);
 	if (fd.fds[0] == -1)
-		return (errors(-1, "debug: common", "fd_in", 1));
+		return (errors(-1, ((t_cmd_info *)cmd->val)->f_in, strerror(errno), 1));
 	fd.fds[1] = get_fd_out(cmd->val);
 	if (fd.fds[1] == -1)
-		return (close(fd.fds[0]), errors(-1, "Error: common", "fd_out", 1));
+		return (close(fd.fds[0]), errors(-1, ((t_cmd_info *)cmd->val)->f_out,
+		strerror(errno), 1));
 	if (((t_cmd_info *)cmd->val)->flag & CMD_SUB)
 		pid = subshell_exe(cmd, data, &fd);
 	else
