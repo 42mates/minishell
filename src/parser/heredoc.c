@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:58:50 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/30 16:58:32 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:41:57 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	heredoc_manage_input(t_cmd_info *cmd_info, int fd)
 	sig = 0;
 	pid = fork();
 	if (pid == -1)
-		return (errors(1, "Error: heredoc_manage_input: fork", 1, 0));
+		return (errors(1, "debug: heredoc_manage_input", "fork", 1));
 	if (pid != 0)
 	{
 		signal(SIGINT, SIG_IGN);
@@ -64,7 +64,7 @@ int	heredoc_manage_input(t_cmd_info *cmd_info, int fd)
 		signal(SIGINT, handler_heredoc);
 		signal(SIGQUIT, SIG_IGN);
 		if (heredoc_readline(cmd_info, fd))
-			exit(errors(1, "Error: heredoc_readline", 1, 0));
+			exit(errors(1, "debug: heredoc_manage_input", "heredoc_rdline", 1));
 		exit(EXIT_SUCCESS);
 	}
 	return (WEXITSTATUS(sig) != 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/16 16:32:48 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:58:54 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	parse_alloc_c_info(t_chunk_info **c_info, int start, int end)
 {
 	*c_info = (t_chunk_info *)malloc(sizeof(t_chunk_info));
 	if (*c_info == NULL)
-		return (errors(1, "Error: parse_alloc_c_info", 1, 0));
+		return (errors(1, "Error: parse_alloc_c_info", "c_info == NULL", 1));
 	(*c_info)->start = start;
 	(*c_info)->end = end;
 	return (0);

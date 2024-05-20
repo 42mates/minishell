@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_token_field.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/16 16:29:27 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:57:57 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	parse_token_field_pre(t_list *str, t_data *data, t_list *chunks,
 			if (!list_put(chunks, c_info, e_elem->val))
 			{
 				free(c_info);
-				return (errors(1, "Error: parse_token_field_pre", 1, 0));
+				return (errors(1, "debug: parse_token_field_pre", "l33", 1));
 			}
 		}
 		else if (parse_collect_chunks((char *)e_elem->val, data, chunks,
@@ -92,7 +92,7 @@ int	parse_token_field(t_list *str, t_data *data, char **word, t_elem_info *info)
 
 	chunks = list_new(NULL, free, NULL);
 	if (chunks == NULL)
-		return (errors(1, "Error: parse_token_field", 1, 0));
+		return (errors(1, "debug: parse_token_field", "chunks == NULL", 1));
 	*word = NULL;
 	info->size = 0;
 	if (parse_token_field_pre(str, data, chunks, info))

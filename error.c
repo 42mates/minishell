@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:08:38 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/16 16:22:55 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 16:11:23 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	print_error(char *builtin, char *arg, char *msg)
 	int	is_export;
 
 	is_export = !ft_strcmp(builtin, "export");
-	write(2, "msh", 3);
-	write(2, ": ", 2);
+	if (ft_strncmp(arg, "debug: ", 7))
+		write(2, "msh: ", 5);
 	if (builtin)
 	{
 		write(2, builtin, ft_strlen(builtin));

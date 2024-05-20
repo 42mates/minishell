@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_manage_group.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/16 16:40:59 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:50:48 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	parse_grp_pipe(t_list *extra, t_list *cmds)
 		while (e_elem != NULL && (long)e_elem->key != L_PIPE)
 			e_elem = e_elem->next;
 		if (e_elem != NULL && e_elem->next == NULL)
-			return (errors(1, "Error: parse error near '|'", 0, 258));
+			return (errors(1, NULL, "parse error near '|'", 258));
 		if (e_elem != NULL)
 			e_elem = e_elem->next;
 	}

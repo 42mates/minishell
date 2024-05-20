@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/16 15:51:41 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:06:19 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	update_g_signal_str(t_data *data)
 		free(data->g_signal_str);
 	data->g_signal_str = ft_itoa(g_signal);
 	if (!data->g_signal_str)
-		return (errors(1, "Error: update_g_signal_str", 1, 0));
+		return (errors(1, "debug: update_g_signal_str", "!g_signal_str", 1));
 	return (0);
 }
 
@@ -59,7 +59,7 @@ static int	get_var(const char *s, t_data *data, char **ptr_env, int *pos)
 	}
 	var_name = ft_substr(s, 0, i);
 	if (!var_name)
-		return (errors(1, "Error: get_var", 1, 0));
+		return (errors(1, "Error: get_var", "var_name", 1));
 	*ptr_env = (char *)list_get(data->env_lst, var_name);
 	*pos = *pos + i;
 	return (free(var_name), 0);
@@ -82,7 +82,7 @@ static int	parse_colect_from_env(char *s, t_data *data, t_list *chunks,
 		if (!list_put(chunks, f_pack->c_info, ptr_env))
 		{
 			free(f_pack->c_info);
-			return (errors(1, "Error: parse_colect_from_env", 1, 0));
+			return (errors(1, "Error: parse_colect_from_env", "list_put", 1));
 		}
 		*(f_pack->size) += f_pack->c_info->end;
 	}
@@ -110,7 +110,7 @@ int	parse_collect_chunks(char *s, t_data *data, t_list *chunks, int *size)
 		if (parse_alloc_c_info(&c_info, j, i))
 			return (1);
 		if (!list_put(chunks, c_info, s))
-			return (free(c_info), errors(1, "Error: parse_collect_c..", 1, 0));
+			return (free(c_info), errors(1, "debug: parse_collect_c..", "", 1));
 		parse_init_fpack(&f_pack, c_info, &i, size);
 		if (s[i] == '$' && parse_colect_from_env(s, data, chunks, &f_pack))
 			return (1);

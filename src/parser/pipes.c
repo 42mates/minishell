@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:46:02 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 12:52:18 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 16:00:16 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	fd_set_val(t_fd *fd, t_elem *e_cmd, t_group *cmds)
 {
 	fd->fds[0] = get_fd_in((t_cmd_info *)e_cmd->val);
 	if (fd->fds[0] == -1)
-		return (errors(-1, "Error: fd_set_val: get_fd_in", 1, 0));
+		return (errors(-1, "debug: fd_set_val", "get_fd_in", 1));
 	fd->fds[1] = get_fd_out((t_cmd_info *)e_cmd->val);
 	if (fd->fds[1] == -1)
-		return (errors(-1, "Error: fd_set_val: get_fd_out", 1, 0));
+		return (errors(-1, "debug: fd_set_val", "get_fd_out", 1));
 	if (e_cmd != cmds->cmds->head && fd->fds[0] == STDIN_FILENO)
 		fd->fds[0] = fd->pfd[0];
 	return (0);
@@ -72,7 +72,7 @@ int	pipes(t_group *cmds, t_data *data)
 		ret = fd_set_val(&fd, e_cmd, cmds);
 		to_stop = fd.pfd[0];
 		if (e_cmd->next && pipe(fd.pfd) == -1)
-			return (errors(-1, "Error: pipes", 1, 0));
+			return (errors(-1, "debug: pipes", "pipe failure", 1));
 		if (e_cmd->next && fd.fds[1] == STDOUT_FILENO)
 			fd.fds[1] = fd.pfd[1];
 		if (((t_cmd_info *)e_cmd->val)->flag & CMD_SUB && ret == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aleksei.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/16 16:49:23 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:56:01 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,12 @@ void		handler_heredoc(int signum);
 void		handler_executor(int signum);
 
 // error_handler.c
-int			errors(int ret, const char *m, char mode, int signum);
+int			errors(int ret, char *arg, char *errmsg, int signum);
 int			parse_grp_cmd_free(t_list *argv, t_cmd_info *cmd_info, int mode);
 int			e_heredoc(const char *m, char *file, char *size, int fd);
+
+char		filetype(const char *path);
+// lexer.c
 
 // parser.c
 int			parser(t_data *data, t_list *toks);

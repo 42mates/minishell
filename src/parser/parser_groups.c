@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_groups.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:58:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/16 16:06:52 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:50:27 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	parse_fill_group(
 		(*type) |= ((*level > 0) << 5);
 		(*type) |= ((((long)((*e_tok)->key) == L_PIPE) && *level == 0) << 6);
 		if (!list_put(grp, (*e_tok)->key, (*e_tok)->val))
-			return (errors(1, "Error: parse_fill_group", 1, 0));
+			return (errors(1, "Error: parse_fill_group", "list_put", 1));
 		*e_tok = (*e_tok)->next;
 	}
 	return (0);
@@ -53,19 +53,19 @@ int	parse_groups(t_list *grps, t_list *toks)
 	{
 		grp = list_new(NULL, NULL, NULL);
 		if (grp == NULL)
-			return (errors(1, "Error: parse_groups", 1, 0));
+			return (errors(1, "debug: parse_groups", "list_new", 1));
 		level = 0;
 		type = PARSER_BASE;
 		if (parse_fill_group(grp, &e_tok, &type, &level))
 			return (1);
 		if (level != 0)
-			return (list_free(grp), errors(1, "Error: parse error near '(' or ')'", 0, 258));
+			return (list_free(grp), errors(1, NULL, "parse error near '(' or ')'", 258));
 		if (list_size(grp) && !list_put(grps, (void *)type, grp))
-			return (list_free(grp), errors(1, "Error: parse_groups", 1, 0));
+			return (list_free(grp), errors(1, "debug: parse_groups", "l64", 1));
 		if (list_size(grp) == 0)
 			list_free(grp);
 		if (e_tok != NULL && is_or_and((long)(e_tok->key)) && !list_put(grps, e_tok->key, NULL))
-			return (errors(1, "Error: parse_groups", 1, 0));
+			return (errors(1, "debug: parse_groups", "l68", 1));
 		if (e_tok != NULL)
 			e_tok = e_tok->next;
 	}
@@ -89,9 +89,9 @@ int	parse_is_or_and_valid(t_list *grps)
 	while (e_elem != NULL)
 	{
 		if (need_grp == 0 && ((long)e_elem->key) == L_OR)
-			return (errors(1, "Error: parse error near '||'", 0, 258));
+			return (errors(1, NULL, "parse error near '||'", 258));
 		else if (need_grp == 0 && ((long)e_elem->key) == L_AND)
-			return (errors(1, "Error: parse error near '&&'", 0, 258));
+			return (errors(1, NULL, "parse error near '&&'", 258));
 		else
 			need_grp = 1;
 		if (need_grp == 1 && is_or_and((long)(e_elem->key)))
@@ -100,8 +100,8 @@ int	parse_is_or_and_valid(t_list *grps)
 		e_elem = e_elem->next;
 	}
 	if (need_grp == 0 && ((long)e_prev->key) == L_OR)
-		return (errors(1, "Error: parse error near '||'", 0, 258));
+		return (errors(1, NULL, "parse error near '||'", 258));
 	if (need_grp == 0 && ((long)e_prev->key) == L_AND)
-		return (errors(1, "Error: parse error near '&&'", 0, 258));
+		return (errors(1, NULL, "parse error near '&&'", 258));
 	return (0);
 }

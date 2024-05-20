@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:24:16 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/30 16:58:33 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:02:32 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	env_rebuild(t_data *data)
 	free_str_array(data->env, -1);
 	data->env = env_make(data->env_lst);
 	if (data->env == NULL)
-		return (errors(-1, "Error: env_rebuild: env_make", 1, 0));
+		return (errors(-1, "debug: env_rebuild", "env_make", 1));
 	data->flag_env = 0;
 	return (0);
 }

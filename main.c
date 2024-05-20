@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:47:13 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/20 12:42:43 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 15:23:14 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int	env_parser(t_list *env_lst, char **env)
 	char	*val;
 
 	if (!env_lst)
-		return (errors(1, "Error: env_parser", 1, 0));
+		return (errors(1, "debug: env_parser", "env_lst - empty variable", 1));
 	i = -1;
 	while (env[++i])
 	{
 		if (ft_str_split(env[i], "=", &key, &val))
-			return (errors(1, "Error: env_parser", 1, 0));
+			return (errors(1, "debug: env_parser", "split", 1));
 		if (!list_put(env_lst, key, val))
-			return (errors(1, "Error: env_parser", 1, 0));
+			return (errors(1, "debug: env_parser", "list_put", 1));
 	}
 	return (0);
 }
@@ -39,9 +39,9 @@ int	init_data(t_data *data, char **env)
 	data->flag_env = 1;
 	data->env = NULL;
 	data->env_lst = list_new((t_cmp_key)ft_strcmp, free, free);
-	data->g_signal_str = NULL;
 	if (!data->env_lst)
-		return (errors(1, "Error: init_data", 1, 0));
+		return (errors(1, "debug: init_data", "env_lst == NULL", 1));
+	data->g_signal_str = NULL;
 	if (env_parser(data->env_lst, env))
 		return (1);
 	data->builtins[0] = "echo";

@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:05:29 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 12:49:10 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 15:26:03 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	builtins_exe(int i, t_elem *e_cmd, t_data *data, t_fd *fd)
 
 	pid = fork();
 	if (pid == -1)
-		errors(-1, "Error: builtins_exe: fork", 1, 0);
+		errors(-1, "debug: builtins_exe", "fork", 1);
 	if (pid > 0)
 		return (pid);
 	if (redir_fd(fd->fds[0], fd->fds[1]))
@@ -39,7 +39,7 @@ int	builtins_call(int i, t_elem *e_cmd, t_data *data, t_fd *fd)
 	{
 		close(in_out[0]);
 		close(in_out[1]);
-		return (errors(1, "Error: builtins_call: redir_fd", 1, 0));
+		return (errors(1, "debug: builtins_call", "redir_fd", 1));
 	}
 	res = (*data->f_builtins[i])(data, e_cmd->key);
 	dup2(in_out[0], STDIN_FILENO);

@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 19:34:14 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/17 16:15:11 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/20 16:57:17 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	iter_access(char **f_ps, char **f_p, t_list *e_elem)
 		f_ps[i] = ft_str_concat(f_ps[i], '/', e_elem->head->val, 1);
 		free(to_free);
 		if (!f_ps[i])
-			return (errors(1, "Error: ft_iterfps", 1, 0));
+			return (errors(1, "debug: iter_access", "f_ps[i] == NULL", 1));
 		if (access(f_ps[i], F_OK) == 0)
 			prev = f_ps[i];
 		if (access(f_ps[i], X_OK) == 0)
@@ -62,20 +62,20 @@ int	command_acces(t_elem *e_cmd, char *path, char **f_path)
 	{
 		*f_path = ft_strdup(e_elem->head->val);
 		if (access(*f_path, F_OK) == 0 && access(*f_path, X_OK) == -1)
-			return (errors(1, "Error: permission denied", 0, 126));
+			return (errors(1, *f_path, strerror(errno), 126));
 		return (0);
 	}
 	f_pathes = ft_split(path, ':');
 	if (f_pathes == NULL)
-		errors(1, "Error: command_acces: ft_split", 1, 0);
+		errors(1, "debug: command_acces", "ft_split", 1);
 	res = iter_access(f_pathes, f_path, e_elem);
 	if (res == 0)
 		return (0);
 	free_str_array(f_pathes, -1);
 	*f_path = NULL;
 	if (res == 2)
-		return (errors(1, "Error: permission denied", 0, 126));
-	return (errors(1, "Error: command not found", 0, 127));
+		return (errors(1, *f_path, "permission denied", 126));
+	return (errors(1, (char *)e_elem->head->val, "command not found", 127));
 }
 
 /*
@@ -92,7 +92,7 @@ int	prepare_argv(t_elem *e_cmd, char ***argv, char *filepath)
 	elems = e_cmd->key;
 	*argv = malloc(sizeof(char *) * (list_size(elems) + 1));
 	if (!(*argv))
-		errors(1, "Error: prepare_argv: malloc", 1, 0);
+		errors(1, "debug: prepare_argv", "malloc", 1);
 	e_curr = elems->head->next;
 	(*argv)[i++] = ft_strdup(filepath);
 	while (e_curr)
@@ -100,7 +100,7 @@ int	prepare_argv(t_elem *e_cmd, char ***argv, char *filepath)
 		(*argv)[i] = ft_strdup((char *)e_curr->val);
 		if ((*argv)[i] == NULL)
 			if (free_str_array(*argv, i) == NULL)
-				errors(1, "Error: prepare_argv: ft_strdup", 1, 0);
+				errors(1, "debug: prepare_argv", "ft_strdup", 1);
 		e_curr = e_curr->next;
 		i++;
 	}
@@ -120,7 +120,7 @@ int	command_call(t_elem *e_cmd, t_data *data, t_fd *fd)
 
 	pid = fork();
 	if (pid == -1)
-		errors(-1, "Error: command_call: fork", 1, 0);
+		errors(-1, "debug: command_call", "fork", 1);
 	if (pid > 0)
 		return (pid);
 	if (redir_fd(fd->fds[0], fd->fds[1]))
@@ -132,7 +132,9 @@ int	command_call(t_elem *e_cmd, t_data *data, t_fd *fd)
 		exit(g_signal);
 	if (prepare_argv(e_cmd, &argv, filepath))
 		exit(g_signal);
-	if (execve(filepath, argv, data->env) == -1)
-		exit(errors(127, "Error: command_call: execve", 1, 0));
+	execve(filepath, argv, data->env);
+	if (filetype(filepath) == 'd')
+		exit(errors(126, filepath, "Is a directory", 1));
+	exit(errors(127, filepath, strerror(errno), 1));
 	return (1);
 }
