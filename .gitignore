@@ -17,3 +17,6 @@ test
 test.msh
 test.posix
 .vscode/
+
+# Tester
+minishell_tester/
