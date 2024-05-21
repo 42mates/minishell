@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:53:13 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 19:02:42 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/21 15:59:44 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	common(t_group *cmds, t_data *data)
 	fd.fds[1] = get_fd_out(cmd->val);
 	if (fd.fds[1] == -1)
 		return (close(fd.fds[0]), errors(-1, ((t_cmd_info *)cmd->val)->f_out,
-		strerror(errno), 1));
+				strerror(errno), 1));
 	if (((t_cmd_info *)cmd->val)->flag & CMD_SUB)
 		pid = subshell_exe(cmd, data, &fd);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_manage_group.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 18:10:11 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/21 16:00:46 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,75 @@ Retrns 0 if OK.
 static int	parse_prepare_grp(t_list *extra, t_group *cmds)
 {
 	if (cmds->type & PARSER_PIPE)
+	{
+		// printf("parse_prepare_grp = parse_grp_pipe\n");
 		return (parse_grp_pipe(extra, cmds->cmds));
+	}
+	// printf("parse_prepare_grp = parse_grp_cmd\n");
 	return (parse_grp_cmd(extra->head, cmds->cmds)); //no3
+}
+
+void	TEST_print_cmds(t_group	*cmds)
+{
+	t_elem	*head1;
+
+	printf("\033[0;33mt_group CMDS\n");
+	if (cmds == NULL)
+	{
+		printf("t_group	*cmds={NULL}\n");
+		printf("\033[0m");
+		return ;
+	}
+	printf("int type={%d}\n", cmds->type);
+	if (cmds->cmds == NULL)
+		printf("t_list *cmds={NULL}\n");
+	else
+	{
+		head1 = cmds->cmds->head;
+		int i = 0;
+		while (head1 != NULL)
+		{
+			printf("cmd_info[%d]:\n", i);
+			i++;
+			printf("	level={%d}\n", ((t_cmd_info *)(head1->val))->level);
+			printf("	flag ={%d}\n", ((t_cmd_info *)(head1->val))->flag);
+			printf("	f_in ={%s}\n", ((t_cmd_info *)(head1->val))->f_in);
+			printf("	f_out={%s}\n", ((t_cmd_info *)(head1->val))->f_out);
+			printf("	sep  ={%s}\n", ((t_cmd_info *)(head1->val))->sep);
+			head1 = head1->next;
+		}
+	}
+	if (cmds->files == NULL)
+		printf("t_list *files={NULL}\n");
+	else
+	{
+		int i = 0;
+		head1 = cmds->cmds->head;
+		while (head1 != NULL)
+		{
+			printf("files[%d]: key={%ld} val={%ld}\n", i, (long)head1->key, (long)head1->val);
+			i++;
+			head1 = head1->next;
+		}
+	}
+	printf("\033[0m");
+}
+
+
+void	TEST_print_extra(t_elem *curr)
+{
+	int i = 0;
+	
+	if (curr == NULL)
+		return ;
+	while (curr != NULL)
+	{
+		printf("\033[0;32mextra[%d] ", i);
+		printf("key={%ld} ", (long)curr->key);
+		printf("val={%s}\033[0m\n", (char *)curr->val);
+		i++;
+		curr = curr->next;
+	}
 }
 
 /*
@@ -86,10 +153,13 @@ pid_t	parse_manage_group(long type, t_list *grp, t_data *data)
 	t_list	*extra;
 	t_group	*cmds;
 
+	// printf("parse_manage_group - type={%ld}\n", type);
 	pid = -1;
-	extra = parse_extra(grp, data);
-	if (extra)
+	extra = parse_extra(grp, data);									// <<===== just work with the last one redir
+	// printf("extra == NULL {%d}\n", extra == NULL);
+	if (extra != NULL)
 	{
+		// TEST_print_extra(extra->head);
 		cmds = group_new(type);
 		if (!cmds)
 			return (-1);
@@ -97,6 +167,11 @@ pid_t	parse_manage_group(long type, t_list *grp, t_data *data)
 		//printf("Value of cmd->cmds->head->val: %ld\n", (long)cmds->cmds->head->key);
 		if (parse_prepare_grp(extra, cmds)) //no4
 			return (group_free(cmds), list_free(extra), -1);
+
+			
+		// TEST_print_cmds(cmds);
+
+
 		if (parse_manage_heredoc(cmds))
 			return (group_free(cmds), list_free(extra), -1);
 		pid = executor(cmds, data);

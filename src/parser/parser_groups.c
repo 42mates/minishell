@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_groups.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:58:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 15:50:27 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/21 12:48:29 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,35 @@ static int	parse_fill_group(
 		*e_tok = (*e_tok)->next;
 	}
 	return (0);
+}
+
+void	TEST_print_t_list_GRPS(t_list *grps)
+{
+	t_elem	*curr = grps->head;
+	t_elem	*g_cu;
+
+	printf("\033[0;35mTEST_print_t_list_GRPS\n");
+	while (curr != NULL)
+	{
+		if (curr->val != NULL)
+		{
+			g_cu = (t_elem *)(((t_list *)(curr->val)))->head;
+			printf("grps key_g={%ld}\n", (long)(curr->key));
+			while (g_cu != NULL)
+			{
+				printf("grps val_g={key={%ld} ", (long)(g_cu->key));
+				printf("val={%s}}\n", (char *)(g_cu->val));
+				g_cu = g_cu->next;
+			}
+		}
+		else
+		{
+			printf("grps key={%ld}\n", (long)(curr->key));
+			printf("grps val={NULL}\n");
+		}
+		curr = curr->next;
+	}
+	printf("\033[0m");
 }
 
 /*

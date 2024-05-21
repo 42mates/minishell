@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aleksei.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 16:56:01 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:49:03 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,5 +186,8 @@ int			builtins_call(int i, t_elem *e_cmd, t_data *data, t_fd *fd);
 void		test_print_tokens(t_list *toks);
 void		test_print_env(t_list *env);
 int			TEST_builtin(t_data *data, t_list *argv);
+void		TEST_print_t_list_GRPS(t_list *grps);
+void		TEST_print_extra(t_elem *curr);
+void		TEST_print_cmds(t_group	*cmds);
 
 #endif
