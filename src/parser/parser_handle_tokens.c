@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:55:46 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/22 17:47:54 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/22 17:52:41 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	handle_redirect_in(t_elem **e_elem, t_cmd_info *cmd_info)
 		cmd_info->flag &= ~CMD_INS;
 	*e_elem = parse_get_next_nonspace_token(*e_elem);
 	if (*e_elem == NULL || (long)(*e_elem)->key != L_WORD)
-		return (errors(1, NULL, "parse error near '<' or '<<'", 258));
+		return (
+			errors(1, NULL, "syntax error near unexpected token `newline'", 2));
 	cmd_info->f_in = (*e_elem)->val;
 	if ((long)curr->key == L_RE_DOC)
 		return (0);
@@ -70,7 +71,8 @@ int	handle_redirect_out(t_elem **e_elem, t_cmd_info *cmd_info)
 		cmd_info->flag &= ~CMD_APP;
 	*e_elem = parse_get_next_nonspace_token(*e_elem);
 	if (*e_elem == NULL || (long)(*e_elem)->key != L_WORD)
-		return (errors(1, NULL, "parse error near '<' or '<<'", 258));
+		return (
+			errors(1, NULL, "syntax error near unexpected token `newline'", 2));
 	cmd_info->f_out = (*e_elem)->val;
 	fd = open(cmd_info->f_out, O_CREAT | O_WRONLY, 0644);
 	if (fd == -1)
