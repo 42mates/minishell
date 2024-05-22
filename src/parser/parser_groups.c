@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:58:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/21 12:48:29 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:07:40 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	parse_groups(t_list *grps, t_list *toks)
 		if (parse_fill_group(grp, &e_tok, &type, &level))
 			return (1);
 		if (level != 0)
-			return (list_free(grp), errors(1, NULL, "parse error near '(' or ')'", 258));
+			return (list_free(grp), errors(1, NULL, "syntax error near unexpected token `(' or `)'", 258));
 		if (list_size(grp) && !list_put(grps, (void *)type, grp))
 			return (list_free(grp), errors(1, "debug: parse_groups", "l64", 1));
 		if (list_size(grp) == 0)
@@ -118,9 +118,9 @@ int	parse_is_or_and_valid(t_list *grps)
 	while (e_elem != NULL)
 	{
 		if (need_grp == 0 && ((long)e_elem->key) == L_OR)
-			return (errors(1, NULL, "parse error near '||'", 258));
+			return (errors(1, NULL, "syntax error near unexpected token `||'", 258));
 		else if (need_grp == 0 && ((long)e_elem->key) == L_AND)
-			return (errors(1, NULL, "parse error near '&&'", 258));
+			return (errors(1, NULL, "syntax error near unexpected token `&&'", 258));
 		else
 			need_grp = 1;
 		if (need_grp == 1 && is_or_and((long)(e_elem->key)))
@@ -129,8 +129,8 @@ int	parse_is_or_and_valid(t_list *grps)
 		e_elem = e_elem->next;
 	}
 	if (need_grp == 0 && ((long)e_prev->key) == L_OR)
-		return (errors(1, NULL, "parse error near '||'", 258));
+		return (errors(1, NULL, "syntax error near unexpected token `||'", 258));
 	if (need_grp == 0 && ((long)e_prev->key) == L_AND)
-		return (errors(1, NULL, "parse error near '&&'", 258));
+		return (errors(1, NULL, "syntax error near unexpected token `&&'", 258));
 	return (0);
 }

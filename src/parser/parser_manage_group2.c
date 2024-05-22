@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/21 16:01:20 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:25:55 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ static int	parse_manage_token2(t_elem **e_elem, t_cmd_info *cmd_info)
 		if (*e_elem == NULL || (long)(*e_elem)->key != L_WORD)
 			return (errors(1, NULL, "parse error near '<' or '<<'", 258));
 		cmd_info->f_in = (*e_elem)->val;
-		// TEST_print_t_cmd_info(cmd_info);									// TEST
+		if ((long)(*e_elem)->key == L_RE_DOC)
+			return (0);
+		// TEST_print_t_cmd_info(cmd_info);										// TEST
 		fd = open(cmd_info->f_in, O_RDONLY, 0644);
 		if (fd == -1)
 			return (errors(1, NULL, "No such file or directory", 1));
@@ -70,7 +72,7 @@ static int	parse_manage_token2(t_elem **e_elem, t_cmd_info *cmd_info)
 		if (*e_elem == NULL || (long)(*e_elem)->key != L_WORD)
 			return (errors(1, NULL, "parse error near '<' or '<<'", 258));
 		cmd_info->f_out = (*e_elem)->val;
-		// TEST_print_t_cmd_info(cmd_info);									// TEST
+		// TEST_print_t_cmd_info(cmd_info);										// TEST
 		fd = open(cmd_info->f_out, O_CREAT | O_WRONLY, 0644);
 		if (fd == -1)
 			return (errors(1, NULL, "Permission denied", 1));
@@ -125,22 +127,20 @@ int	parse_grp_cmd(t_elem *e_elem, t_list *cmds)
 		return (free(cmd_info), errors(1, "debug: parse_grp_cmd", "argv", 0));
 
 
-
-	// Here code loses cmd_info
 	while (e_elem != NULL && ((long)e_elem->key != L_PIPE || cmd_info->level))
 	{
 		if (parse_manage_token(&e_elem, cmd_info, argv))
+		{
+			while (e_elem != NULL && ((long)e_elem->key != L_PIPE || cmd_info->level))
+				e_elem = e_elem->next;
 			return (parse_grp_cmd_free(argv, cmd_info, 1));
+		}
 		e_elem = e_elem->next;
-		// 
 	}
 	if (!list_size(argv) && cmd_info->f_out == NULL && cmd_info->f_in == NULL)
 
 		return (parse_grp_cmd_free(argv, cmd_info, 2)); //no2
-
-
-
-	// Here code collects only the last one cmd_info
+		
 	if (e_elem == NULL || (long)e_elem->key == L_PIPE)
 	{
 		if (!list_put(cmds, argv, cmd_info))

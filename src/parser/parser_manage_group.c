@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/21 16:00:46 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:24:48 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,22 @@ static int	parse_grp_pipe(t_list *extra, t_list *cmds)
 	t_elem	*e_elem;
 
 	e_elem = extra->head;
+	// printf("parse_grp_pipe - before WHILE\n");
 	while (e_elem != NULL)
 	{
-		if (parse_grp_cmd(e_elem, cmds))
+		// printf("parse_grp_pipe - WHILE            \\\n");
+		if (parse_grp_cmd(e_elem, cmds) && e_elem == NULL)
+		{
+			// printf("parse_grp_pipe - parse_grp_cmd = fail\n");
 			return (1);
+		}
 		while (e_elem != NULL && (long)e_elem->key != L_PIPE)
 			e_elem = e_elem->next;
 		if (e_elem != NULL && e_elem->next == NULL)
-			return (errors(1, NULL, "parse error near '|'", 258));
+			return (errors(1, NULL, "syntax error near unexpected token `|'", 258));
 		if (e_elem != NULL)
 			e_elem = e_elem->next;
+		// printf("parse_grp_pipe - WHILE            /\n");
 	}
 	return (0);
 }
