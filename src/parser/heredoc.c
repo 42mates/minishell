@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:58:50 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 15:41:57 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/22 18:29:07 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,14 +107,17 @@ int	parse_manage_heredoc(t_group *cmds)
 	e_cmd = cmds->cmds->head;
 	while (e_cmd != NULL)
 	{
-		res = 0;
-		cmd_info = (t_cmd_info *)e_cmd->val;
-		if (cmd_info->flag & CMD_INS)
-			res = heredoc_init(cmd_info, cmds->files);
-		if (res == 2)
+		if (e_cmd->key != NULL)
 		{
-			g_signal = 1;
-			return (1);
+			res = 0;
+			cmd_info = (t_cmd_info *)e_cmd->val;
+			if (cmd_info->flag & CMD_INS)
+				res = heredoc_init(cmd_info, cmds->files);
+			if (res == 2)
+			{
+				g_signal = 1;
+				return (1);
+			}
 		}
 		e_cmd = e_cmd->next;
 	}

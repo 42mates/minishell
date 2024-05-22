@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:46:02 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/21 16:01:33 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:48:31 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,16 @@ int	pipes(t_group *cmds, t_data *data)
 	t_fd	fd;
 
 	fd.pfd[0] = -1;
+	// printf("pipes 1\n");
 	e_cmd = cmds->cmds->head;
+	while (e_cmd->key == NULL)
+		e_cmd = e_cmd->next;
+	// printf("pipes 2\n");
 	while (e_cmd)
 	{
+		// printf("pipes while 1 g_signal={%d} pid={%d}\n", g_signal, pid);
+		g_signal = 0;
+		// printf("pipes A\n");
 		ret = fd_set_val(&fd, e_cmd, cmds);
 		to_stop = fd.pfd[0];
 		if (e_cmd->next && pipe(fd.pfd) == -1)
@@ -77,11 +84,32 @@ int	pipes(t_group *cmds, t_data *data)
 		if (e_cmd->next && fd.fds[1] == STDOUT_FILENO)
 			fd.fds[1] = fd.pfd[1];
 		if (((t_cmd_info *)e_cmd->val)->flag & CMD_SUB && ret == 0)
+		{
+			// printf("pipes subshell_exe\n");
 			pid = subshell_exe(e_cmd, data, &fd);
+			// printf("pipes subshell_exe 		g_signal={%d} pid={%d}\n", g_signal, pid);
+		}
 		else if (ret == 0)
+		{
+			// printf("pipes common_exe\n");
 			pid = common_exe(e_cmd, data, &fd, 1);
+			// printf("pipes common_exe		 g_signal={%d} pid={%d}\n", g_signal, pid);
+			if (e_cmd->next != NULL && ((t_elem *)e_cmd->next)->key == NULL)
+			{
+				g_signal = 1;
+			}
+		}
+		// printf("pipes while 2 		g_signal={%d} pid={%d}\n", g_signal, pid);
 		fd_close(&fd, e_cmd, to_stop);
 		e_cmd = e_cmd->next;
+		// if (e_cmd->next && e_cmd->next)
+		// 	g_signal = 1;
+		while (e_cmd != NULL && e_cmd->key == NULL)
+		{
+			g_signal = 1;
+			e_cmd = e_cmd->next;
+		}
+		// printf("pipes B\n");
 	}
 	return (pid);
 }

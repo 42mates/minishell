@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/22 16:24:48 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:49:10 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,33 @@ static int	parse_grp_pipe(t_list *extra, t_list *cmds)
 	while (e_elem != NULL)
 	{
 		// printf("parse_grp_pipe - WHILE            \\\n");
+		// printf("parse_grp_pipe - PARSE 1\n");
+
+
 		if (parse_grp_cmd(e_elem, cmds) && e_elem == NULL)
 		{
 			// printf("parse_grp_pipe - parse_grp_cmd = fail\n");
 			return (1);
 		}
+
+
+
+		// t_group *group = group_new(900);
+		// group->cmds = cmds;
+		// TEST_print_cmds(group);
+		// printf("parse_grp_pipe - WHILE A           |\n");
 		while (e_elem != NULL && (long)e_elem->key != L_PIPE)
 			e_elem = e_elem->next;
+		// printf("parse_grp_pipe - WHILE B           |\n");
 		if (e_elem != NULL && e_elem->next == NULL)
-			return (errors(1, NULL, "syntax error near unexpected token `|'", 258));
+			return (errors(1, NULL, "parse error near '|'", 258));
+		// printf("parse_grp_pipe - WHILE C           |\n");
 		if (e_elem != NULL)
 			e_elem = e_elem->next;
 		// printf("parse_grp_pipe - WHILE            /\n");
+		// printf("parse_grp_pipe - PARSE 2\n");
 	}
+	// printf("parse_grp_pipe - DONE\n");
 	return (0);
 }
 
@@ -80,6 +94,7 @@ static int	parse_prepare_grp(t_list *extra, t_group *cmds)
 	if (cmds->type & PARSER_PIPE)
 	{
 		// printf("parse_prepare_grp = parse_grp_pipe\n");
+		// TEST_print_extra(extra->head);
 		return (parse_grp_pipe(extra, cmds->cmds));
 	}
 	// printf("parse_prepare_grp = parse_grp_cmd\n");
@@ -177,10 +192,13 @@ pid_t	parse_manage_group(long type, t_list *grp, t_data *data)
 			
 		// TEST_print_cmds(cmds);
 
-
+		// printf("list_size(cmds->cmds)={%d}\n", list_size(cmds->cmds));
 		if (parse_manage_heredoc(cmds))
 			return (group_free(cmds), list_free(extra), -1);
+		// printf("list_size(cmds->cmds)={%d}\n", list_size(cmds->cmds));
 		pid = executor(cmds, data);
+		// printf("parse_manage_group		 g_signal={%d} pid={%d}\n", g_signal, pid);
+		// printf("pid={%d}\n", pid);
 		group_free(cmds);
 		list_free(extra);
 	}

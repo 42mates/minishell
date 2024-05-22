@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:29:51 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 12:50:29 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/22 19:07:02 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,18 @@ pid_t	executor(t_group *cmds, t_data *data)
 {
 	signal(SIGQUIT, handler_executor);
 	signal(SIGINT, handler_executor);
+	// printf("executor\n");
 	if (PARSER_PIPE & cmds->type)
+	{
+		// printf("cmds->type={pipes}\n");
 		return (pipes(cmds, data));
+	}
 	if (((t_cmd_info *)cmds->cmds->head->val)->flag & CMD_SUB)
+	{
+		// printf("((t_cmd_info *)cmds->cmds->head->val)->flag={subshell}\n");
 		return (subshell(cmds, data));
+	}
+	// printf("cmds->type={common}\n");
 	return (common(cmds, data));
 }
 

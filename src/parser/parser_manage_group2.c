@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/22 16:25:55 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:16:22 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ Returns 0 is OK.
 static int	parse_manage_token2(t_elem **e_elem, t_cmd_info *cmd_info)
 {
 	int fd;
-	
+	t_elem *curr;
+
+	curr = *e_elem;
 	if ((long)(*e_elem)->key == L_RE_IN || (long)(*e_elem)->key == L_RE_DOC)
 	{
 		if ((long)(*e_elem)->key == L_RE_DOC)
@@ -53,7 +55,7 @@ static int	parse_manage_token2(t_elem **e_elem, t_cmd_info *cmd_info)
 		if (*e_elem == NULL || (long)(*e_elem)->key != L_WORD)
 			return (errors(1, NULL, "parse error near '<' or '<<'", 258));
 		cmd_info->f_in = (*e_elem)->val;
-		if ((long)(*e_elem)->key == L_RE_DOC)
+		if ((long)(curr)->key == L_RE_DOC)
 			return (0);
 		// TEST_print_t_cmd_info(cmd_info);										// TEST
 		fd = open(cmd_info->f_in, O_RDONLY, 0644);
@@ -79,7 +81,6 @@ static int	parse_manage_token2(t_elem **e_elem, t_cmd_info *cmd_info)
 		close(fd);
 		return (0);
 	}
-	// printf("cmd_info:\n");
 	return (0);
 }
 
@@ -119,28 +120,28 @@ int	parse_grp_cmd(t_elem *e_elem, t_list *cmds)
 	t_list		*argv;
 	t_cmd_info	*cmd_info;
 
+	// printf("parse_grp_cmd\n");
+
 	cmd_info = cmd_info_init();
 	if (cmd_info == NULL)
 		return (errors(1, "debug: parse_grp_cmd", "cmd_info_init", 0));
 	argv = list_new(NULL, NULL, NULL);
 	if (argv == NULL)
 		return (free(cmd_info), errors(1, "debug: parse_grp_cmd", "argv", 0));
-
-
 	while (e_elem != NULL && ((long)e_elem->key != L_PIPE || cmd_info->level))
 	{
 		if (parse_manage_token(&e_elem, cmd_info, argv))
 		{
 			while (e_elem != NULL && ((long)e_elem->key != L_PIPE || cmd_info->level))
 				e_elem = e_elem->next;
-			return (parse_grp_cmd_free(argv, cmd_info, 1));
+			// printf("HEHE\n");
+			list_put(cmds, NULL, NULL);												// F0x
+			return (parse_grp_cmd_free(argv, cmd_info, 1));							// Here COW
 		}
 		e_elem = e_elem->next;
 	}
 	if (!list_size(argv) && cmd_info->f_out == NULL && cmd_info->f_in == NULL)
-
 		return (parse_grp_cmd_free(argv, cmd_info, 2)); //no2
-		
 	if (e_elem == NULL || (long)e_elem->key == L_PIPE)
 	{
 		if (!list_put(cmds, argv, cmd_info))
