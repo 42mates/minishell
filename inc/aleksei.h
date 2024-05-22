@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aleksei.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/21 11:49:03 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:40:23 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,10 @@ char		filetype(const char *path);
 
 // parser.c
 int			parser(t_data *data, t_list *toks);
+
+int			handle_parenthesis(t_elem **e_elem, t_cmd_info *cmd_info);
+int			handle_redirect_in(t_elem **e_elem, t_cmd_info *cmd_info);
+int			handle_redirect_out(t_elem **e_elem, t_cmd_info *cmd_info);
 
 // parser_manage_group.c
 pid_t		parse_manage_group(long type, t_list *grp, t_data *data);

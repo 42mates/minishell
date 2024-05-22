@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/21 13:09:00 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:40:47 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	parse_wait_all(int pid, int *status)
 		if (pid == child)
 		{
 			g_signal = WEXITSTATUS(*status);
-			if (WIFSIGNALED(*status)) // 0 if was stopped by signal
+			if (WIFSIGNALED(*status))
 			{
 				g_signal = WTERMSIG(*status);
 				if (g_signal != 131)

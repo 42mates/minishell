@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
+#    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/05/21 16:01:56 by akurochk         ###   ########.fr        #
+#    Updated: 2024/05/22 17:08:33 by mbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC = 	main.c \
 		src/parser/heredoc.c \
 		src/parser/parser_dollar.c \
 		src/parser/parser_groups.c \
+		src/parser/parser_handle_tokens.c \
 		src/parser/parser_manage_group.c \
 		src/parser/parser_manage_group2.c \
 		src/parser/parser_star.c \

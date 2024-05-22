@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_manage_group.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/22 16:24:48 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:47:20 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ static int	parse_grp_pipe(t_list *extra, t_list *cmds)
 		while (e_elem != NULL && (long)e_elem->key != L_PIPE)
 			e_elem = e_elem->next;
 		if (e_elem != NULL && e_elem->next == NULL)
-			return (errors(1, NULL, "syntax error near unexpected token `|'", 258));
+			return (
+				errors(1, NULL, "syntax error near unexpected token `|'", 258));
 		if (e_elem != NULL)
 			e_elem = e_elem->next;
 		// printf("parse_grp_pipe - WHILE            /\n");
@@ -83,7 +84,7 @@ static int	parse_prepare_grp(t_list *extra, t_group *cmds)
 		return (parse_grp_pipe(extra, cmds->cmds));
 	}
 	// printf("parse_prepare_grp = parse_grp_cmd\n");
-	return (parse_grp_cmd(extra->head, cmds->cmds)); //no3
+	return (parse_grp_cmd(extra->head, cmds->cmds));
 }
 
 void	TEST_print_cmds(t_group	*cmds)

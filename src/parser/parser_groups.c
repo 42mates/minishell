@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_groups.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:58:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/22 16:07:40 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:43:48 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,14 @@ int	parse_groups(t_list *grps, t_list *toks)
 		if (parse_fill_group(grp, &e_tok, &type, &level))
 			return (1);
 		if (level != 0)
-			return (list_free(grp), errors(1, NULL, "syntax error near unexpected token `(' or `)'", 258));
+			return (list_free(grp), errors(1, NULL, "syntax error near \
+			unexpected token `(' or `)'", 258));
 		if (list_size(grp) && !list_put(grps, (void *)type, grp))
 			return (list_free(grp), errors(1, "debug: parse_groups", "l64", 1));
 		if (list_size(grp) == 0)
 			list_free(grp);
-		if (e_tok != NULL && is_or_and((long)(e_tok->key)) && !list_put(grps, e_tok->key, NULL))
+		if (e_tok != NULL && is_or_and((long)(e_tok->key)) 
+			&& !list_put(grps, e_tok->key, NULL))
 			return (errors(1, "debug: parse_groups", "l68", 1));
 		if (e_tok != NULL)
 			e_tok = e_tok->next;

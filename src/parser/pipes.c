@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:46:02 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/21 16:01:33 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:41:05 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	get_fd_in(t_cmd_info *cmd_info)
 {
-	// printf("fd={%s}\n", cmd_info->f_in);
 	if (!cmd_info->f_in)
 		return (STDIN_FILENO);
 	return (open(cmd_info->f_in, O_RDONLY, 0644));

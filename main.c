@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:47:13 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/20 18:00:49 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:40:00 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,7 @@ int	main(int ac, const char **av, char **env)
 		else if (line != NULL && *line)
 		{
 			if (lexer(line, toks) == 0)
-			{
-				// test_print_tokens(toks);
 				parser(&data, toks);
-			}
 			free(line);
 		}
 		list_free(toks);
