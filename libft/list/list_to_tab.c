@@ -6,13 +6,20 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:46:33 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/02 17:14:58 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/23 11:20:38 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-char	**list_to_env(t_list *list)
+/**
+ * Converts a linked list to an array of strings under the `env` format.
+ *
+ * @param list The linked list to convert.
+ * @return A null-terminated array of strings representing the linked list.
+ *         Returns NULL if memory allocation fails.
+ */
+char **list_to_env(t_list *list)
 {
 	char	**tab;
 	t_elem	*node;
@@ -38,7 +45,7 @@ char	**list_to_env(t_list *list)
 }
 
 /**
- * Converts the values of all nodes il `lst` to an array of strings.
+ * Converts the values of all nodes `lst` to an array of strings.
  *
  * @param lst The linked list to convert.
  * @return the array or NULL if memory allocation fails.
