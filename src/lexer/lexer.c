@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:13:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 16:08:50 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:56:05 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static int	lexer_get_token(t_list *toks, const char *line, long *i)
 			return (errors(1, (char *)line, "found unclosed quotes", 0));
 		*i = *i + end + 1;
 	}
-	else if (is_operator(line[*i], line[*i + 1]))
+	else if (line[*i] && is_operator(line[*i], line[*i + 1]))
 	{
 		if (lexer_get_op(toks, line, *i, &end))
 			return (1);
