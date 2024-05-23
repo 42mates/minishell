@@ -6,7 +6,7 @@
 #    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/05/21 16:01:56 by akurochk         ###   ########.fr        #
+#    Updated: 2024/05/23 13:35:24 by akurochk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC = 	main.c \
 		src/parser/heredoc.c \
 		src/parser/parser_dollar.c \
 		src/parser/parser_groups.c \
+		src/parser/parser_handle_tokens.c \
 		src/parser/parser_manage_group.c \
 		src/parser/parser_manage_group2.c \
 		src/parser/parser_star.c \
@@ -60,10 +61,7 @@ SRC = 	main.c \
 		src/utils/error_handler.c \
 		src/utils/filetype.c \
 		src/utils/signal.c \
-		src/utils/env.c \
-		\
-		src/tests/test_builtins.c \
-		src/tests/test_lexer.c  
+		src/utils/env.c
 
 all: $(NAME)
 

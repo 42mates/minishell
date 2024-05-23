@@ -6,121 +6,52 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/22 18:16:22 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:43:28 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/*
-Returns next token != L_SPACE.
-Or returns NULL.
-*/
-static t_elem	*parse_get_next_nonspace_token(t_elem *e_elem)
-{
-	if (!e_elem)
-		return (NULL);
-	e_elem = e_elem->next;
-	while (e_elem && (long)e_elem->key == L_SPACE)
-		e_elem = e_elem->next;
-	return (e_elem);
-}
-
-void	TEST_print_t_cmd_info(t_cmd_info *info)
-{
-	printf("cmd_info:\n");
-	printf("	level={%d}\n", info->level);
-	printf("	flag ={%d}\n", info->flag);
-	printf("	f_in ={%s}\n", info->f_in);
-	printf("	f_out={%s}\n", info->f_out);
-	printf("	sep  ={%s}\n", info->sep);
-}
-
-/*
-Returns 0 is OK.
-*/
-static int	parse_manage_token2(t_elem **e_elem, t_cmd_info *cmd_info)
-{
-	int fd;
-	t_elem *curr;
-
-	curr = *e_elem;
-	if ((long)(*e_elem)->key == L_RE_IN || (long)(*e_elem)->key == L_RE_DOC)
-	{
-		if ((long)(*e_elem)->key == L_RE_DOC)
-			cmd_info->flag |= CMD_INS;
-		else
-			cmd_info->flag &= ~CMD_INS;
-		*e_elem = parse_get_next_nonspace_token(*e_elem);
-		if (*e_elem == NULL || (long)(*e_elem)->key != L_WORD)
-			return (errors(1, NULL, "parse error near '<' or '<<'", 258));
-		cmd_info->f_in = (*e_elem)->val;
-		if ((long)(curr)->key == L_RE_DOC)
-			return (0);
-		// TEST_print_t_cmd_info(cmd_info);										// TEST
-		fd = open(cmd_info->f_in, O_RDONLY, 0644);
-		if (fd == -1)
-			return (errors(1, NULL, "No such file or directory", 1));
-		close(fd);
-		return (0);
-	}
-	if ((long)(*e_elem)->key == L_RE_OUT || (long)(*e_elem)->key == L_RE_APP)
-	{
-		if ((long)(*e_elem)->key == L_RE_APP)
-			cmd_info->flag |= CMD_APP;
-		else
-			cmd_info->flag &= ~CMD_APP;
-		*e_elem = parse_get_next_nonspace_token(*e_elem);
-		if (*e_elem == NULL || (long)(*e_elem)->key != L_WORD)
-			return (errors(1, NULL, "parse error near '<' or '<<'", 258));
-		cmd_info->f_out = (*e_elem)->val;
-		// TEST_print_t_cmd_info(cmd_info);										// TEST
-		fd = open(cmd_info->f_out, O_CREAT | O_WRONLY, 0644);
-		if (fd == -1)
-			return (errors(1, NULL, "Permission denied", 1));
-		close(fd);
-		return (0);
-	}
-	return (0);
-}
-
-/*
-Returns 0 is OK.
-*/
-static int	parse_manage_token(
-				t_elem **e_elem, t_cmd_info *cmd_info, t_list *argv)
+/**
+ * Parses and manages tokens during the parsing process.
+ * This function executes different tasks based on the type of token 
+ * encountered, such as handling parentheses, words, spaces, and redirections.
+ *
+ * @param e_elem   A pointer to the current token element.
+ * @param cmd_i    A pointer to the command information structure.
+ * @param argv     A pointer to the list of arguments.
+ * @return         Returns 0 on success, or an error code on failure.
+ */
+static int	parse_manage_token(t_elem **e_elem, t_cmd_info *cmd_i, t_list *argv)
 {
 	if (*e_elem == NULL)
 		return (errors(1, "debug: someting goes REALLY wrong", 0, 777));
 	if ((long)(*e_elem)->key == L_PAR_L || (long)(*e_elem)->key == L_PAR_R)
 	{
-		cmd_info->level += ((long)(*e_elem)->key == L_PAR_L) + (-1)
-			* ((long)(*e_elem)->key == L_PAR_R);
-		cmd_info->flag |= CMD_SUB;
-		if ((cmd_info->level == 1 && (long)(*e_elem)->key == L_PAR_L)
-			|| (cmd_info->level == 0 && (long)(*e_elem)->key == L_PAR_R))
+		if (!handle_parenthesis(e_elem, cmd_i))
 			return (0);
 	}
-	if ((long)(*e_elem)->key == L_SPACE && cmd_info->level == 0)
+	if ((long)(*e_elem)->key == L_SPACE && cmd_i->level == 0)
 		return (0);
-	if ((cmd_info->flag & CMD_SUB) && cmd_info->level == 0
+	if ((cmd_i->flag & CMD_SUB) && cmd_i->level == 0
 		&& (long)(*e_elem)->key == L_WORD)
 		return (errors(1, "debug: parse_manage_token", "extra token", 258));
-	if (((long)(*e_elem)->key == L_WORD || cmd_info->level > 0)
+	if (((long)(*e_elem)->key == L_WORD || cmd_i->level > 0)
 		&& !list_put(argv, (*e_elem)->key, (*e_elem)->val))
 		return (errors(1, "debug: parse_manage_token", "list_put", 0));
-	// printf("argv added: key={%ld} val={%s}\n", (long)(*e_elem)->key, (char *)(*e_elem)->val);
-	if (cmd_info->level > 0)
+	if (cmd_i->level > 0)
 		return (0);
-	return (parse_manage_token2(e_elem, cmd_info));
+	if ((long)(*e_elem)->key == L_RE_IN || (long)(*e_elem)->key == L_RE_DOC)
+		return (handle_redirect_in(e_elem, cmd_i));
+	if ((long)(*e_elem)->key == L_RE_OUT || (long)(*e_elem)->key == L_RE_APP)
+		return (handle_redirect_out(e_elem, cmd_i));
+	return (0);
 }
 
 int	parse_grp_cmd(t_elem *e_elem, t_list *cmds)
 {
 	t_list		*argv;
 	t_cmd_info	*cmd_info;
-
-	// printf("parse_grp_cmd\n");
 
 	cmd_info = cmd_info_init();
 	if (cmd_info == NULL)
@@ -132,16 +63,16 @@ int	parse_grp_cmd(t_elem *e_elem, t_list *cmds)
 	{
 		if (parse_manage_token(&e_elem, cmd_info, argv))
 		{
-			while (e_elem != NULL && ((long)e_elem->key != L_PIPE || cmd_info->level))
+			while (e_elem != NULL && ((long)e_elem->key != L_PIPE
+					|| cmd_info->level))
 				e_elem = e_elem->next;
-			// printf("HEHE\n");
-			list_put(cmds, NULL, NULL);												// F0x
-			return (parse_grp_cmd_free(argv, cmd_info, 1));							// Here COW
+			list_put(cmds, NULL, NULL);
+			return (parse_grp_cmd_free(argv, cmd_info, 1));
 		}
 		e_elem = e_elem->next;
 	}
 	if (!list_size(argv) && cmd_info->f_out == NULL && cmd_info->f_in == NULL)
-		return (parse_grp_cmd_free(argv, cmd_info, 2)); //no2
+		return (parse_grp_cmd_free(argv, cmd_info, 2));
 	if (e_elem == NULL || (long)e_elem->key == L_PIPE)
 	{
 		if (!list_put(cmds, argv, cmd_info))

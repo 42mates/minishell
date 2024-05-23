@@ -6,21 +6,9 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/22 19:52:00 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:30:58 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-readline, rl_clear_history, rl_on_new_line,
-rl_replace_line, rl_redisplay, add_history,
-printf, malloc, free, write, access, open, read,
-close, fork, wait, waitpid, wait3, wait4, signal,
-sigaction, sigemptyset, sigaddset, kill, exit,
-getcwd, chdir, stat, lstat, fstat, unlink, execve,
-dup, dup2, pipe, opendir, readdir, closedir,
-strerror, perror, isatty, ttyname, ttyslot, ioctl,
-getenv, tcsetattr, tcgetattr, tg
-*/
 
 #ifndef ALEKSEI_H
 # define ALEKSEI_H
@@ -115,6 +103,10 @@ char		filetype(const char *path);
 // parser.c
 int			parser(t_data *data, t_list *toks);
 
+int			handle_parenthesis(t_elem **e_elem, t_cmd_info *cmd_info);
+int			handle_redirect_in(t_elem **e_elem, t_cmd_info *cmd_info);
+int			handle_redirect_out(t_elem **e_elem, t_cmd_info *cmd_info);
+
 // parser_manage_group.c
 pid_t		parse_manage_group(long type, t_list *grp, t_data *data);
 int			parse_grp_cmd(t_elem *e_elem, t_list *cmds);
@@ -181,13 +173,5 @@ int			command_call(t_elem *e_cmd, t_data *data, t_fd *fd);
 // builtins_call.c
 int			builtins_exe(int i, t_elem *e_cmd, t_data *data, t_fd *fd);
 int			builtins_call(int i, t_elem *e_cmd, t_data *data, t_fd *fd);
-
-//TEST
-void		test_print_tokens(t_list *toks);
-void		test_print_env(t_list *env);
-int			TEST_builtin(t_data *data, t_list *argv);
-void		TEST_print_t_list_GRPS(t_list *grps);
-void		TEST_print_extra(t_elem *curr);
-void		TEST_print_cmds(t_group	*cmds);
 
 #endif

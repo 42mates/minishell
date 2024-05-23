@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:50 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/22 18:46:58 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:34:58 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ int	redir_fd(int in, int out)
 	{
 		if (dup2(in, STDIN_FILENO) == -1)
 			g_signal = 1;
-			// errors(1, "debug: redir_fd", ":", 1);					// FOX
 		if (close(in) == -1)
 			g_signal = 1;
-			// errors(1, "debug: redir_fd", ":", 1);				// FOX
 	}
 	if (out != STDOUT_FILENO)
 	{
