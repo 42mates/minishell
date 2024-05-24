@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:46:02 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/23 13:33:36 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/23 18:04:51 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	get_fd_in(t_cmd_info *cmd_info)
 {
+	if (cmd_info == NULL)
+		return (STDOUT_FILENO);
 	if (!cmd_info->f_in)
 		return (STDIN_FILENO);
 	return (open(cmd_info->f_in, O_RDONLY, 0644));
@@ -67,7 +69,7 @@ int	pipes(t_group *cmds, t_data *data)
 
 	fd.pfd[0] = -1;
 	e_cmd = cmds->cmds->head;
-	while (e_cmd->key == NULL)
+	while (e_cmd && e_cmd->key == NULL)
 		e_cmd = e_cmd->next;
 	while (e_cmd)
 	{

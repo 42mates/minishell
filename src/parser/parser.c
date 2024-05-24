@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/23 13:33:06 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:35:28 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	parser(t_data *data, t_list *toks)
 	grps = list_new(NULL, NULL, list_free);
 	if (grps == NULL)
 		return (1);
-	if (parse_groups(grps, toks))
+	if (parse_groups(grps, toks->head, PARSER_BASE, 0))
 		return (list_free(grps), 1);
 	if (list_size(grps) == 0)
 		return (list_free(grps), 0);

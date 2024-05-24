@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:58:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/23 13:43:03 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:04:10 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,10 @@ static int	parse_fill_group(
 /*
 Returns 0 if OK.
 */
-int	parse_groups(t_list *grps, t_list *toks)
+int	parse_groups(t_list *grps, t_elem *e_tok, long type, long level)
 {
 	t_list	*grp;
-	t_elem	*e_tok;
-	long	type;
-	long	level;
 
-	e_tok = toks->head;
 	while (e_tok != NULL)
 	{
 		grp = list_new(NULL, NULL, NULL);
@@ -59,14 +55,13 @@ int	parse_groups(t_list *grps, t_list *toks)
 		if (parse_fill_group(grp, &e_tok, &type, &level))
 			return (1);
 		if (level != 0)
-			return (list_free(grp), errors(1, NULL, "syntax error near \
-			unexpected token `(' or `)'", 258));
+			return (list_free(grp), errors(1, NULL, ERROR_PARENTHESIS, 2));
 		if (list_size(grp) && !list_put(grps, (void *)type, grp))
 			return (list_free(grp), errors(1, "debug: parse_groups", "l64", 1));
 		if (list_size(grp) == 0)
 			list_free(grp);
 		if (e_tok != NULL && is_or_and((long)(e_tok->key))
-			&& !list_put(grps, e_tok->key, NULL))
+				&& !list_put(grps, e_tok->key, NULL))
 			return (errors(1, "debug: parse_groups", "l68", 1));
 		if (e_tok != NULL)
 			e_tok = e_tok->next;
@@ -75,7 +70,7 @@ int	parse_groups(t_list *grps, t_list *toks)
 }
 
 /*
-Checks errorsnear || and &&.
+Checks errors near || and &&.
 Returns 0 if OK.
 Returns 1 if error.
 */
@@ -91,9 +86,9 @@ int	parse_is_or_and_valid(t_list *grps)
 	while (e_elem != NULL)
 	{
 		if (need_grp == 0 && ((long)e_elem->key) == L_OR)
-			return (errors(1, NULL, "syntax error near unexpected token `||'", 258));
+			return (errors(1, NULL, ERROR_OR, 2));
 		else if (need_grp == 0 && ((long)e_elem->key) == L_AND)
-			return (errors(1, NULL, "syntax error near unexpected token `&&'", 258));
+			return (errors(1, NULL, ERROR_AND, 2));
 		else
 			need_grp = 1;
 		if (need_grp == 1 && is_or_and((long)(e_elem->key)))
@@ -102,8 +97,8 @@ int	parse_is_or_and_valid(t_list *grps)
 		e_elem = e_elem->next;
 	}
 	if (need_grp == 0 && ((long)e_prev->key) == L_OR)
-		return (errors(1, NULL, "syntax error near unexpected token `||'", 258));
+		return (errors(1, NULL, ERROR_OR, 2));
 	if (need_grp == 0 && ((long)e_prev->key) == L_AND)
-		return (errors(1, NULL, "syntax error near unexpected token `&&'", 258));
+		return (errors(1, NULL, ERROR_AND, 2));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/23 13:43:28 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:49:46 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,11 @@ int	parse_grp_cmd(t_elem *e_elem, t_list *cmds)
 	argv = list_new(NULL, NULL, NULL);
 	if (argv == NULL)
 		return (free(cmd_info), errors(1, "debug: parse_grp_cmd", "argv", 0));
-	while (e_elem != NULL && ((long)e_elem->key != L_PIPE || cmd_info->level))
+	while (e_elem && ((long)e_elem->key != L_PIPE || cmd_info->level))
 	{
 		if (parse_manage_token(&e_elem, cmd_info, argv))
 		{
-			while (e_elem != NULL && ((long)e_elem->key != L_PIPE
-					|| cmd_info->level))
+			while (e_elem && ((long)e_elem->key != L_PIPE || cmd_info->level))
 				e_elem = e_elem->next;
 			list_put(cmds, NULL, NULL);
 			return (parse_grp_cmd_free(argv, cmd_info, 1));
@@ -73,7 +72,7 @@ int	parse_grp_cmd(t_elem *e_elem, t_list *cmds)
 	}
 	if (!list_size(argv) && cmd_info->f_out == NULL && cmd_info->f_in == NULL)
 		return (parse_grp_cmd_free(argv, cmd_info, 2));
-	if (e_elem == NULL || (long)e_elem->key == L_PIPE)
+	if (!e_elem || (long)e_elem->key == L_PIPE)
 	{
 		if (!list_put(cmds, argv, cmd_info))
 			return (parse_grp_cmd_free(argv, cmd_info, 3));

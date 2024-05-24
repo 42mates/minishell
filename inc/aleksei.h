@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/23 13:30:58 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:03:56 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include "lexer.h"
 # include "parser.h"
 # include "../minishell.h"
+
+# define ERROR_PIPE				"syntax error near unexpected token `|'"
+# define ERROR_AND				"syntax error near unexpected token `&&'"
+# define ERROR_OR				"syntax error near unexpected token `||'"
+# define ERROR_PARENTHESIS		"syntax error near unexpected token `(' or `)'"
+# define ERROR_NEW_LINE			"syntax error near unexpected token `newline'"
 
 extern pid_t			g_signal;
 
@@ -116,7 +122,7 @@ int			parse_collect_chunks(
 				char *s, t_data *data, t_list *chunks, int *size);
 
 // parser_groups.c
-int			parse_groups(t_list *grps, t_list *toks);
+int			parse_groups(t_list *grps, t_elem *e_tok, long type, long level);
 int			parse_is_or_and_valid(t_list *grps);
 
 // parser_token_field.c 

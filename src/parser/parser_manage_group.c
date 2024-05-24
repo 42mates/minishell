@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/23 13:39:20 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:25:48 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	parse_grp_pipe(t_list *extra, t_list *cmds)
 			e_elem = e_elem->next;
 		if (e_elem != NULL && e_elem->next == NULL)
 			return (
-				errors(1, NULL, "syntax error near unexpected token `|'", 258));
+				errors(1, NULL, ERROR_PIPE, 258));
 		if (e_elem != NULL)
 			e_elem = e_elem->next;
 	}
