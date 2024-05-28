@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 19:34:14 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/28 12:30:28 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/28 17:10:08 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	command_acces(t_elem *e_cmd, char *path, char **f_path)
 	free_str_array(f_pathes, -1);
 	*f_path = NULL;
 	if (res == 2)
-		return (errors(1, (char *)e_elem->head->val, "permission denied", 126));
+		return (errors(1, (char *)e_elem->head->val, "Permission denied", 126));
 	return (errors(1, (char *)e_elem->head->val, "command not found", 127));
 }
 
@@ -108,6 +108,15 @@ int	prepare_argv(t_elem *e_cmd, char ***argv, char *filepath)
 	return (0);
 }
 
+static void	command_call_error(char *filepath, char *command)
+{
+	if (!command || !*command)
+		exit(errors(127, "", "command not found", 1));
+	if (filetype(filepath) == 'd')
+		exit(errors(126, filepath, "Is a directory", 1));
+	exit(errors(127, filepath, strerror(errno), 1));
+}
+
 /*
 Calls the comand e_cmd by using execve
 */
@@ -133,8 +142,6 @@ int	command_call(t_elem *e_cmd, t_data *data, t_fd *fd)
 	if (prepare_argv(e_cmd, &argv, filepath))
 		exit(g_signal);
 	execve(filepath, argv, data->env);
-	if (filetype(filepath) == 'd')
-		exit(errors(126, filepath, "Is a directory", 1));
-	exit(errors(127, filepath, strerror(errno), 1));
+	command_call_error(filepath, (char *)((t_list *)e_cmd->key)->head->val);
 	return (1);
 }

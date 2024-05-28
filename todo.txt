@@ -1,0 +1,2 @@
+- empty string returns the wrong error message
+- `*` in quotes is not handled correctly
