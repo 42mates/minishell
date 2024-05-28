@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:46:33 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/23 11:20:38 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/28 12:42:00 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @return A null-terminated array of strings representing the linked list.
  *         Returns NULL if memory allocation fails.
  */
-char **list_to_env(t_list *list)
+char	**list_to_env(t_list *list)
 {
 	char	**tab;
 	t_elem	*node;

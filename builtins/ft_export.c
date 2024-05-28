@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:39:16 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/23 12:40:20 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/28 12:42:12 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,5 @@ int	ft_export(t_data *data, t_list *args)
 	data->env = list_to_env(data->env_lst);
 	free(argv);
 	g_signal = exit_status;
-
-	//for (t_elem *elem = data->env_lst->head; elem; elem = elem->next)
-	//	print_var(elem, NULL);
 	return (exit_status);
 }

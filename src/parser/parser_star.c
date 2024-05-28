@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:37:01 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/28 11:44:51 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/28 12:43:15 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_list	*parse_star(const char *word)
 	DIR				*dir;
 	struct dirent	*s_dir;
 
-	if (!ft_strchr(word, '*'))// || ft_strchr(word, '/'))
+	if (!ft_strchr(word, '*'))
 		return (NULL);
 	printf("parse_star\n");
 	words = list_new(cmp_int, NULL, NULL);
