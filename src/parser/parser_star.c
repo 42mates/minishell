@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_star.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:37:01 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/28 12:43:15 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/28 13:07:20 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ t_list	*parse_star(const char *word)
 
 	if (!ft_strchr(word, '*'))
 		return (NULL);
-	printf("parse_star\n");
 	words = list_new(cmp_int, NULL, NULL);
 	if (getcwd(pwd, PATH_MAX) == NULL || words == NULL)
 		return (NULL);
