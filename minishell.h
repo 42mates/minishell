@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:17:30 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/23 17:27:05 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/28 12:34:19 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 // Prompt for minishell
 // # define PROMPT "\033[0;34m( ͡° ͜ʖ ͡°)\033[0m> "
-# define PROMPT "\033[0;34mmsh> \033[0m"
+# define PROMPT "\033[1;34mmsh> \033[0m"
 // Characters that cannot be part of a environment variable key/name 
 # define INVALID_KEY "!@#%^&*()-+={}[]|:;'\",<>./? \t\n\v\f\r"
 

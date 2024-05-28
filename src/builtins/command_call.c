@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 19:34:14 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 16:57:17 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/28 12:30:28 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	command_acces(t_elem *e_cmd, char *path, char **f_path)
 	free_str_array(f_pathes, -1);
 	*f_path = NULL;
 	if (res == 2)
-		return (errors(1, *f_path, "permission denied", 126));
+		return (errors(1, (char *)e_elem->head->val, "permission denied", 126));
 	return (errors(1, (char *)e_elem->head->val, "command not found", 127));
 }
 
