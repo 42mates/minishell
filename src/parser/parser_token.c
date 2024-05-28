@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 12:52:01 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/28 12:07:01 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ static void	parse_token_second_loop(t_list *extra, char *word, t_list *words)
 	list_free(words);
 }
 
+t_list	*parse_word(char **word, t_list *env)
+{
+	*word = set_path(*word, env);
+	return (parse_star(*word));
+}
+
 int	parse_token(t_elem **e_elem, t_list *extra, t_data *data)
 {
 	static t_elem_info	info;
@@ -55,7 +61,7 @@ int	parse_token(t_elem **e_elem, t_list *extra, t_data *data)
 			return (list_free(str), 1);
 		if (word == NULL)
 			return (list_free(str), 0);
-		words = parse_star(word);
+		words = parse_word(&word, data->env_lst);
 		if (words == NULL)
 			list_put(extra, (void *)L_WORD, word);
 		else

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
+#    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/05/23 13:35:24 by akurochk         ###   ########.fr        #
+#    Updated: 2024/05/23 17:25:58 by mbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ SRC = 	main.c \
 		error.c \
 		\
 		src/execute.c \
-		src/set_home_path.c \
 		src/here_doc.c \
 		src/pipex.c \
 		\
@@ -54,6 +53,7 @@ SRC = 	main.c \
 		src/parser/parser_utils.c \
 		src/parser/parser.c \
 		src/parser/pipes.c \
+		src/parser/set_path.c \
 		src/parser/subshell.c \
 		\
 		src/utils/ft_str_split.c \

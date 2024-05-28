@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:17:30 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/15 18:54:27 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/23 17:27:05 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct s_pipex
 /**** SOURCE ****/
 
 int		execute(char **args, char **envp);
-char	*set_home_path(char *str, int free_str);
 void	here_doc(const char *limiter);
 int		pipex(char ***cmds, char **envp, int infile, int outfile);
 
