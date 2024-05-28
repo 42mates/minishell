@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aleksei.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/24 17:03:56 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:08:10 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,12 @@ int			pipes(t_group *cmds, t_data *data);
 // executor.c
 pid_t		executor(t_group *cmds, t_data *data);
 int			get_builtins_num(t_elem *e_cmd, t_data *data);
+
+char		*set_current_path(char *str);
+char		*set_parent_path(char *str);
+char		*set_home_path(char *str, t_list *env_lst);
+char		*set_path(char *str, t_list *env_lst);
+// set_path.c
 
 // subshell.c
 int			subshell(t_group *cmds, t_data *data);

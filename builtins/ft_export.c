@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:39:16 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/20 12:44:26 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:40:20 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ static int	builtin_export(char **arg, t_list *env)
 	while (arg[++i])
 	{
 		if (!get_key_val(arg[i], &key, &val))
+		{
 			list_replace(env, key, val);
+			free(key);
+		}
 		else
 			status = EXIT_FAILURE;
 	}
@@ -104,7 +107,12 @@ int	ft_export(t_data *data, t_list *args)
 	if (!argv)
 		return (print_error("export", NULL, "malloc failed"), EXIT_FAILURE);
 	exit_status = builtin_export(argv, data->env_lst);
+	freetab(data->env, TRUE);
+	data->env = list_to_env(data->env_lst);
 	free(argv);
 	g_signal = exit_status;
+
+	//for (t_elem *elem = data->env_lst->head; elem; elem = elem->next)
+	//	print_var(elem, NULL);
 	return (exit_status);
 }
