@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/24 16:25:48 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/29 14:48:57 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static t_list	*parse_extra(t_list *grp, t_data *data)
 			+ ((long)(e_elem->key) == L_PAR_R) * (-1);
 		if (level > 0 && parse_sub_token(e_elem, extra))
 			return (list_free(extra), NULL);
-		else if (level == 0 && parse_token(&e_elem, extra, data))
+		else if (level == 0
+			&& parse_token(&e_elem, extra, data, (long)e_elem->key))
 			return (list_free(extra), NULL);
 		e_elem = e_elem->next;
 	}

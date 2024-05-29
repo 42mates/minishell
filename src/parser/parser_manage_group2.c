@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/24 16:49:46 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:00:02 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,20 @@ static int	parse_manage_token(t_elem **e_elem, t_cmd_info *cmd_i, t_list *argv)
 	return (0);
 }
 
+static int	parse_grp_cmd_second(
+	t_elem *e_elem, t_list *cmds, t_list *argv, t_cmd_info *cmd_info)
+{
+	if (!list_size(argv) && cmd_info->f_out == NULL && cmd_info->f_in == NULL)
+		return (parse_grp_cmd_free(argv, cmd_info, 2));
+	if (!e_elem || (long)e_elem->key == L_PIPE)
+	{
+		if (!list_put(cmds, argv, cmd_info))
+			return (parse_grp_cmd_free(argv, cmd_info, 3));
+		return (0);
+	}
+	return (parse_grp_cmd_free(argv, cmd_info, 1));
+}
+
 int	parse_grp_cmd(t_elem *e_elem, t_list *cmds)
 {
 	t_list		*argv;
@@ -70,13 +84,5 @@ int	parse_grp_cmd(t_elem *e_elem, t_list *cmds)
 		}
 		e_elem = e_elem->next;
 	}
-	if (!list_size(argv) && cmd_info->f_out == NULL && cmd_info->f_in == NULL)
-		return (parse_grp_cmd_free(argv, cmd_info, 2));
-	if (!e_elem || (long)e_elem->key == L_PIPE)
-	{
-		if (!list_put(cmds, argv, cmd_info))
-			return (parse_grp_cmd_free(argv, cmd_info, 3));
-		return (0);
-	}
-	return (parse_grp_cmd_free(argv, cmd_info, 1));
+	return (parse_grp_cmd_second(e_elem, cmds, argv, cmd_info));
 }

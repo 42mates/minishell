@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aleksei.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/28 12:08:10 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/29 13:59:52 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int			parse_token_field(
 				t_list *str, t_data *data, char **word, t_elem_info *info);
 
 // parser_token.c
-int			parse_token(t_elem **e_elem, t_list *extra, t_data *data);
+int			parse_token(t_elem **e_elem, t_list *extra, t_data *data, long k);
 
 // parser_utils.c
 int			is_extra(void *key);
