@@ -6,20 +6,37 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:58:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/24 17:04:10 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:14:14 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/**
+ * Checks if the given key is a logical OR or logical AND operator.
+ *
+ * @param key The key to check.
+ * @return 1 if the key is a logical OR or logical AND operator, 0 otherwise.
+ */
 static int	is_or_and(long key)
 {
 	return (key == L_OR || key == L_AND);
 }
 
-/*
-Returns 0 if OK.
-*/
+/**
+ * Parses and fills a group with tokens.
+ *
+ * This function iterates through the token list and fills the given group
+ * with tokens until it reaches the end of the list or encounters a logical
+ * operator (OR, AND). The function keeps track of the nesting level of
+ * parentheses and sets the type of the group.
+ *
+ * @param grp   The group to fill with tokens.
+ * @param e_tok The current token in the list.
+ * @param type  A pointer to the type of the group.
+ * @param level A pointer to the level of parentheses.
+ * @return      0 if successful, 1 if an error occurs.
+ */
 static int	parse_fill_group(
 		t_list *grp, t_elem **e_tok, long *type, long *level)
 {
@@ -38,9 +55,15 @@ static int	parse_fill_group(
 	return (0);
 }
 
-/*
-Returns 0 if OK.
-*/
+/**
+ * Parses tokens into groups and adds them to a groups list.
+ *
+ * @param grps The list to add the parsed groups to.
+ * @param e_tok The current token being parsed.
+ * @param type The type of the current group.
+ * @param level The level of the current group in case of parenthesis.
+ * @return 0 if successful, 1 otherwise.
+ */
 int	parse_groups(t_list *grps, t_elem *e_tok, long type, long level)
 {
 	t_list	*grp;
@@ -69,11 +92,12 @@ int	parse_groups(t_list *grps, t_elem *e_tok, long type, long level)
 	return (0);
 }
 
-/*
-Checks errors near || and &&.
-Returns 0 if OK.
-Returns 1 if error.
-*/
+/**
+ * Checks if the groups in the given have errors near OR or AND operators.
+ * 
+ * @param grps The list of groups to check.
+ * @return 0 if the groups are valid, otherwise an error code.
+ */
 int	parse_is_or_and_valid(t_list *grps)
 {
 	int		need_grp;

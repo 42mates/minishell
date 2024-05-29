@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/24 16:35:28 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:00:06 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,13 @@ static int	parse_groups_exe(t_list *grps, t_data *data)
 	return (0);
 }
 
-/*---PARSER---*/
-
-/*
-Returns 0 if OK.
-*/
+/**
+ * Parses the tokens and constructs the command groups for execution.
+ *
+ * @param data The data structure.
+ * @param toks The list of tokens to be parsed.
+ * @return Returns 0 on success, 1 on failure.
+ */
 int	parser(t_data *data, t_list *toks)
 {
 	t_list	*grps;

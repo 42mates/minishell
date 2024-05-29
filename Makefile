@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/05/23 17:25:58 by mbecker          ###   ########.fr        #
+#    Updated: 2024/05/29 16:16:35 by akurochk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC = 	main.c \
 		src/parser/set_path.c \
 		src/parser/subshell.c \
 		\
+		src/utils/fd_utils.c \
 		src/utils/ft_str_split.c \
 		src/utils/ft_str_concat.c \
 		src/utils/error_handler.c \

@@ -3,19 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:13:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/23 12:56:05 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/29 15:35:12 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/*
-Returns the position of the second quotes relative to the first quotes.
-Returns 0 if didn't find second quotes.
-*/
+/**
+ * Finds the index of the second occurrence 
+ * of a specified character in a string.
+ *
+ * @param c The character to search for.
+ * @param line The string in which to search for the character.
+ * @return The index of the second occurrence of the character,
+ * or 0 if not found.
+ */
 static long	lexer_where_second_quotes(char c, const char *line)
 {
 	long	i;
@@ -27,9 +32,20 @@ static long	lexer_where_second_quotes(char c, const char *line)
 	return (0);
 }
 
-/*
-Returns 0 if OK.
-*/
+/**
+ * Extracts quotes from the given line and adds them to the token list.
+ * This function searches for quotes in the line starting from the given
+ * index 'i'. It determines the end index of the quotes and extracts
+ * the substring between the quotes. The extracted substring is then added to
+ * the token list along with the type of quotes.
+ * 
+ * @param toks The token list to add the extracted quotes.
+ * @param line The input line to search for quotes.
+ * @param i The starting index to search for quotes.
+ * @param end A pointer to store the end index of the quotes.
+ * @return Returns 0 if the quotes are successfully extracted and added
+ * to the token list, 1 otherwise.
+ */
 static int	lexer_get_quotes(t_list *toks, const char *line, long i, long *end)
 {
 	char	*s_str;
@@ -43,23 +59,17 @@ static int	lexer_get_quotes(t_list *toks, const char *line, long i, long *end)
 	if (line[i] == '\'')
 	{
 		if (!list_put(toks, (int *)L_S_QUOT, s_str))
-		{
-			free (s_str);
-			return (1);
-		}
+			return (free(s_str), 1);
 	}
 	else
 	{
 		if (!list_put(toks, (int *)L_D_QUOT, s_str))
-		{
-			free (s_str);
-			return (1);
-		}
+			return (free(s_str), 1);
 	}
 	return (0);
 }
 
-/*
+/**
 Returns 0 if OK.
 */
 static int	lexer_get_op(t_list *toks, const char *line, long i, long *end)
@@ -78,14 +88,25 @@ static int	lexer_get_op(t_list *toks, const char *line, long i, long *end)
 	return (0);
 }
 
-/*
-Analyses token type in the line between whitespaces:
-	- if ' or "
-	- if | or > or < or & or ( or )
-	- if word
-Collects token in toks key=type. 
-Returns 0 if OK.
-*/
+/**
+ * @brief Retrieves the next token from the input line and adds it
+ * to the token list.
+ *
+ * This function analyzes the character at the current position in
+ * the input line and determines the type of token it represents.
+ * If the character is a single quote or double quote, it calls
+ * the lexer_get_quotes() function to handle quotes.
+ * If the character is an operator: "|", ">", "<", "&", "(" or ")" -
+ * it calls the lexer_get_op() function to handle operators.
+ * If the character is neither a quote nor an operator, it calls 
+ * the lexer_get_word() function to handle words.
+ *
+ * @param toks A pointer to the token list.
+ * @param line The input line.
+ * @param i A pointer to the current position in the input line.
+ * @return 0 if the token is successfully added to the token list,
+ * 1 if there is an error.
+ */
 static int	lexer_get_token(t_list *toks, const char *line, long *i)
 {
 	long	end;
@@ -113,10 +134,14 @@ static int	lexer_get_token(t_list *toks, const char *line, long *i)
 	return (0);
 }
 
-/*
-Collects tokens from the line to the toks collection.
-Returns 0 if OK.
-*/
+/**
+ * Collects tokens from the line to the toks collection.
+ * Returns 0 if successful.
+ *
+ * @param line The input line to tokenize.
+ * @param toks The collection to store the tokens.
+ * @return 0 if successful, 1 otherwise.
+ */
 int	lexer(const char *line, t_list *toks)
 {
 	long	i;

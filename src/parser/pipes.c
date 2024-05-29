@@ -6,42 +6,11 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:46:02 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/29 14:50:45 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/29 17:01:24 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-int	get_fd_in(t_cmd_info *cmd_info)
-{
-	if (cmd_info == NULL)
-		return (STDOUT_FILENO);
-	if (!cmd_info->f_in)
-		return (STDIN_FILENO);
-	return (open(cmd_info->f_in, O_RDONLY, 0644));
-}
-
-int	get_fd_out(t_cmd_info *cmd_info)
-{
-	if (!cmd_info->f_out)
-		return (STDOUT_FILENO);
-	if (cmd_info->flag & CMD_APP)
-		return (open(cmd_info->f_out, O_CREAT | O_WRONLY | O_APPEND, 0644));
-	return (open(cmd_info->f_out, O_CREAT | O_WRONLY, 0644));
-}
-
-int	fd_set_val(t_fd *fd, t_elem *e_cmd, t_group *cmds)
-{
-	fd->fds[0] = get_fd_in((t_cmd_info *)e_cmd->val);
-	if (fd->fds[0] == -1)
-		return (errors(-1, (char *)e_cmd->val, strerror(errno), 1));
-	fd->fds[1] = get_fd_out((t_cmd_info *)e_cmd->val);
-	if (fd->fds[1] == -1)
-		return (errors(-1, (char *)e_cmd->val, strerror(errno), 1));
-	if (e_cmd != cmds->cmds->head && fd->fds[0] == STDIN_FILENO)
-		fd->fds[0] = fd->pfd[0];
-	return (0);
-}
 
 static void	fd_close(t_fd *fd, t_elem *e_cmd, int to_stop)
 {
@@ -55,10 +24,50 @@ static void	fd_close(t_fd *fd, t_elem *e_cmd, int to_stop)
 		close(fd->fds[1]);
 }
 
-/*
-Returns process pid.
-Return -1 if error.
-*/
+/**
+ * To help with Norminette
+ */
+static t_elem	*pipes_pre(t_fd *fd, t_group *cmds, t_elem	**e_cmd)
+{
+	fd->pfd[0] = -1;
+	*e_cmd = cmds->cmds->head;
+	while (*e_cmd && (*e_cmd)->key == NULL)
+		*e_cmd = (*e_cmd)->next;
+	return (*e_cmd);
+}
+
+/**
+ * To help with Norminette
+ */
+static int	pipes_util(t_fd *fd, t_elem *e_cmd, t_group *cmds, int *to_stop)
+{
+	g_signal = 0;
+	*to_stop = fd->pfd[0];
+	return (fd_set_val(fd, e_cmd, cmds));
+}
+
+/**
+ * To help with Norminette
+ */
+static t_elem	*pipes_post(t_elem *e_cmd, t_fd *fd, int to_stop)
+{
+	fd_close(fd, e_cmd, to_stop);
+	e_cmd = e_cmd->next;
+	while (e_cmd != NULL && e_cmd->key == NULL)
+	{
+		g_signal = 1;
+		e_cmd = e_cmd->next;
+	}
+	return (e_cmd);
+}
+
+/**
+ * Executes a series of commands separated by pipes.
+ *
+ * @param cmds The group of commands to execute.
+ * @param data The data structure containing.
+ * @return The process ID of the last command executed.
+ */
 int	pipes(t_group *cmds, t_data *data)
 {
 	int		pid;
@@ -67,15 +76,10 @@ int	pipes(t_group *cmds, t_data *data)
 	t_elem	*e_cmd;
 	t_fd	fd;
 
-	fd.pfd[0] = -1;
-	e_cmd = cmds->cmds->head;
-	while (e_cmd && e_cmd->key == NULL)
-		e_cmd = e_cmd->next;
+	e_cmd = pipes_pre(&fd, cmds, &e_cmd);
 	while (e_cmd)
 	{
-		g_signal = 0;
-		ret = fd_set_val(&fd, e_cmd, cmds);
-		to_stop = fd.pfd[0];
+		ret = pipes_util(&fd, e_cmd, cmds, &to_stop);
 		if (e_cmd->next && pipe(fd.pfd) == -1)
 			return (errors(-1, "debug: pipes", "pipe failure", 1));
 		if (e_cmd->next && fd.fds[1] == STDOUT_FILENO)
@@ -88,13 +92,7 @@ int	pipes(t_group *cmds, t_data *data)
 			if (e_cmd->next != NULL && ((t_elem *)e_cmd->next)->key == NULL)
 				g_signal = 1;
 		}
-		fd_close(&fd, e_cmd, to_stop);
-		e_cmd = e_cmd->next;
-		while (e_cmd != NULL && e_cmd->key == NULL)
-		{
-			g_signal = 1;
-			e_cmd = e_cmd->next;
-		}
+		e_cmd = pipes_post(e_cmd, &fd, to_stop);
 	}
 	return (pid);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:47:13 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/22 17:40:00 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/29 15:56:42 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,14 @@
 
 int	g_signal = 0;
 
-int	env_parser(t_list *env_lst, char **env)
+/**
+ * Parses the environment variables and fill a linked list.
+ * 
+ * @param env_lst The linked list to store the environment variables.
+ * @param env The array of environment variables.
+ * @return Returns 0 on success, or an error code on failure.
+ */
+static int	env_parser(t_list *env_lst, char **env)
 {
 	int		i;
 	char	*key;
@@ -33,7 +40,14 @@ int	env_parser(t_list *env_lst, char **env)
 	return (0);
 }
 
-int	init_data(t_data *data, char **env)
+/**
+ * Initializes the data structure with the given environment variables.
+ * 
+ * @param data The data structure to initialize.
+ * @param env The environment variables.
+ * @return 0 if successful, 1 otherwise.
+ */
+static int	init_data(t_data *data, char **env)
 {
 	data->flag_exit = 1;
 	data->flag_env = 1;
@@ -61,10 +75,17 @@ int	init_data(t_data *data, char **env)
 	return (0);
 }
 
-/*
-Here code must free everything
-*/
-void	main_exit(t_data *data)
+/**
+ * @brief Performs cleanup operations and exits the program.
+ *
+ * This function is responsible for printing the "exit" message to
+ * the standard output,freeing memory allocated for the environment variables,
+ * freeing the linked list of environment variables, freeing the signal string,
+ * and clearing the readline history.
+ *
+ * @param data A pointer to the data structure.
+ */
+static void	main_exit(t_data *data)
 {
 	write(STDOUT_FILENO, "exit\n", 5);
 	free_str_array(data->env, -1);
@@ -73,11 +94,21 @@ void	main_exit(t_data *data)
 	rl_clear_history();
 }
 
-/* new token list, read line, add history */
-/* SIGINT = Ctrl + C */
-void	main_begining(t_list **toks, char **line)
+/**
+ * @brief Initializes the main function by setting up signal handlers,
+ * allocating memory for tokens, and reading user input.
+ *
+ * This function sets up the signal handlers for SIGINT and SIGQUIT.
+ * It also allocates memory for the tokens list,
+ * and reads user input and add it to the command history.
+ *
+ * @param toks A tokens list for initialization.
+ * @param line A line to collect user input.
+ */
+static void	main_begining(t_list **toks, char **line)
 {
 	signal(SIGINT, handler_signal);
+	signal(SIGQUIT, SIG_IGN);
 	errno = 0;
 	*toks = list_new(cmp_int, NULL, free);
 	*line = readline(PROMPT);
@@ -106,7 +137,6 @@ int	main(int ac, const char **av, char **env)
 			free(line);
 		}
 		list_free(toks);
-		signal(SIGQUIT, SIG_IGN);
 	}
 	main_exit(&data);
 	return (g_signal);

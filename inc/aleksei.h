@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:14:38 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/29 13:59:52 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:18:51 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,10 @@ typedef struct s_fd
 int			ft_str_split(
 				const char *s, const char *sep, char **dst1, char **dst2);
 int			ft_str_contains(const char *s, const char c);
+
+int			get_fd_in(t_cmd_info *cmd_info);
+int			get_fd_out(t_cmd_info *cmd_info);
+int			fd_set_val(t_fd *fd, t_elem *e_cmd, t_group *cmds);
 
 // signal.c
 void		handler_signal(int signum);
