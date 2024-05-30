@@ -6,12 +6,19 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:50 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/23 13:34:58 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/30 17:42:37 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/**
+ * Redirects file descriptors for input and output.
+ *
+ * @param in The file descriptor for input.
+ * @param out The file descriptor for output.
+ * @return 0 on success, -1 on failure.
+ */
 int	redir_fd(int in, int out)
 {
 	if (in != STDIN_FILENO)
@@ -31,6 +38,14 @@ int	redir_fd(int in, int out)
 	return (0);
 }
 
+/**
+ * Executes a subshell process.
+ *
+ * @param e_cmd The command to execute.
+ * @param data The data structure.
+ * @param fd The file descriptor structure.
+ * @return The process ID.
+ */
 int	subshell_exe(t_elem *e_cmd, t_data *data, t_fd *fd)
 {
 	int	pid;
@@ -56,6 +71,13 @@ int	subshell_exe(t_elem *e_cmd, t_data *data, t_fd *fd)
 	exit (g_signal);
 }
 
+/**
+ * Prepares fd construction and executes a subshell.
+ *
+ * @param cmds The group of commands to execute.
+ * @param data The data structure.
+ * @return The process ID.
+ */
 int	subshell(t_group *cmds, t_data *data)
 {
 	int		pid;

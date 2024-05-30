@@ -6,13 +6,13 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:58:50 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/22 18:29:07 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/30 17:27:19 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	heredoc_file_swap(char *file, t_cmd_info *cmd_info, t_list *files)
+static int	heredoc_file_swap(char *file, t_cmd_info *cmd_info, t_list *files)
 {
 	if (!list_put(files, 0, file))
 		return (1);
@@ -23,10 +23,15 @@ int	heredoc_file_swap(char *file, t_cmd_info *cmd_info, t_list *files)
 	return (0);
 }
 
-/*
-Returns 0 if OK.
-*/
-int	heredoc_readline(t_cmd_info *cmd_info, int fd)
+/**
+ * Reads input from the user until a specific separator is encountered.
+ * The input is written to a file descriptor.
+ *
+ * @param cmd_info The command information.
+ * @param fd The file descriptor to write the input to.
+ * @return Returns 0 on success, 1 on error.
+ */
+static int	heredoc_readline(t_cmd_info *cmd_info, int fd)
 {
 	char	*line;
 
@@ -44,7 +49,14 @@ int	heredoc_readline(t_cmd_info *cmd_info, int fd)
 	return (free(line), 0);
 }
 
-int	heredoc_manage_input(t_cmd_info *cmd_info, int fd)
+/**
+ * Run the heredoc input management process.
+ *
+ * @param cmd_info The command information.
+ * @param fd The file descriptor to write the input to.
+ * @return Returns 0 in success.
+ */
+static int	heredoc_manage_input(t_cmd_info *cmd_info, int fd)
 {
 	int	sig;
 	int	pid;
@@ -70,7 +82,12 @@ int	heredoc_manage_input(t_cmd_info *cmd_info, int fd)
 	return (WEXITSTATUS(sig) != 0);
 }
 
-int	heredoc_init(t_cmd_info *cmd_info, t_list *files)
+/**
+ * Creates a temporary file to store the heredoc input.
+ * Manages the error handling.
+ * Runs subproceses to read the input.
+ */
+static int	heredoc_init(t_cmd_info *cmd_info, t_list *files)
 {
 	int		fd;
 	char	*file;
@@ -95,9 +112,14 @@ int	heredoc_init(t_cmd_info *cmd_info, t_list *files)
 	return (e_heredoc(NULL, file, size, fd));
 }
 
-/*
-Returns 0 if OK.
-*/
+/**
+ * Parses and manages heredoc redirections for a group of commands.
+ * 
+ * @param cmds The group of commands to parse 
+ * and manage heredoc redirections for.
+ * @return Returns 0 if a heredoc redirection was encountered
+ * and handled successfully, 1 otherwise.
+ */
 int	parse_manage_heredoc(t_group *cmds)
 {
 	int			res;

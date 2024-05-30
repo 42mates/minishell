@@ -6,15 +6,21 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:53:13 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/24 16:39:32 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/30 17:35:17 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/*
-mode: 1 run builtins_exe for pipes function, 0 for builtins_call.
-*/
+/**
+ * Executes a command based on the given mode.
+ *
+ * @param e_cmd The command element to be executed.
+ * @param data The data structure.
+ * @param fd The file descriptor structure.
+ * @param mode For pipes (1). For the rest (0).
+ * @return Returns 0 if the command execution is successful.
+ */
 int	common_exe(t_elem *e_cmd, t_data *data, t_fd *fd, int mode)
 {
 	int	i;
@@ -31,6 +37,19 @@ int	common_exe(t_elem *e_cmd, t_data *data, t_fd *fd, int mode)
 	return (builtins_call(i, e_cmd, data, fd));
 }
 
+/**
+ * Executes a command.
+ *
+ * This function is responsible for executing a command in the minishell.
+ * It takes a group of commands and the data structure as input
+ * and returns the process ID. The function sets up file descriptors for input
+ * and output, and then calls the appropriate execution function based
+ * on the command type.
+ *
+ * @param cmds The group of commands to execute.
+ * @param data The data structure.
+ * @return The process ID of the executed command.
+ */
 int	common(t_group *cmds, t_data *data)
 {
 	int		pid;
@@ -41,12 +60,11 @@ int	common(t_group *cmds, t_data *data)
 	fd.pfd[0] = -1;
 	fd.fds[0] = get_fd_in(cmd->val);
 	if (fd.fds[0] == -1)
-		return (
-			errors(-1, ((t_cmd_info *)cmd->val)->f_in, strerror(errno), 1));
+		return (errors(-1, ((t_cmd_info *)cmd->val)->f_in, strerror(errno), 1));
 	fd.fds[1] = get_fd_out(cmd->val);
 	if (fd.fds[1] == -1)
-		return (close(fd.fds[0]), errors(-1, ((t_cmd_info *)cmd->val)->f_out,
-				strerror(errno), 1));
+		return (close(fd.fds[0]),
+			errors(-1, ((t_cmd_info *)cmd->val)->f_out, strerror(errno), 1));
 	if (((t_cmd_info *)cmd->val)->flag & CMD_SUB)
 		pid = subshell_exe(cmd, data, &fd);
 	else
