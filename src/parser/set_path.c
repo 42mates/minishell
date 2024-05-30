@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 15:03:18 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/23 17:47:38 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/30 12:59:41 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param str The string to concatenate with the current working directory.
  * @param env_lst The environment list.
  * @return char* The new string representing the updated path,
-	or NULL if an error occurs.
+ * or NULL if an error occurs.
  */
 char	*set_current_path(char *str)
 {
@@ -37,7 +37,7 @@ char	*set_current_path(char *str)
 }
 
 /**
- * @brief Sets the parent path of a given string by removing the last directory 
+ * @brief Sets the parent path of a given string by removing the last directory
  * from the current working directory.
  *
  * @param str The string to set the parent path for.

@@ -6,12 +6,19 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:46:02 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/29 17:01:24 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/30 16:58:17 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/**
+ * @brief Closes file descriptors based on the given conditions.
+ *
+ * @param fd The t_fd structure containing file descriptors.
+ * @param e_cmd The t_elem structure representing the current command element.
+ * @param to_stop The file descriptor to be closed.
+ */
 static void	fd_close(t_fd *fd, t_elem *e_cmd, int to_stop)
 {
 	if (to_stop != -1)

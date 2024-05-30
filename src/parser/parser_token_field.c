@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   parser_token_field.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 15:57:57 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/30 16:58:32 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/**
+ * Initializes the chunk and takes variables from env.
+ * 
+ * @param str List of tokens.
+ * @param data The data structure.
+ * @param chunks The list to store the parsed chunks.
+ * @param e_info An information about elements inside str list.
+ * @return Returns 0 on success, 1 on failure.
+ */
 static int	parse_token_field_pre(t_list *str, t_data *data, t_list *chunks,
 		t_elem_info *e_info)
 {
@@ -42,6 +51,13 @@ static int	parse_token_field_pre(t_list *str, t_data *data, t_list *chunks,
 	return (0);
 }
 
+/**
+ * Fills the word with information from chunks list. 
+ *
+ * @param chunks The list of chunks containing the token field and env vriables.
+ * @param word The string to collect all from chunks list.
+ * @return 0 if successful.
+ */
 static int	parse_token_field_cpy(t_list *chunks, char *word)
 {
 	int		i;
@@ -60,6 +76,9 @@ static int	parse_token_field_cpy(t_list *chunks, char *word)
 	return (0);
 }
 
+/**
+ * Frees the word if someting goes wrong.
+ */
 static void	parse_token_field_free_var(
 	t_list *str, char **word, t_elem_info *info)
 {
@@ -78,6 +97,9 @@ static void	parse_token_field_free_var(
 	*word = NULL;
 }
 
+/**
+ * To help with Norminette
+ */
 static void	parse_token_field_free(t_list *chunks, char **word)
 {
 	if (chunks)
@@ -86,6 +108,15 @@ static void	parse_token_field_free(t_list *chunks, char **word)
 		free(*word);
 }
 
+/**
+ * Parses a list of tokens to take variables from env and builts word.
+ *
+ * @param str List of tokens.
+ * @param data The data structure.
+ * @param word A pointer word.
+ * @param info An information about elements inside str list.
+ * @return 0 if successful, 1 otherwise.
+ */
 int	parse_token_field(t_list *str, t_data *data, char **word, t_elem_info *info)
 {
 	t_list	*chunks;

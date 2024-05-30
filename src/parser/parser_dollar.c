@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parser_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 16:06:19 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/30 16:57:43 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/**
+ * Updates string value of g_signal in data structure.
+ */
 static int	update_g_signal_str(t_data *data)
 {
 	if (data->g_signal_str != NULL)
@@ -22,7 +25,10 @@ static int	update_g_signal_str(t_data *data)
 	return (0);
 }
 
-static int	get_var_first(const char *s, t_data *data, char **ptr_env, int *pos)
+/**
+ * Set ptr to exitcode in case of '$?'.
+ */
+static int	get_var_pre(const char *s, t_data *data, char **ptr_env, int *pos)
 {
 	if (s[0] == '\0')
 	{
@@ -40,6 +46,9 @@ static int	get_var_first(const char *s, t_data *data, char **ptr_env, int *pos)
 	return (2);
 }
 
+/**
+ * Gets ptr to env variable.
+ */
 static int	get_var(const char *s, t_data *data, char **ptr_env, int *pos)
 {
 	int		i;
@@ -47,7 +56,7 @@ static int	get_var(const char *s, t_data *data, char **ptr_env, int *pos)
 	char	*var_name;
 
 	i = 0;
-	ret = get_var_first(s, data, ptr_env, pos);
+	ret = get_var_pre(s, data, ptr_env, pos);
 	if (ret != 2)
 		return (ret);
 	while (ft_isalnum(s[i]) || s[i] == '_')
@@ -65,7 +74,10 @@ static int	get_var(const char *s, t_data *data, char **ptr_env, int *pos)
 	return (free(var_name), 0);
 }
 
-static int	parse_colect_from_env(char *s, t_data *data, t_list *chunks,
+/**
+ * Collects ptr to env variables to chunks list.
+ */
+static int	parse_collect_from_env(char *s, t_data *data, t_list *chunks,
 		t_field_pack *f_pack)
 {
 	char	*ptr_env;
@@ -90,6 +102,16 @@ static int	parse_colect_from_env(char *s, t_data *data, t_list *chunks,
 	return (0);
 }
 
+/**
+ * Parses the input string 's', collects chunks of text separated by '$',
+ * replace '$' by env variables.
+ * 
+ * @param s       The input string to parse.
+ * @param data    A pointer to the data structure.
+ * @param chunks  A list to store the chunks.
+ * @param size    To collect size of total word and position.
+ * @return        Returns 0 on success, 1 on failure.
+ */
 int	parse_collect_chunks(char *s, t_data *data, t_list *chunks, int *size)
 {
 	int				i;
@@ -112,7 +134,7 @@ int	parse_collect_chunks(char *s, t_data *data, t_list *chunks, int *size)
 		if (!list_put(chunks, c_info, s))
 			return (free(c_info), errors(1, "debug: parse_collect_c..", "", 1));
 		parse_init_fpack(&f_pack, c_info, &i, size);
-		if (s[i] == '$' && parse_colect_from_env(s, data, chunks, &f_pack))
+		if (s[i] == '$' && parse_collect_from_env(s, data, chunks, &f_pack))
 			return (1);
 		j = i;
 	}

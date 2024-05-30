@@ -6,7 +6,7 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/29 15:00:02 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/30 16:59:02 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ static int	parse_manage_token(t_elem **e_elem, t_cmd_info *cmd_i, t_list *argv)
 	return (0);
 }
 
+/**
+ * To help with Norminette
+ */
 static int	parse_grp_cmd_second(
 	t_elem *e_elem, t_list *cmds, t_list *argv, t_cmd_info *cmd_info)
 {
@@ -62,6 +65,14 @@ static int	parse_grp_cmd_second(
 	return (parse_grp_cmd_free(argv, cmd_info, 1));
 }
 
+/**
+ * Parses a group command from the given element (token)
+ * and adds it to the list of commands.
+ * 
+ * @param e_elem The element to start parse.
+ * @param cmds The list of commands to add the parsed command to.
+ * @return 0 if successful, 1 otherwise.
+ */
 int	parse_grp_cmd(t_elem *e_elem, t_list *cmds)
 {
 	t_list		*argv;

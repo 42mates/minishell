@@ -6,18 +6,21 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/29 14:48:57 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/30 16:36:39 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/*---PARSE RUN GROUP---*/
-
-/*
-Returns 0 if OK.
-Returns 1 if can't create element in extra.
-*/
+/**
+ * Parses a group element inside parenthesis and adds it to the extra list. 
+ * If the element is a word or text in quotes, its value will be copied
+ * with ft_strdup to list of extra.
+ * 
+ * @param e_elem The group element to parse.
+ * @param extra The list to add the parsed element to.
+ * @return Returns 0 if successful, 1 otherwise.
+ */
 static int	parse_sub_token(t_elem *e_elem, t_list *extra)
 {
 	if (is_extra(e_elem->key))
@@ -25,6 +28,15 @@ static int	parse_sub_token(t_elem *e_elem, t_list *extra)
 	return (!list_put(extra, e_elem->key, e_elem->val));
 }
 
+/**
+ * Parses the tokens in a group and returns a list of parsed tokens.
+ * It checks level of parenthesis, quotes symbols (dots, stars, etc.)
+ * and recombinates the groupped tokens into the list "extra". 
+ * 
+ * @param grp The list of tokens in the group.
+ * @param data The data structure containing additional information.
+ * @return A list of recombined tokens, or NULL if an error occurs.
+ */
 static t_list	*parse_extra(t_list *grp, t_data *data)
 {
 	int		level;
@@ -40,14 +52,20 @@ static t_list	*parse_extra(t_list *grp, t_data *data)
 			+ ((long)(e_elem->key) == L_PAR_R) * (-1);
 		if (level > 0 && parse_sub_token(e_elem, extra))
 			return (list_free(extra), NULL);
-		else if (level == 0
-			&& parse_token(&e_elem, extra, data, (long)e_elem->key))
+		else if (!level && parse_token(&e_elem, extra, data, (long)e_elem->key))
 			return (list_free(extra), NULL);
 		e_elem = e_elem->next;
 	}
 	return (extra);
 }
 
+/**
+ * Parses a group of commands separated by pipes.
+ * 
+ * @param extra A pointer to list associated with the group.
+ * @param cmds A pointer to the group of commands to be parsed and prepared.
+ * @return Returns 0 if successful, 1 otherwise.
+ */
 static int	parse_grp_pipe(t_list *extra, t_list *cmds)
 {
 	t_elem	*e_elem;
@@ -60,17 +78,24 @@ static int	parse_grp_pipe(t_list *extra, t_list *cmds)
 		while (e_elem != NULL && (long)e_elem->key != L_PIPE)
 			e_elem = e_elem->next;
 		if (e_elem != NULL && e_elem->next == NULL)
-			return (
-				errors(1, NULL, ERROR_PIPE, 258));
+			return (errors(1, NULL, ERROR_PIPE, 258));
 		if (e_elem != NULL)
 			e_elem = e_elem->next;
 	}
 	return (0);
 }
 
-/*
-Retrns 0 if OK.
-*/
+/**
+ * Parses and prepares a group of commands.
+ * 
+ * This function is responsible for choosing parsing way and preparing a group
+ * of commands. If the group contains a pipe, it calls the parse_grp_pipe()
+ * to handle it. Otherwise, it calls the parse_grp_cmd() to parse the commands.
+ * 
+ * @param extra A pointer to list associated with the group.
+ * @param cmds A pointer to the group of commands to be parsed and prepared.
+ * @return Returns 0 if successful, 1 otherwise.
+ */
 static int	parse_prepare_grp(t_list *extra, t_group *cmds)
 {
 	if (cmds->type & PARSER_PIPE)
@@ -78,10 +103,14 @@ static int	parse_prepare_grp(t_list *extra, t_group *cmds)
 	return (parse_grp_cmd(extra->head, cmds->cmds));
 }
 
-/*
-Returns pid value if OK.
-Returns -1 if fail.
-*/
+/**
+ * Handles and execute a group of commands.
+ *
+ * @param type The type of the group.
+ * @param grp The list of tokens in the group.
+ * @param data The data structure containing information about the shell.
+ * @return The process ID of the executed group, or -1 if an error occurs.
+ */
 pid_t	parse_manage_group(long type, t_list *grp, t_data *data)
 {
 	pid_t	pid;

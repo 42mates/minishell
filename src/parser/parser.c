@@ -6,12 +6,22 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/29 16:00:06 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/29 17:34:43 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/**
+ * @brief Waits for all child processes to exit and updates the status.
+ *
+ * This function waits for all child processes to exit, updates the status
+ * of the main process and g_signal. It takes the process ID of the main process 
+ * and a pointer to the status variable as parameters.
+ *
+ * @param pid The process ID of the main process.
+ * @param status A pointer to the status variable.
+ */
 static void	parse_wait_all(int pid, int *status)
 {
 	int	child;
@@ -34,22 +44,31 @@ static void	parse_wait_all(int pid, int *status)
 	}
 }
 
-/*---PARSE RUN CHAIN---*/
-
+/**
+ * Checks if the given element of grps list connected with the previous one
+ * by logical OR or AND operator.
+ *
+ * @param e_elem The grps element to check.
+ * @param chain A pointer to the chain value.
+ * @return 1 if the element is a logical operator, 0 otherwise.
+ */
 static int	parse_check_chain(t_elem *e_elem, int *chain)
 {
-	if ((g_signal == 0 && ((long)e_elem->key == L_OR)) || (g_signal != 0
-			&& ((long)e_elem->key == L_AND)))
+	if ((g_signal == 0 && ((long)e_elem->key == L_OR))
+		|| (g_signal != 0 && ((long)e_elem->key == L_AND)))
 		return (1);
 	*chain = 0;
 	return (0);
 }
 
-/*---PARSE GROUPS EXE---*/
-
-/*
-Returns 0 if OK.
-*/
+/**
+ * Runs child processes, handle and execute comands from groups inside grps list.
+ * Waits for all child processes. Runs next group in chain of AND, OR operators.
+ *
+ * @param grps The list of groups to handle and execute.
+ * @param data The data structure containing information about the minishell.
+ * @return Returns 0 on success, 1 if an error occurred.
+ */
 static int	parse_groups_exe(t_list *grps, t_data *data)
 {
 	int		chain;

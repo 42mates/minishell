@@ -6,16 +6,20 @@
 /*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:37:01 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/28 13:07:20 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/30 16:33:35 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/*
-Cleans array.
-Returns NULL.
-*/
+/**
+ * Frees the memory allocated for a string array.
+ *
+ * @param array The string array to be freed.
+ * @param a The index until which the array elements should be freed.
+ * If a is -1, all elements in the array will be freed.
+ * @return NULL.
+ */
 void	*free_str_array(char **array, int a)
 {
 	int		i;
@@ -34,7 +38,14 @@ void	*free_str_array(char **array, int a)
 	return (free(array), NULL);
 }
 
-int	handle_star(const char *w, const char **p)
+/**
+ * @brief Compares pattern and string in current position.
+ * 
+ * @param w The wildcard pattern.
+ * @param p The array containing the pointers.
+ * @return Returns 0 if there is a match, 1 otherwise.
+ */
+static int	handle_star(const char *w, const char **p)
 {
 	if (*p[0] == '*' && (p[0] == w || *(p[0] - 1) != '\\'))
 	{
@@ -51,7 +62,17 @@ int	handle_star(const char *w, const char **p)
 	return (0);
 }
 
-int	have_match2(const char *w, const char **p)
+/**
+ * @brief Checks if there is a match between string and wildcard patern.
+ * 
+ * Symbol by symbol function compare string and pattern.
+ * Current position in string is p[1], in pattern is p[0].
+ * 
+ * @param w The wildcard pattern.
+ * @param p The array containing the pointers.
+ * @return Returns 1 if there is a match, 0 otherwise.
+ */
+static int	have_match2(const char *w, const char **p)
 {
 	while (*p[1])
 	{
@@ -75,7 +96,18 @@ int	have_match2(const char *w, const char **p)
 	return (*p[0] == '\0');
 }
 
-int	have_match(const char *s, const char *w)
+/**
+ * @brief Checks if there is a match between string and wildcard patern.
+ * 
+ * This function checks if the string 's' matches the wildcard pattern 'w'.
+ * The wildcard pattern can contain the '*' character, which matches any
+ * sequence of characters (including an empty sequence).
+ * 
+ * @param s The string to be checked for a match.
+ * @param w The wildcard pattern to be matched against.
+ * @return Returns 1 if there is a match, 0 otherwise.
+ */
+static int	have_match(const char *s, const char *w)
 {
 	const char	*p[4];
 
@@ -91,6 +123,11 @@ int	have_match(const char *s, const char *w)
 	return (have_match2(w, p));
 }
 
+/**
+ * Parses the word and returns a list of words that match the pattern.
+ * 
+ * @param word The word to parse.
+ */
 t_list	*parse_star(const char *word)
 {
 	t_list			*words;
