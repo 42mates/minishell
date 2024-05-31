@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/30 15:44:29 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:43:18 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../inc/minishell.h"
 
 /**
  * To help with Norminette
@@ -59,11 +59,10 @@ static void	parse_token_second(t_list *extra, char *word, t_list *words)
  * @return A list of possible words, or NULL the word quoted or there are
  * no possible alternatives to represent the word.
  */
-static t_list	*parse_word(char **word, t_list *env, long k)
+static t_list	*parse_word(char **word, long k)
 {
 	if (k == L_S_QUOT || k == L_D_QUOT)
 		return (NULL);
-	*word = set_path(*word, env);
 	return (parse_star(*word));
 }
 
@@ -93,7 +92,7 @@ int	parse_token(t_elem **e_elem, t_list *extra, t_data *data, long k)
 			return (list_free(str), 1);
 		if (word == NULL)
 			return (list_free(str), 0);
-		words = parse_word(&word, data->env_lst, k);
+		words = parse_word(&word, k);
 		if (words == NULL)
 			list_put(extra, (void *)L_WORD, word);
 		else

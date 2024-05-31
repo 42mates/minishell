@@ -6,11 +6,11 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:41:45 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/20 12:44:18 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/31 16:36:37 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../inc/minishell.h"
 
 static int	check_option(char **args, int *i)
 {

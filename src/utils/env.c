@@ -6,11 +6,11 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:24:16 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 16:02:32 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/31 15:43:18 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../inc/minishell.h"
 
 char	**env_make(t_list *env)
 {

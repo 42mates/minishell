@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:13:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/29 15:41:18 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:43:18 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../inc/minishell.h"
 
 /**
  * Checks if a character is a whitespace character.

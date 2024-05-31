@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_groups.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:58:05 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/29 16:14:14 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:43:18 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../inc/minishell.h"
 
 /**
  * Checks if the given key is a logical OR or logical AND operator.

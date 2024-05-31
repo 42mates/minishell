@@ -6,11 +6,11 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:22:52 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/20 12:44:01 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/31 16:36:37 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../inc/minishell.h"
 
 //cd
 //cd notexisting

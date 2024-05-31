@@ -6,11 +6,11 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:35:28 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/17 17:59:38 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/31 16:36:37 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../inc/minishell.h"
 
 static int	ft_strisdigit(char *str)
 {

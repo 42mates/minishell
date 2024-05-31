@@ -6,11 +6,11 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:05:29 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/20 15:26:03 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/31 15:43:18 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../inc/minishell.h"
 
 int	builtins_exe(int i, t_elem *e_cmd, t_data *data, t_fd *fd)
 {

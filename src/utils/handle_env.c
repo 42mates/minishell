@@ -6,11 +6,11 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:14:49 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/20 12:43:11 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/31 16:19:17 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../inc/minishell.h"
 
 void	env_set(char const **argv, t_list *env)
 {

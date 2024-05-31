@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:25:30 by akurochk          #+#    #+#             */
-/*   Updated: 2024/04/30 16:58:34 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:43:18 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../inc/minishell.h"
 
 void	handler_signal(int signum)
 {
@@ -35,5 +35,5 @@ void	handler_executor(int signum)
 	if (signum == SIGINT)
 		write(2, "\n", 1);
 	else if (signum == SIGQUIT)
-		write(2, "Exit: handler_executor\n", 5);
+		write(2, "Quit (core dumped)\n", 19);
 }

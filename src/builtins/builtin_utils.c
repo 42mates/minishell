@@ -6,11 +6,11 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:44:14 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/20 12:43:41 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/31 16:36:37 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../inc/minishell.h"
 
 /**
  * Prints the environment variable information as `key=value`.

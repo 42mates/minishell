@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 16:36:35 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/20 12:44:30 by mbecker          ###   ########.fr       */
+/*   Created: 2024/05/15 15:22:19 by mbecker           #+#    #+#             */
+/*   Updated: 2024/05/31 16:36:37 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../inc/minishell.h"
 
-int	ft_pwd(t_data *data, t_list *args)
+int	ft_env(t_data *data, t_list *args)
 {
-	char	*path;
+	t_elem	*env;
 
-	(void)data;
-	(void)args;
-	path = getcwd(NULL, 0);
-	if (!path)
+	env = data->env_lst->head;
+	if (args->head->next)
+		return (print_error("env", NULL, "too many arguments"), 1);
+	while (env)
 	{
-		print_error("pwd", "error retrieving current directory: getcwd",
-			strerror(errno));
-		return (EXIT_FAILURE);
-	}
-	else
-	{
-		write(1, path, ft_strlen(path));
-		write(1, "\n", 1);
-		free(path);
+		if (env->val)
+			print_var(env, NULL);
+		env = env->next;
 	}
 	g_signal = EXIT_SUCCESS;
 	return (EXIT_SUCCESS);

@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 17:22:05 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/20 12:44:51 by mbecker          ###   ########.fr       */
+/*   Created: 2024/04/16 16:36:35 by mbecker           #+#    #+#             */
+/*   Updated: 2024/05/31 16:36:37 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../inc/minishell.h"
 
-int	ft_unset(t_data *data, t_list *args)
+int	ft_pwd(t_data *data, t_list *args)
 {
-	t_elem	*tmp;
-	t_elem	*env;
+	char	*path;
 
-	tmp = args->head->next;
-	while (tmp)
+	(void)data;
+	(void)args;
+	path = getcwd(NULL, 0);
+	if (!path)
 	{
-		env = data->env_lst->head;
-		while (env)
-		{
-			if (ft_strcmp(env->key, tmp->val) == 0)
-			{
-				list_del_one(data->env_lst, env->key);
-				break ;
-			}
-			env = env->next;
-		}
-		tmp = tmp->next;
+		print_error("pwd", "error retrieving current directory: getcwd",
+			strerror(errno));
+		return (EXIT_FAILURE);
 	}
-	return (0);
+	else
+	{
+		write(1, path, ft_strlen(path));
+		write(1, "\n", 1);
+		free(path);
+	}
+	g_signal = EXIT_SUCCESS;
+	return (EXIT_SUCCESS);
 }
