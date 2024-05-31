@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:47:13 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/31 15:34:29 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/05/31 16:53:28 by akurochk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,9 @@ static void	main_begining(t_list **toks, char **line)
 	signal(SIGQUIT, SIG_IGN);
 	errno = 0;
 	*toks = list_new(cmp_int, NULL, free);
-	*line = readline(PROMPT);
+	*line = readline("msh> ");
+	if (*line == NULL || **line == '\0')
+		return ;
 	if (*line && **line)
 		add_history(*line);
 }
@@ -130,12 +132,10 @@ int	main(int ac, const char **av, char **env)
 		main_begining(&toks, &line);
 		if (line == NULL)
 			data.flag_exit = 0;
-		else if (line != NULL && *line)
-		{
-			if (lexer(line, toks) == 0)
-				parser(&data, toks);
-			free(line);
-		}
+		else if (line != NULL && *line && lexer(line, toks) == 0)
+			parser(&data, toks);
+		free(line);
+		line = NULL;
 		list_free(toks);
 	}
 	main_exit(&data);
