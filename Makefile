@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbecker <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 13:23:43 by mbecker           #+#    #+#              #
-#    Updated: 2024/05/31 16:16:29 by mbecker          ###   ########.fr        #
+#    Updated: 2024/05/31 17:01:34 by akurochk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,14 @@ $(NAME): libft
 		echo "$(LGREEN)./$(GREEN)$(NAME)$(LGREEN) ready.$(NC)";\
 	else\
 		echo "$(LGREEN)./$(GREEN)$(NAME)$(LGREEN) already compiled.$(NC)";\
+	fi
+
+bonus: libft
+	@if [ ! -f minishell_bonus ]; \
+		then $(CC) $(CFLAGS) -o $(NAME)_bonus $(SRC) -Llibft -lft -lreadline;\
+		echo "$(LGREEN)./$(GREEN)$(NAME)_bonus$(LGREEN) ready.$(NC)";\
+	else\
+		echo "$(LGREEN)./$(GREEN)$(NAME)_bonus$(LGREEN) already compiled.$(NC)";\
 	fi
 
 clean:
