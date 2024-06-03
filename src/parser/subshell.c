@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:50 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/31 15:43:18 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/06/03 14:58:42 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	redir_fd(int in, int out)
 	if (in != STDIN_FILENO)
 	{
 		if (dup2(in, STDIN_FILENO) == -1)
-			g_signal = 1;
+			g_signal = -1;
 		if (close(in) == -1)
-			g_signal = 1;
+			g_signal = -1;
 	}
 	if (out != STDOUT_FILENO)
 	{

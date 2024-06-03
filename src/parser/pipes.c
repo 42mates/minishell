@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:46:02 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/31 15:43:18 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/06/03 14:58:35 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static t_elem	*pipes_post(t_elem *e_cmd, t_fd *fd, int to_stop)
 	e_cmd = e_cmd->next;
 	while (e_cmd != NULL && e_cmd->key == NULL)
 	{
-		g_signal = 1;
+		g_signal = -1;
 		e_cmd = e_cmd->next;
 	}
 	return (e_cmd);
@@ -97,7 +97,7 @@ int	pipes(t_group *cmds, t_data *data)
 		{
 			pid = common_exe(e_cmd, data, &fd, 1);
 			if (e_cmd->next != NULL && ((t_elem *)e_cmd->next)->key == NULL)
-				g_signal = 1;
+				g_signal = -1;
 		}
 		e_cmd = pipes_post(e_cmd, &fd, to_stop);
 	}

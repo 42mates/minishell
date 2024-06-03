@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:44:00 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/31 16:00:22 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/06/03 11:25:14 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@
 
 /********** UTILS **********/
 
-# define PROMPT "\033[1;34mmsh> \033[0m"
+# define PROMPT "msh> "
+# define H_PROMPT "> "
 # define INVALID_KEY "!@#%^&*()-+={}[]|:;'\",<>./? \t\n\v\f\r"
 # define STD_PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 

@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:39:16 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/31 16:36:37 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/06/03 11:30:54 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	print_export(t_list *env)
 	list_free(env);
 }
 
-// See for spaces and $ handling in parsing.
 static int	get_key_val(char *arg, char **key, char **val)
 {
 	char	*sep;

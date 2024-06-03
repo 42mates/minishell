@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:58:50 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/31 15:43:18 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/06/03 11:28:07 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	heredoc_readline(t_cmd_info *cmd_info, int fd)
 
 	while (1)
 	{
-		line = readline("> ");
+		line = readline(H_PROMPT);
 		if (line == NULL || !ft_strcmp(line, cmd_info->sep))
 			break ;
 		if (write(fd, line, ft_strlen(line)) == -1)

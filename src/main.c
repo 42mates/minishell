@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akurochk <akurochk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:47:13 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/31 16:53:28 by akurochk         ###   ########.fr       */
+/*   Updated: 2024/06/03 11:24:53 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ static void	main_begining(t_list **toks, char **line)
 	signal(SIGQUIT, SIG_IGN);
 	errno = 0;
 	*toks = list_new(cmp_int, NULL, free);
-	*line = readline("msh> ");
+	*line = readline(PROMPT);
 	if (*line == NULL || **line == '\0')
 		return ;
 	if (*line && **line)

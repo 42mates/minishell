@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:32:31 by akurochk          #+#    #+#             */
-/*   Updated: 2024/05/31 15:43:18 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/06/03 15:26:13 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ static void	parse_wait_all(int pid, int *status)
 		child = waitpid(0, status, 0);
 		if (pid == child)
 		{
-			if (g_signal != 1)
+			if (g_signal != -1)
 				g_signal = WEXITSTATUS(*status);
+			else if (g_signal == -1)
+				g_signal = 1;
 			if (WIFSIGNALED(*status))
 			{
 				g_signal = WTERMSIG(*status);

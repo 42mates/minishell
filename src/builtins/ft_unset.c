@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:22:05 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/31 16:36:37 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/06/03 12:27:41 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ int	ft_unset(t_data *data, t_list *args)
 		}
 		tmp = tmp->next;
 	}
+	freetab(data->env, TRUE);
+	data->env = list_to_env(data->env_lst);
 	return (0);
 }

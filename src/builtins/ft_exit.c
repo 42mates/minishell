@@ -6,7 +6,7 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:35:28 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/31 16:36:37 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/06/03 12:45:42 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static int	exit_parsing(t_elem *head, long long *nb)
 	}
 	if (tmp->next)
 	{
+		write(STDOUT_FILENO, "exit\n", 5);
 		print_error("exit", NULL, "too many arguments");
 		return (1);
 	}
@@ -56,14 +57,18 @@ static int	exit_parsing(t_elem *head, long long *nb)
 int	ft_exit(t_data *data, t_list *args)
 {
 	unsigned char	exit_status;
+	int				should_exit;
 	long long		nb;
 
 	nb = 0;
+	should_exit = 1;
 	exit_status = exit_parsing(args->head, &nb);
+	if (exit_status == 1)
+		should_exit = 0;
 	if (!exit_status)
 		exit_status = (unsigned char)nb;
-	data->flag_exit = 0;
+	if (should_exit == 1)
+		data->flag_exit = 0;
 	g_signal = exit_status;
 	return (exit_status);
 }
-//9223372036854775808 LONGMIN

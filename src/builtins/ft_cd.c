@@ -6,15 +6,11 @@
 /*   By: mbecker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:22:52 by mbecker           #+#    #+#             */
-/*   Updated: 2024/05/31 16:36:37 by mbecker          ###   ########.fr       */
+/*   Updated: 2024/06/03 11:30:40 by mbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-//cd
-//cd notexisting
-//cd xxx yyy
 
 static int	cd_noargs(t_list *env)
 {
