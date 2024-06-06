@@ -58,3 +58,8 @@ To get started with Minishell, follow these steps:
 	./minishell
 	```
 
+### Note:
+The project uses the `readline` library for line editing. Functions from this library can cause memory leaks when used with `valgrind`. To avoid this, run the program with the following command from the project's root directory:
+```bash
+valgrind --suppressions=$PWD/readline.supp ./minishell
+```
