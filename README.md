@@ -22,9 +22,9 @@ Commands can be executed with or without arguments from absolute and relative pa
 
 #### Signal Handling:
 
-- __ctrl-C__ displays a new prompt on a new line.   
-- __ctrl-D__ exits the shell.  
-- __ctrl-\\__ does nothing.
+- __ctrl-C__ sends a SIGINT signal to interrupt the running process.   
+- __ctrl-D__ sends and End Of File (EOF) signal.  
+- __ctrl-\\__ quits a running process.
 
 #### Environment Variables:
 Environment variables can be used in any command as `$` followed by the variable name. They can be manipulated using the [`export`](#builtins) and [`unset`](#builtins) builtins. These variables are inherited from the parent process and sent to the child processes. `$?`, which expands to the exit status of the last executed command, is also supported.
